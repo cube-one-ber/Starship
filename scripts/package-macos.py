@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import plistlib
+import shlex
 import shutil
 import subprocess
 import tempfile
@@ -16,7 +17,8 @@ APP = STAGE / 'Starship Journal.app'
 
 
 def run(*command, **kwargs):
-    subprocess.run([str(value) for value in command], check=True, **kwargs)
+    print('Running:', ' '.join(str(value) for value in command), flush=True)
+    subprocess.run([str(value) for value in command], check=True, timeout=300, **kwargs)
 
 
 def main():
@@ -34,8 +36,14 @@ def main():
             'NSHighResolutionCapable': True, 'CFBundleIconFile': 'Starship.icns'}
     with (APP / 'Contents/Info.plist').open('wb') as file:
         plistlib.dump(info, file)
-    # Render the existing application SVG with macOS's own image tools.
-    run('qlmanage', '-t', '-s', '1024', '-o', STAGE, ROOT / 'native/assets/icon.svg')
+    # Qt's renderer runs without Quick Look's desktop thumbnail service.
+    brew = Path(subprocess.check_output(['brew', '--prefix'], text=True).strip())
+    flags = shlex.split(subprocess.check_output(
+        ['pkg-config', '--cflags', '--libs', 'Qt6Gui', 'Qt6Svg'], text=True))
+    renderer = STAGE / 'render-icon'
+    run('clang++', '-std=c++17', ROOT / 'native/macos/render-icon.cpp', '-o', renderer,
+        *flags, f'-Wl,-rpath,{brew / "lib"}')
+    run(renderer, ROOT / 'native/assets/icon.svg', STAGE / 'icon.svg.png')
     iconset = STAGE / 'Starship.iconset'
     iconset.mkdir()
     for size in (16, 32, 128, 256, 512):
@@ -57,7 +65,6 @@ def main():
     for source in (ROOT / 'target/macos-sources').iterdir():
         if (source / 'LICENSES').is_dir():
             shutil.copytree(source / 'LICENSES', licenses / source.name)
-    brew = Path(subprocess.check_output(['brew', '--prefix'], text=True).strip())
     cellar = Path(subprocess.check_output(['brew', '--cellar'], text=True).strip())
     for formula in cellar.iterdir():
         for installed in formula.iterdir():
