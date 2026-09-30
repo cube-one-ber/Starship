@@ -1,6 +1,7 @@
 name: Windows
 on:
   push:
+    branches: ['**']
   pull_request:
   workflow_dispatch:
 permissions:
@@ -52,3 +53,23 @@ jobs:
           name: Windows-UI-previews
           path: target/windows-smoke-tests/
           if-no-files-found: ignore
+  prerelease:
+    name: Publish commit prerelease
+    needs: build
+    if: github.event_name != 'pull_request' && startsWith(github.ref, 'refs/heads/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: prerelease-${{ github.sha }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: Starship-Journal-windows-x64
+          path: dist
+      - name: Publish tested Windows build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/publish-prerelease.sh
