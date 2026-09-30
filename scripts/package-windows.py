@@ -112,7 +112,8 @@ def package(exe: Path, qmake: str, output: Path) -> Path:
             copy_tree(sdk_qml / "org/kde" / module, stage / "qml/org/kde" / module)
         for plugin in ("styles", "kf6/kirigami/platform", "kiconthemes6/iconengines"):
             copy_tree(sdk_plugins / plugin, stage / "plugins" / plugin)
-        copy_tree(sdk_plugins / "kf6/sonnet", stage / "plugins/kf6/sonnet", required=False)
+        # Sonnet's QML module is required by the desktop controls, but this app
+        # does not use its optional spellchecking backends (or their dictionaries).
         # Include offscreen for the same smoke test on Windows and Linux.
         for group, filename in (("platforms", "qoffscreen.dll"), ("imageformats", "qsvg.dll"),
                                 ("iconengines", "qsvgicon.dll")):
