@@ -1,6 +1,6 @@
 # Starship — The Flight Journal
 
-A native **Rust + KDE Kirigami** app with a KDE-style flight archive, searchable mission debriefs, and a live next-flight countdown. The interface uses Kirigami navigation, system colors and fonts, standard controls, form layouts, and adaptive cards. Covers integrated Flights 1–14; early prototype hops are outside this archive.
+A native **Rust + KDE Kirigami** app with a spaceflight-themed archive, searchable mission debriefs, and a live next-flight countdown. A deep navy mission-control palette, warm amber accents, cinematic photography, orbital linework, and typography from SF Pro, SF Mono, and New York give the journal its own visual identity. The interface uses Kirigami navigation, standard controls, and adaptive cards. Covers integrated Flights 1–14; early prototype hops are outside this archive.
 
 ## Run
 
@@ -18,9 +18,19 @@ The script requires pacman, curl and bsdtar. It puts KDE's unmodified Breeze QML
 cargo run --release
 ```
 
-If Qt discovery needs help, use `QMAKE=/usr/bin/qmake6 cargo run --release`. The compiled executable is `target/release/starship-journal`. Flight data and photography are bundled into the executable. Launch updates are fetched in a background Rust thread and saved atomically in Qt's platform cache directory: under `$XDG_CACHE_HOME` or `~/.cache` on Linux, and `%LOCALAPPDATA%` on Windows.
+If Qt discovery needs help, use `QMAKE=/usr/bin/qmake6 cargo run --release`. The compiled executable is `target/release/starship-journal`. Flight data, photography, the application color scheme, and fonts are bundled into the executable. Launch updates are fetched in a background Rust thread and saved atomically in Qt's platform cache directory: under `$XDG_CACHE_HOME` or `~/.cache` on Linux, and `%LOCALAPPDATA%` on Windows.
+
+The archive pairs a cinematic journal header with an orbital launch-window panel, then adapts its flight cards from three columns to one. Mission debriefs have photographic flight banners, editorial New York headlines, and a responsive grid of mission facts. The header gently settles into view; cards reveal as they enter the viewport, lift on hover or keyboard focus, and respond to presses. Filtering fades the old results out before showing the latest selection. Moving between mission debriefs uses a directional slide and fade, with the previous photo retained until its replacement has loaded.
+
+Motion uses [Kirigami’s standard animation durations](https://api.kde.org/qml-org-kde-kirigami-platform-units.html), following the desktop animation-speed setting. The drawer’s **Reduce motion** option persists between runs and finishes pending transitions immediately. These effects use official Qt Quick animations alongside Kirigami cards, headings, layouts, and themed controls.
 
 Kirigami provides the navigation, cards, dialogs and adaptive layouts. Rust handles the flight archive, filtering, schedule normalization, countdown and networking, connected to QML through CXX-Qt. The small C++ image provider decodes JPEG XL directly with the official libjxl library.
+
+## Typography and appearance
+
+SF Pro (variable), SF Mono (regular and semibold), and New York (variable roman and italic) were copied from this computer’s installed Apple fonts into `native/assets/fonts` at the user’s request. Qt registers them from the executable’s resources before loading the interface, so no system font installation is needed. File origins and SHA-256 hashes are recorded in `native/assets/fonts/provenance.json`. The fonts remain Apple’s proprietary fonts and retain their original terms.
+
+The bundled `Starship.colors` scheme uses KDE’s application color-scheme mechanism to keep Breeze controls, drawers, menus, search fields, and page backgrounds consistent. It applies only to this app. Orbital diagrams are drawn with Qt Quick Canvas and repaint only when their geometry changes; they do not run an idle animation loop.
 
 ## Windows
 
@@ -87,9 +97,12 @@ cargo test live_nextspaceflight_schedule -- --ignored --nocapture
 cargo build
 QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software ./target/debug/starship-journal --smoke-test
 QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software ./target/debug/starship-journal --smoke-test --narrow-test
+QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software ./target/debug/starship-journal --smoke-test --reduce-motion
 ```
 
-The smoke checks exercise the actual search and year controls, mission and navigation pages, and all 14 JPEG XL mission cards. They save `starship-kirigami-*.png` previews in the platform temporary directory (`/tmp` on Linux), then exit with a success or failure status. Set `STARSHIP_TEST_OUTPUT_DIR` to choose a different screenshot directory. The Windows verification script saves screenshots and logs in `target/windows-smoke-tests`. Use `QT_FORCE_STDERR_LOGGING=1` to print Qt diagnostics.
+The smoke checks exercise rapid search and year changes, empty results, keyboard focus, interrupted mission transitions, reduced motion, navigation pages, scroll reveals, and all 14 JPEG XL mission cards. They save `starship-kirigami-*.png` previews in the platform temporary directory (`/tmp` on Linux), then exit with a success or failure status. Set `STARSHIP_TEST_OUTPUT_DIR` to choose a different screenshot directory. The Windows verification script saves screenshots and logs in `target/windows-smoke-tests`. Use `QT_FORCE_STDERR_LOGGING=1` to print Qt diagnostics.
+
+An animated preview is stored in `native/previews/motion.gif`. To capture new frames from the actual app, add `--motion-preview` to a smoke-test run and set `STARSHIP_TEST_OUTPUT_DIR` to an output folder. The app writes 140 numbered `starship-motion-*.png` frames at an 80 ms interval for assembly with a video or GIF encoder.
 
 Packaging dependency checks run on either platform:
 

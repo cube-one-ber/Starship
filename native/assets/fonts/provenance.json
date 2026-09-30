@@ -1,0 +1,35 @@
+{
+  "origin": "Installed Apple fonts supplied by this computer; bundled at the user\u2019s request.",
+  "files": [
+    {
+      "file": "NewYork.ttf",
+      "source": "/usr/share/fonts/apple-fonts/NewYork.ttf",
+      "sha256": "436cd9d9a9e7bf27b2240ed13f804725654ee5de1d5d936cad68eaa013c49744",
+      "bytes": 380580
+    },
+    {
+      "file": "NewYorkItalic.ttf",
+      "source": "/usr/share/fonts/apple-fonts/NewYorkItalic.ttf",
+      "sha256": "adc356b12b9fd90480ec46f12eaf09d460596ca3d33342c32749f1a6c0a164fa",
+      "bytes": 405524
+    },
+    {
+      "file": "SF-Mono-Regular.otf",
+      "source": "/usr/share/fonts/apple-fonts/SF-Mono-Regular.otf",
+      "sha256": "d7186273849a922b3eafbbdd8289d1e708a2c7f7893ec90961d382353c872d49",
+      "bytes": 109692
+    },
+    {
+      "file": "SF-Mono-Semibold.otf",
+      "source": "/usr/share/fonts/apple-fonts/SF-Mono-Semibold.otf",
+      "sha256": "ed5c7934c102d382ecee3406197ad3c74fbd1ba969d838698b0b74a80ea2021b",
+      "bytes": 110060
+    },
+    {
+      "file": "SF-Pro.ttf",
+      "source": "/usr/share/fonts/apple-fonts/SF-Pro.ttf",
+      "sha256": "7270e1593be7b88597d8ab302e4d156a33084c85b8161e042ff6510cdaf10e10",
+      "bytes": 21373376
+    }
+  ]
+}

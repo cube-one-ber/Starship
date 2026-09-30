@@ -1,4 +1,4 @@
-use cxx_qt_build::{CxxQtBuilder, QmlModule};
+use cxx_qt_build::{CxxQtBuilder, QmlFile, QmlModule};
 fn main() {
     let windows = std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("windows");
     if windows {
@@ -42,6 +42,13 @@ fn main() {
                 .qml_file("native/qml/Main.qml")
                 .qml_file("native/qml/FlightCard.qml")
                 .qml_file("native/qml/Photo.qml")
+                .qml_file("native/qml/JournalHero.qml")
+                .qml_file("native/qml/FadeBehavior.qml")
+                .qml_file("native/qml/AnimatedColumn.qml")
+                .qml_file(QmlFile::from("native/qml/SpaceStyle.qml").singleton(true))
+                .qml_file("native/qml/OrbitalArtwork.qml")
+                .qml_file("native/qml/SectionLabel.qml")
+                .qml_file("native/qml/MissionStat.qml")
                 .qml_file("native/qml/CountdownPanel.qml"),
         )
         .qt_module("Network")

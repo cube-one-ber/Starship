@@ -1,4 +1,10 @@
 <RCC><qresource prefix="/">
+<file alias="themes/Starship.colors">assets/Starship.colors</file>
+<file alias="fonts/SF-Pro.ttf">assets/fonts/SF-Pro.ttf</file>
+<file alias="fonts/NewYork.ttf">assets/fonts/NewYork.ttf</file>
+<file alias="fonts/NewYorkItalic.ttf">assets/fonts/NewYorkItalic.ttf</file>
+<file alias="fonts/SF-Mono-Regular.otf">assets/fonts/SF-Mono-Regular.otf</file>
+<file alias="fonts/SF-Mono-Semibold.otf">assets/fonts/SF-Mono-Semibold.otf</file>
 <file alias="photos/flight-2.jpg">assets/photos/flight-2.jpg</file>
 <file alias="photos/flight-2.jxl">assets/photos/flight-2.jxl</file>
 <file alias="photos/flight-1.jpg">assets/photos/flight-1.jpg</file>

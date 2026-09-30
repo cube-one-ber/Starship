@@ -3,6 +3,7 @@
 #include <QApplication>
 #include "jxl_provider.h"
 #include <QIcon>
+#include <QFontDatabase>
 #include <QDir>
 #include <QFileInfo>
 #include <QLibraryInfo>
@@ -17,6 +18,7 @@
 #include <memory>
 #include <vector>
 namespace starship {
+inline bool bundledFontsLoaded = false;
 inline std::unique_ptr<QGuiApplication> newApplication(const QStringList &arguments) {
     // QApplication retains argc/argv, so their storage must outlive the app.
     static std::vector<QByteArray> storage;
@@ -63,6 +65,31 @@ inline void configureApplication() {
     QIcon::setThemeName("breeze");
     QIcon::setFallbackThemeName("breeze");
     QGuiApplication::setWindowIcon(QIcon(":/icon.svg"));
+    bundledFontsLoaded = true;
+    for (const auto &file : {"SF-Pro.ttf", "NewYork.ttf", "NewYorkItalic.ttf", "SF-Mono-Regular.otf", "SF-Mono-Semibold.otf"}) {
+        const int id = QFontDatabase::addApplicationFont(QStringLiteral(":/fonts/") + file);
+        bundledFontsLoaded = bundledFontsLoaded && id >= 0 && !QFontDatabase::applicationFontFamilies(id).isEmpty();
+    }
+    QApplication::setFont(QFont(QStringLiteral("SF Pro"), 11));
+    // KDE's theme plugins read the same application-scoped scheme path used by
+    // KColorSchemeManager. Keep every control's color set in the bundled scheme.
+    QCoreApplication::instance()->setProperty("KDE_COLOR_SCHEME_PATH", QStringLiteral(":/themes/Starship.colors"));
+    QPalette flightPalette;
+    flightPalette.setColor(QPalette::Window, QColor("#090e16"));
+    flightPalette.setColor(QPalette::WindowText, QColor("#eef1f5"));
+    flightPalette.setColor(QPalette::Base, QColor("#101925"));
+    flightPalette.setColor(QPalette::AlternateBase, QColor("#162230"));
+    flightPalette.setColor(QPalette::Text, QColor("#eef1f5"));
+    flightPalette.setColor(QPalette::Button, QColor("#162230"));
+    flightPalette.setColor(QPalette::ButtonText, QColor("#eef1f5"));
+    flightPalette.setColor(QPalette::Highlight, QColor("#ecc08a"));
+    flightPalette.setColor(QPalette::HighlightedText, QColor("#11151c"));
+    flightPalette.setColor(QPalette::Link, QColor("#ecc08a"));
+    flightPalette.setColor(QPalette::ToolTipBase, QColor("#162230"));
+    flightPalette.setColor(QPalette::ToolTipText, QColor("#eef1f5"));
+    flightPalette.setColor(QPalette::Disabled, QPalette::Text, QColor("#91a0b4"));
+    flightPalette.setColor(QPalette::Disabled, QPalette::ButtonText, QColor("#91a0b4"));
+    QApplication::setPalette(flightPalette);
     if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
 #ifdef Q_OS_WIN
         // KDE's Windows guidance: use Breeze widgets through the desktop QML style.
@@ -96,10 +123,10 @@ inline QString testOutputPath(const QString &name) {
 }
 inline bool appearanceReady() {
 #ifdef Q_OS_WIN
-    return QApplication::style()->objectName().compare("breeze", Qt::CaseInsensitive) == 0
+    return bundledFontsLoaded && QApplication::style()->objectName().compare("breeze", Qt::CaseInsensitive) == 0
         && QIcon::hasThemeIcon("chronometer") && QIcon::hasThemeIcon("dialog-ok-apply");
 #else
-    return true;
+    return bundledFontsLoaded;
 #endif
 }
 inline int rootCount(const QQmlApplicationEngine &engine) { return engine.rootObjects().size(); }
