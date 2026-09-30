@@ -145,7 +145,7 @@ exec "$app_dir/usr/bin/starship-journal" "$@"
 Version: {version}
 Release: 1
 Summary: Starship flight journal
-License: LicenseRef-Proprietary
+License: LicenseRef-Unspecified
 AutoReqProv: no
 Requires: glibc >= 2.41
 %description

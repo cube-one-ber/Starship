@@ -27,7 +27,7 @@ for module in extra-cmake-modules kconfig kirigami sonnet qqc2-desktop-style bre
     -DCMAKE_DISABLE_FIND_PACKAGE_KF6IconThemes=ON \
     -DCMAKE_DISABLE_FIND_PACKAGE_KF6ColorScheme=ON \
     -DSONNET_NO_BACKENDS=ON -DWITH_ICON_GENERATION=OFF \
-    -DBINARY_ICONS_RESOURCE=ON -DWITH_ICONS_LIBRARY=OFF -DSKIP_INSTALL_ICONS=ON
+    -DBINARY_ICONS_RESOURCE=ON -DWITH_ICONS_LIBRARY=ON -DSKIP_INSTALL_ICONS=ON
   cmake --build "$source_dir/build" --parallel 3
   cmake --install "$source_dir/build"
 done
