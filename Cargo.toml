@@ -7,7 +7,6 @@ build = "build.rs"
 
 [[bin]]
 name = "starship-journal"
-path = "native/main.rs"
 
 [dependencies]
 cxx = "1.0"

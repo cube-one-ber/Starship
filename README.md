@@ -1,111 +1,195 @@
-# Starship — The Flight Journal
+# Starship · The Flight Journal
 
-A native **Rust + KDE Kirigami** app with a spaceflight-themed archive, searchable mission debriefs, and a live next-flight countdown. A deep navy mission-control palette, warm amber accents, cinematic photography, orbital linework, and typography from SF Pro, SF Mono, and New York give the journal its own visual identity. The interface uses Kirigami navigation, standard controls, and adaptive cards. Covers integrated Flights 1–14; early prototype hops are outside this archive.
+A native desktop journal of Starship's integrated flights, built with **Rust, Qt 6, and KDE Kirigami**. Explore the flight archive, read mission debriefs, and follow the next launch in an interface shaped by spaceflight photography, orbital diagrams, and a navy-and-gold palette.
 
-## Run
+![Starship lifting off at Starbase through illuminated exhaust clouds](resources/photos/hero.jpg)
 
-Requires Rust, a C++ compiler, pkg-config, Qt 6 development tools (including Qt Quick, Quick Controls and Widgets), Kirigami, qqc2-desktop-style, and libjxl development files. On Arch Linux these are provided by `rust`, `gcc`, `pkgconf`, `qt6-base`, `qt6-declarative`, `kirigami`, `qqc2-desktop-style`, and `libjxl`.
+*Flight 14 photography by [Max Evans / NSF](https://maxevans.smugmug.com/Rockets/SpaceX/Starship-Flight-14/i-gTxZJ8F).*
 
-For the polished KDE appearance, install `qqc2-breeze-style`, or cache the official Arch package locally with:
+[Download builds](https://github.com/cube-one-ber/Starship/releases) · [Build from source](#build-from-source) · [Photo credits](#photography-and-credits) · [Build and release details](docs/building.md)
+
+## Explore the journal
+
+- **Flight archive:** integrated Flights 1–14, with search, year filters, separate Ship and Booster results, and photographic cards. Early prototype hops are outside the archive.
+- **Mission debriefs:** vehicle serials, UTC liftoff times, payloads, flight logs, approximate timelines, section shortcuts, previous/next-flight navigation, and links to official reports and replays.
+- **Independent analysis:** 26 entries across all 14 flights from @mcrs987 / TheSpaceEngineer, including reconstructions, footage studies, hardware surveys, and recovery tracking. [Browse the source index](docs/mcrs987-flight-index.md).
+- **Landing locations:** sourced impact estimates and independent geolocations, with precision labels, maps, and links to the original analysis.
+- **Next launch:** a refreshed launch window, expandable details in narrow archive windows, and a countdown when a precise, confirmed liftoff time is available.
+- **Adaptive interface:** a compact header and three-column archive that becomes a single column in narrow windows, readable metadata, preserved filters and scroll position when returning from debriefs, keyboard navigation, and a persistent **Reduce motion** setting.
+- **Bundled archive:** flight data, photos, fonts, and the application color scheme ship with the executable; schedule refreshes use the network.
+
+### Flight archive
+
+![Desktop flight archive with photographic hero, next-launch panel, search, and mission cards](docs/previews/desktop.png)
+
+### Mission debrief
+
+![Flight 14 mission debrief with launch photography, vehicle details, and flight log](docs/previews/mission.png)
+
+### Smaller windows
+
+<p>
+  <img src="docs/previews/narrow.png" width="300" alt="Flight archive in a narrow window, with stacked hero and launch panels">
+  <img src="docs/previews/mission-narrow.png" width="300" alt="Mission debrief in a narrow window, with stacked mission facts">
+</p>
+
+<details>
+<summary>View independent analysis, landing-coordinate panels and motion preview</summary>
+
+![Independent analysis with publication dates and links to original posts](docs/previews/analysis.png)
+
+![Flight 14 landing-coordinate panels with source and map actions](docs/previews/flight14-coordinates.png)
+
+![Animated preview of the journal's navigation and transitions](docs/previews/motion.gif)
+
+Animations follow the desktop animation-speed setting through Kirigami's standard durations. **Reduce motion** finishes pending transitions immediately and persists between runs.
+
+</details>
+
+## Download
+
+The [Releases page](https://github.com/cube-one-ber/Starship/releases) contains commit prereleases produced after the Windows, Linux, and macOS build and package checks pass. Packages bundle Qt, Kirigami, icons, and JPEG XL runtime dependencies. Release downloads include SHA-256 checksums.
+
+| Platform | Packages | Run |
+| --- | --- | --- |
+| Windows 10/11 x64 | Portable ZIP | Extract the entire ZIP and open `starship-journal.exe`. Keep its runtime folders and DLLs alongside it. |
+| Linux x86_64 | AppImage, tar.gz, DEB, RPM | Run the AppImage, use `AppRun` in the extracted archive, or install a distribution package. Requires glibc 2.41 or later. |
+| macOS Apple Silicon | DMG, app bundle ZIP | Drag the app from the DMG to Applications, or extract the ZIP. Check the release notes for the minimum macOS version. |
+
+macOS development builds use an ad-hoc signature and are not Apple-notarized. See [build and release details](docs/building.md) for platform compatibility, packaging, and CI checks.
+
+## Build from source
+
+Run the following commands from the repository root. Building requires a Rust toolchain supporting edition 2024, a C++ compiler, pkg-config, Qt 6 development tools and libraries (Quick, Quick Controls, and Widgets), Kirigami, a KDE controls style, and **libjxl 0.10 or later**.
+
+### Linux
+
+On Arch Linux, install the native dependencies:
 
 ```sh
-python scripts/prepare-native-style.py
+sudo pacman -S --needed rust gcc pkgconf qt6-base qt6-declarative kirigami qqc2-desktop-style qqc2-breeze-style libjxl
+cargo run --release --locked
 ```
 
-The script requires pacman, curl and bsdtar. It puts KDE's unmodified Breeze QML controls and Kirigami theme plugin in `native/runtime`, without changing desktop settings. The app discovers this local runtime or the installed Breeze package automatically. The cached dependency is ignored by version control; its source URL, license and SHA-256 are recorded in `native/runtime/source.json`. Without Breeze, the app falls back to qqc2-desktop-style. `QT_QUICK_CONTROLS_STYLE` can override the app's default.
+The executable is `target/release/starship-journal`. If Qt discovery needs help:
 
 ```sh
-cargo run --release
+QMAKE=/usr/bin/qmake6 cargo run --release --locked
 ```
 
-If Qt discovery needs help, use `QMAKE=/usr/bin/qmake6 cargo run --release`. The compiled executable is `target/release/starship-journal`. Flight data, photography, the application color scheme, and fonts are bundled into the executable. Launch updates are fetched in a background Rust thread and saved atomically in Qt's platform cache directory: under `$XDG_CACHE_HOME` or `~/.cache` on Linux, and `%LOCALAPPDATA%` on Windows.
-
-The archive pairs a cinematic journal header with an orbital launch-window panel, then adapts its flight cards from three columns to one. Mission debriefs have photographic flight banners, editorial New York headlines, and a responsive grid of mission facts. The header gently settles into view; cards reveal as they enter the viewport, lift on hover or keyboard focus, and respond to presses. Filtering fades the old results out before showing the latest selection. Moving between mission debriefs uses a directional slide and fade, with the previous photo retained until its replacement has loaded.
-
-Motion uses [Kirigami’s standard animation durations](https://api.kde.org/qml-org-kde-kirigami-platform-units.html), following the desktop animation-speed setting. The drawer’s **Reduce motion** option persists between runs and finishes pending transitions immediately. These effects use official Qt Quick animations alongside Kirigami cards, headings, layouts, and themed controls.
-
-Kirigami provides the navigation, cards, dialogs and adaptive layouts. Rust handles the flight archive, filtering, schedule normalization, countdown and networking, connected to QML through CXX-Qt. The small C++ image provider decodes JPEG XL directly with the official libjxl library.
-
-## Typography and appearance
-
-SF Pro (variable), SF Mono (regular and semibold), and New York (variable roman and italic) were copied from this computer’s installed Apple fonts into `native/assets/fonts` at the user’s request. Qt registers them from the executable’s resources before loading the interface, so no system font installation is needed. File origins and SHA-256 hashes are recorded in `native/assets/fonts/provenance.json`. The fonts remain Apple’s proprietary fonts and retain their original terms.
-
-The bundled `Starship.colors` scheme uses KDE’s application color-scheme mechanism to keep Breeze controls, drawers, menus, search fields, and page backgrounds consistent. It applies only to this app. Orbital diagrams are drawn with Qt Quick Canvas and repaint only when their geometry changes; they do not run an idle animation loop.
-
-## Windows
-
-The Windows build targets **Windows 10/11 x64** and uses [MSYS2 UCRT64](https://www.msys2.org/). Install MSYS2, open its **UCRT64** terminal, run `pacman -Syu`, and follow any instructions to restart the terminal and finish updating. Then, from this project directory:
+For an Arch checkout, you can also cache the official Breeze controls locally instead of installing `qqc2-breeze-style`:
 
 ```sh
-mapfile -t packages < <(tr -d '\r' < native/windows/packages.txt)
+python scripts/prepare/prepare-native-style.py
+```
+
+This helper requires pacman, curl, and bsdtar. It stores the unmodified runtime in the ignored `target/runtime/` directory and records its source, license, and SHA-256. The app discovers local or installed Breeze controls automatically, with qqc2-desktop-style as a fallback. `QT_QUICK_CONTROLS_STYLE` overrides the default.
+
+To build Linux distribution packages, use `bash scripts/build/build-linux.sh` in a prepared Debian 13 build environment. The [CI workflow](.github/workflows/builds.yml) lists the required Debian packages.
+
+### Windows
+
+Install MSYS2, open its **UCRT64** terminal, and finish updating with `pacman -Syu`. Then install the project's SDK packages and build:
+
+```sh
+mapfile -t packages < <(tr -d '\r' < packaging/windows/packages.txt)
 pacman -S --needed --noconfirm "${packages[@]}"
-bash scripts/build-windows.sh
+bash scripts/build/build-windows.sh
 ```
 
-This uses the MSYS2 Rust/GNU toolchain, runs the backend tests, and builds `target/windows/x86_64-pc-windows-gnu/release/starship-journal.exe`. It produces **`dist/Starship-Journal-windows-x64.zip`**, including Qt, Kirigami, KDE's Breeze widget style, icon theme, libjxl, and their DLL dependencies. Extract the entire ZIP and double-click `starship-journal.exe`; the end user does not need MSYS2, Rust, Qt, or KDE installed. Keep the accompanying runtime folders and DLLs beside the EXE.
+The script uses the MSYS2 Rust/GNU toolchain, runs backend tests, and produces `dist/Starship-Journal-windows-x64.zip`. Packaging uses Qt's `windeployqt` and checks recursive DLL dependencies.
 
-Windows keeps the KDE appearance using Breeze and qqc2-desktop-style, following [KDE's Windows setup guidance](https://develop.kde.org/docs/getting-started/kirigami/platforms-windows/). The release EXE has an application icon, a Windows manifest for monitor scaling, and opens without a console window. `QT_QUICK_CONTROLS_STYLE` still overrides the default style.
+### macOS
 
-The packager uses Qt's official `windeployqt` and checks the recursive DLL imports of the EXE and all runtime plugins. It fails if a dependency is missing, and includes package versions, license notices, photo credits and SHA-256 checksums.
-
-Before compilation, the build script copies the required SDK DLLs beside MSYS2's Qt host tools and verifies that those tools run with an empty environment. This accommodates CXX-Qt's isolated tool invocations without changing or patching Rust dependencies.
-
-To verify an extracted package from PowerShell:
-
-```powershell
-./scripts/check-windows.ps1 -PackagePath 'C:/path/to/Starship-Journal-windows-x64'
-```
-
-This checks both layouts with the SDK removed from `PATH` and Qt's import overrides, including Breeze style/icons and JPEG XL decoding. `.github/workflows/windows.yml` builds and tests the portable package on a Windows runner and uploads the ZIP and UI previews. The Windows build cannot be executed on the current Linux development machine; the workflow and PowerShell check provide the Windows validation path.
-
-## Launch information
-
-Mission summaries were checked against SpaceX post-flight reports on 29 September 2026. Each debrief links to the official report and replay.
-
-The schedule reads structured launch data embedded in [NextSpaceflight's public Starship launch pages](https://nextspaceflight.com/launches/?q=Starship) on load and every ten minutes, with a manual refresh. It verifies the next numbered flight against its detail page and links directly to that launch. NextSpaceflight [does not yet offer a public launch API](https://api.nextspaceflight.com/api_access/), so this adapter depends on its website format. If a request fails or the page format changes, the last saved NextSpaceflight schedule or bundled `native/data/schedule.json` snapshot is shown. Older caches from other providers are discarded.
-
-The app displays tentative day/month/quarter/year windows without starting a countdown. Only a precise minute/second time with Go status and a confirmed liftoff time starts ticking; holds, scrubs and withdrawn windows clear it. Checked on 30 September 2026, [Flight 15](https://nextspaceflight.com/launches/details/8403/) is listed as NET October 2026 with no exact launch time. Flight history remains curated from SpaceX mission reports and needs editorial updates after future flights.
-
-## Photography and JPEG XL
-
-13 selected photographs (12 mission cards plus the hero) were downloaded **using gallery-dl** from [Max Evans's SmugMug](https://maxevans.smugmug.com/Rockets). His public gallery had no dedicated Flight 4 or 7 albums, so those two use credited SpaceX photography. Source URLs are recorded in `assets/selection.json` and `native/data/photos.json`.
-
-- `assets/originals/`: JPEG downloads at the largest publicly available size.
-- `assets/jxl/`: losslessly recompressed archival JPEG XL files.
-- `native/assets/photos/`: resized JPEG XL photographs and JPEG fallbacks.
-- `native/assets/images/`: credited SpaceX photographs for Flights 4 and 7.
-- `assets/conversion-report.json`: source URLs, original SHA-256 checksums, and size comparisons.
-
-All JPEG XL encoding uses **cjxl 0.12.0**, from the official [libjxl reference implementation](https://github.com/libjxl/libjxl). All 13 archival files were decoded with `djxl` and verified to reconstruct the exact original JPEG bytes. The native app decodes its bundled JPEG XL photographs using libjxl, with JPEG fallbacks for image errors.
-
-To reproduce downloads and conversion (requires gallery-dl, ImageMagick, cjxl and djxl):
+On Apple Silicon, install Rust and the Homebrew build dependencies:
 
 ```sh
-python scripts/prepare-photos.py
+brew install cmake ninja pkgconf qtbase qtdeclarative qtsvg qtshadertools qttools jpeg-xl
+bash scripts/build/build-macos.sh
 ```
 
-Photographs remain the property of their credited photographers; no license or ownership transfer is implied.
+The script builds the pinned KDE dependencies, runs backend tests, and creates app bundle ZIP and DMG packages in `dist/` using Qt's `macdeployqt`.
 
-## Verification
+## Flight data and launch timing
 
-Native backend tests and interactive QML smoke checks:
+The archive is curated in [`resources/data/flights.json`](resources/data/flights.json). Research sources, coordinate provenance, and editorial precision notes are recorded in the [content source ledger](docs/content-sources.md). Flight histories need editorial updates after future flights.
+
+The schedule adapter reads structured launch data embedded in NextSpaceflight's public Starship pages on startup, every ten minutes, and on manual refresh. It checks the next numbered flight against its detail page. This depends on the website's format; a failed request or parsing change falls back to the saved NextSpaceflight schedule or the [bundled snapshot](resources/data/schedule.json).
+
+Only a confirmed minute- or second-precision launch time with **Go** status starts the countdown. Tentative days, months, quarters, and years remain launch windows; holds, scrubs, and withdrawn windows clear the countdown. Schedule updates run in a background Rust thread and are saved atomically in Qt's platform cache directory.
+
+Coordinates preserve their sources' stated precision. Independent geolocations and impact estimates are labeled accordingly; preflight targets and post-landing drift positions are not presented as touchdowns.
+
+## Photography and credits
+
+![Starship Flight 5 campaign photographed at the launch tower](resources/photos/flight-5.jpg)
+
+*Flight 5 photography by [Max Evans / NSF](https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-5/i-TFcrWJ2).*
+
+The journal includes 13 selected photographs from **Max Evans / NSF** (12 flight images and the hero), downloaded with gallery-dl. Flights 4 and 7 use credited **SpaceX** photography. Source URLs and credits are recorded in [`assets/archive/selection.json`](assets/archive/selection.json) and [`resources/data/photos.json`](resources/data/photos.json).
+
+| Location | Contents |
+| --- | --- |
+| `assets/archive/originals/` | Original JPEG downloads |
+| `assets/archive/jxl/` | Losslessly recompressed archival JPEG XL files |
+| `resources/photos/` | Resized JPEG XL images and JPEG fallbacks |
+| `resources/images/` | SpaceX images for Flights 4 and 7 |
+| [`assets/archive/conversion-report.json`](assets/archive/conversion-report.json) | Source URLs, original hashes, and size comparisons |
+
+The native image provider decodes JPEG XL with libjxl and uses JPEG fallbacks on image errors. The photo preparation script verifies that archival JPEG XL files reconstruct the original JPEG bytes exactly. To reproduce downloads and conversion, install gallery-dl, ImageMagick, cjxl, and djxl, then run:
 
 ```sh
-cargo test
-# Optional check against the live website:
-cargo test live_nextspaceflight_schedule -- --ignored --nocapture
-cargo build
+python scripts/prepare/prepare-photos.py
+```
+
+**Typography:** bundled SF Pro, SF Mono, and New York fonts are registered from Qt resources. Their file origins and hashes are recorded in [`resources/fonts/provenance.json`](resources/fonts/provenance.json). The `Starship.colors` scheme applies to this app without changing desktop settings.
+
+Photographs remain the property of their credited photographers. The bundled Apple fonts remain proprietary and retain their original terms. This project is unaffiliated with SpaceX or NASASpaceflight.
+
+## Development and verification
+
+Rust owns the archive, filtering, schedule normalization, countdown, and networking. CXX-Qt connects the backend to the QML interface; a small C++ image provider handles JPEG XL decoding.
+
+| Path | Purpose |
+| --- | --- |
+| `src/domain.rs` | Flight data, filtering, launch parsing, countdown logic, and domain tests |
+| `src/backend.rs` | Qt bridge, background refresh, and cache updates |
+| `qml/` | Kirigami pages, cards, mission reports, and animations |
+| `resources/data/` | Curated flights, photo metadata, and schedule snapshot |
+| `docs/` | Research ledger, build guide, and application previews |
+| `scripts/` | Asset preparation, platform builds, packaging, and portable checks |
+| `docs/previews/` | Captured application screenshots and motion preview |
+
+See [the directory guide](docs/structure.md) for the complete layout and where to add source files, resources, and platform tools.
+
+Run backend and packaging tests:
+
+```sh
+cargo test --locked
+python -m unittest discover -s tests/packaging -v
+```
+
+On Linux, `bash scripts/check/check-native.sh` runs backend tests, builds the app, and exercises the desktop and narrow QML layouts. To run the smoke checks directly, including reduced motion:
+
+```sh
+cargo build --locked
 QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software ./target/debug/starship-journal --smoke-test
 QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software ./target/debug/starship-journal --smoke-test --narrow-test
 QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software ./target/debug/starship-journal --smoke-test --reduce-motion
 ```
 
-The smoke checks exercise rapid search and year changes, empty results, keyboard focus, interrupted mission transitions, reduced motion, navigation pages, scroll reveals, and all 14 JPEG XL mission cards. They save `starship-kirigami-*.png` previews in the platform temporary directory (`/tmp` on Linux), then exit with a success or failure status. Set `STARSHIP_TEST_OUTPUT_DIR` to choose a different screenshot directory. The Windows verification script saves screenshots and logs in `target/windows-smoke-tests`. Use `QT_FORCE_STDERR_LOGGING=1` to print Qt diagnostics.
+Smoke checks cover filtering, empty results, keyboard focus, interrupted mission transitions, navigation, reduced motion, and all 14 mission images. Screenshots are written to the platform temporary directory; set `STARSHIP_TEST_OUTPUT_DIR` to choose a destination and `QT_FORCE_STDERR_LOGGING=1` to print Qt diagnostics. Add `--motion-preview` to capture 140 numbered frames for a GIF or video.
 
-An animated preview is stored in `native/previews/motion.gif`. To capture new frames from the actual app, add `--motion-preview` to a smoke-test run and set `STARSHIP_TEST_OUTPUT_DIR` to an output folder. The app writes 140 numbered `starship-motion-*.png` frames at an 80 ms interval for assembly with a video or GIF encoder.
-
-Packaging dependency checks run on either platform:
+The optional live schedule test makes network requests:
 
 ```sh
-python -m unittest discover -s scripts/tests -v
+cargo test --locked live_nextspaceflight_schedule -- --ignored --nocapture
 ```
+
+To verify an extracted Windows package from PowerShell:
+
+```powershell
+./scripts/check/check-windows.ps1 -PackagePath 'C:/path/to/Starship-Journal-windows-x64'
+```
+
+[CI](.github/workflows/builds.yml) builds and checks portable packages on all three platforms before publishing commit prereleases. See [the build guide](docs/building.md) for the complete release process.

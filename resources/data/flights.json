@@ -1,0 +1,1115 @@
+[
+  {
+    "id": 14,
+    "date": "2026-09-28",
+    "title": "The first sustained orbit.",
+    "summary": "Ship 41 reached Earth orbit and deployed 26 operational Starlink V3 satellites. An early deorbit brought it back north of Hawaii.",
+    "booster": "Ocean splashdown",
+    "ship": "Pacific splashdown",
+    "milestone": "First sustained orbit",
+    "outcome": "Milestone",
+    "details": [
+      "Flight 14 began on a suborbital ascent profile so the ship could return even without an insertion burn. A vacuum Raptor shut down early, but controllers reviewed the vehicle’s condition and cleared it to continue. A short single-engine burn about 25 minutes after launch placed Ship 41 into sustained Earth orbit.",
+      "The dispenser released 26 operational Starlink V3 satellites between roughly 34 and 65 minutes after liftoff. Three carried additional cameras to examine the ship’s thermal protection. The shield also tested revised tile geometry and two tiles previously flown on Ship 40.",
+      "The original plan called for six orbits and a Pacific return west of Chile. Controllers instead ordered an early deorbit around two hours and 12 minutes into flight. Starship completed a controlled splashdown north of Hawaii after about three hours and eight minutes, then tipped over and burned. Booster 21 had already completed its Gulf of Mexico return."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-14",
+    "photo": {
+      "flight": 14,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-Flight-14/i-g86WbBR",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 14 campaign, photographed by Max Evans",
+      "path": "/photos/flight-14",
+      "originalSha256": "4b703ff6f7e955724e201ee37977b6d1ef88f3c800f00441750aaae1dbb2e8ce",
+      "originalBytes": 7055951,
+      "jxlBytes": 6180929
+    },
+    "booster_id": "B21",
+    "ship_id": "S41",
+    "generation": "V3",
+    "launch_time": "12:48:59 UTC",
+    "launch_site": "Starbase · Pad 2",
+    "payload": "26 Starlink V3 satellites · orbital delivery",
+    "trajectory": "Earth orbit · Pacific return",
+    "detail_headings": [
+      "Committing to orbit",
+      "The first orbital delivery",
+      "A shorter flight, a different landing zone"
+    ],
+    "timeline": [
+      {
+        "time": "~07:00",
+        "event": "Booster completes controlled splashdown"
+      },
+      {
+        "time": "~25:00",
+        "event": "Single-engine burn establishes orbit"
+      },
+      {
+        "time": "~34:00–65:00",
+        "event": "Twenty-six satellites deployed"
+      },
+      {
+        "time": "~02h 12m",
+        "event": "Early deorbit burn"
+      },
+      {
+        "time": "~03h 08m",
+        "event": "Ship splashes down north of Hawaii"
+      }
+    ],
+    "landings": [
+      {
+        "vehicle": "Booster 21 · Gulf splashdown",
+        "coordinates": "25°52′47″N · 96°46′36″W",
+        "latitude": 25.879722222222224,
+        "longitude": -96.77666666666667,
+        "precision": "Independent geolocation",
+        "note": "Position published by @mcrs987 on 28 September 2026, 40 km downrange. He inferred an on-target landing from aircraft and vessel activity. This is an independent geolocation, rather than a position released from SpaceX telemetry.",
+        "source": "https://x.com/mcrs987/status/2104591150313091123"
+      },
+      {
+        "vehicle": "Ship 41 · Pacific splashdown",
+        "coordinates": "25°29′57.46″N · 155°25′39.13″W",
+        "latitude": 25.499294444444445,
+        "longitude": -155.4275361111111,
+        "precision": "Independent geolocation",
+        "note": "Touchdown position published by @mcrs987 on 28 September 2026, about 500 km from the Hawaiian islands. He identified MELISSA C as the supporting vessel. The published digits are retained; positional accuracy was not stated.",
+        "source": "https://x.com/mcrs987/status/2104612024638415010"
+      }
+    ],
+    "analysis": [
+      {
+        "title": "Comparing the last three landing engines",
+        "kind": "Footage analysis",
+        "published": "2026-09-28",
+        "summary": "He mirrored the engine graphic and rotated camera views to compare plume directions consistently. He highlighted an unusually early and visually faint shutdown of one of the booster’s last three landing engines, while reporting that the other two completed their burns.",
+        "source": "https://x.com/mcrs987/status/2104644180123480137",
+        "context": null,
+        "context_label": ""
+      },
+      {
+        "title": "Ice forming around the booster raceway",
+        "kind": "Footage observation",
+        "published": "2026-09-28",
+        "summary": "He highlighted apparent ice formation around the booster’s external raceway during the landing burn and compared it with footage from Flights 12 and 13. He questioned what could explain it without establishing a cause; a broken component is not treated as a confirmed finding.",
+        "source": "https://x.com/mcrs987/status/2104669142817153297",
+        "context": "https://x.com/mcrs987/status/2104671795047788827",
+        "context_label": "Earlier-flight comparison"
+      },
+      {
+        "title": "Venting when the vacuum engine shut down",
+        "kind": "Footage observation",
+        "published": "2026-09-28",
+        "summary": "He noticed aft-cavity venting around the ship’s vacuum-engine shutdown. The post considered nitrogen purge and propellant as possibilities, rather than identifying the vented material conclusively. Both possibilities remain unconfirmed in this analysis.",
+        "source": "https://x.com/mcrs987/status/2104557812848505076",
+        "context": null,
+        "context_label": ""
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "date": "2026-07-24",
+    "title": "A ship that stayed afloat.",
+    "summary": "Twenty working Starlink V3 satellites were tested on a suborbital path. Ship 40 landed softly and remained intact on the Indian Ocean.",
+    "booster": "Hard splashdown",
+    "ship": "Soft splashdown",
+    "milestone": "Intact ocean landing",
+    "outcome": "Milestone",
+    "details": [
+      "Ship 40 released 20 working Starlink V3 satellites after completing ascent. SpaceX communicated with each using radio and laser links and downloaded telemetry. These were functional hardware tests, but the objects followed a deliberately suborbital path and reentered about 20 minutes after deployment.",
+      "The ship restarted a Raptor in space, survived entry and performed a banking maneuver before a soft Indian Ocean splashdown. All three landing engines initially restarted. Booster 20 completed the high-thrust part of boostback but ended it early and suffered a hard splashdown after an incomplete landing-engine restart.",
+      "Ship 40 remained intact and afloat after tipping over, allowing close inspection of the heat shield. Recovery vessels tracked the drifting ship. It was subsequently taken to waters near Christmas Island, where engineers collected samples and data before it was loaded onto the heavy-lift vessel Forte in August."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-13",
+    "photo": {
+      "flight": 13,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-13/i-qxMHn8q",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 13 campaign, photographed by Max Evans",
+      "path": "/photos/flight-13",
+      "originalSha256": "090baf2f561140f34444029c608ad81ca79be8a045626bb94ae6164640456769",
+      "originalBytes": 2233625,
+      "jxlBytes": 1786081
+    },
+    "booster_id": "B20",
+    "ship_id": "S40",
+    "generation": "V3",
+    "launch_time": "22:51 UTC",
+    "launch_site": "Starbase · Pad 2",
+    "payload": "20 Starlink V3 satellites · suborbital test",
+    "trajectory": "Suborbital · Indian Ocean return",
+    "detail_headings": [
+      "Working satellites, deliberately suborbital",
+      "A complete upper-stage return",
+      "An intact ship to examine"
+    ],
+    "timeline": [
+      {
+        "time": "~07:00",
+        "event": "Booster impacts after incomplete landing burn"
+      },
+      {
+        "time": "~17:00–28:00",
+        "event": "Twenty V3 satellites deployed"
+      },
+      {
+        "time": "~39:00",
+        "event": "Raptor restarts during coast"
+      },
+      {
+        "time": "~65:00",
+        "event": "Ship completes soft splashdown"
+      },
+      {
+        "time": "After landing",
+        "event": "Ship remains intact and afloat"
+      }
+    ],
+    "landings": [
+      {
+        "vehicle": "Booster 20 · Gulf splashdown",
+        "coordinates": "25°56′43″N · 96°54′12″W",
+        "latitude": 25.94527777777778,
+        "longitude": -96.90333333333334,
+        "precision": "Published estimate",
+        "note": "Approximate splashdown position published by @mcrs987 on 25 July 2026, about 20 km from the intended target. He cited a smoke plume in GOES-19 imagery. This is the booster’s estimated position, not Ship 40’s landing or subsequent drift.",
+        "source": "https://x.com/mcrs987/status/2080833041656684643"
+      }
+    ],
+    "analysis": [
+      {
+        "title": "Locating Booster 20’s splashdown",
+        "kind": "Geolocation",
+        "published": "2026-07-25",
+        "summary": "He estimated the booster’s splashdown at 25°56′43″N, 96°54′12″W, roughly 20 km from the intended location, and pointed to a smoke plume in GOES-19 imagery. The coordinate panel records this as a published estimate.",
+        "source": "https://x.com/mcrs987/status/2080833041656684643",
+        "context": null,
+        "context_label": ""
+      },
+      {
+        "title": "Following Ship 40’s drift and recovery fleet",
+        "kind": "Vessel tracking",
+        "published": "2026-07-31",
+        "summary": "His tracking updates followed the floating ship and GO Australis, then the arrival of Normand Ranger. On 31 July, he reported about 403 km of drift over 162 hours. These are post-touchdown movements, not the ship’s initial landing coordinates.",
+        "source": "https://x.com/mcrs987/status/2083245131218538803",
+        "context": "https://x.com/mcrs987/status/2082202679657349249",
+        "context_label": "Earlier drift update"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "date": "2026-05-22",
+    "title": "V3 takes flight.",
+    "summary": "New vehicles, Raptor 3 engines and Pad 2 debuted together. Ship 39 completed its return; Booster 19 impacted far beyond its landing target.",
+    "booster": "Downrange ocean impact",
+    "ship": "Ocean splashdown",
+    "milestone": "First V3 flight",
+    "outcome": "Milestone",
+    "details": [
+      "The first V3 mission also introduced Raptor 3 engines and Starbase’s second orbital launch pad. Ship 39 reached its planned suborbital trajectory despite a vacuum-engine shutdown during ascent. It deployed 20 Starlink V3 mass simulators and two modified Starlink satellites equipped for imaging.",
+      "The planned in-space relight was skipped. During return, the ship tested its aft-flap structure and a banking maneuver relevant to future returns to Starbase. It retained control through atmospheric entry, then flipped upright and completed an Indian Ocean splashdown using two Raptor engines.",
+      "Booster 19 suffered engine-start failures during boostback and did not return to its intended near-coastal zone. Its hard impact occurred far downrange. A published geolocation estimate places it about 318 kilometers from launch and 310 kilometers from the intended landing target; the coordinates below identify that impact, rather than a successful landing."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-12",
+    "photo": {
+      "flight": 12,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-12/i-zQH9382",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 12 campaign, photographed by Max Evans",
+      "path": "/photos/flight-12",
+      "originalSha256": "ce7bac681b50af1ae3e2f186e66702b8fe5e9cde693320941a6ded766cbcf6f1",
+      "originalBytes": 2205437,
+      "jxlBytes": 1924285
+    },
+    "booster_id": "B19",
+    "ship_id": "S39",
+    "generation": "V3",
+    "launch_time": "22:30:22 UTC",
+    "launch_site": "Starbase · Pad 2",
+    "payload": "20 V3 simulators + 2 imaging satellites",
+    "trajectory": "Suborbital · Indian Ocean return",
+    "detail_headings": [
+      "A new propulsion generation",
+      "Deployment and a two-engine landing",
+      "A booster return cut short"
+    ],
+    "timeline": [
+      {
+        "time": "00:00",
+        "event": "First V3 stack launches from Pad 2"
+      },
+      {
+        "time": "~03:00",
+        "event": "Booster boostback sequence fails"
+      },
+      {
+        "time": "~08:00",
+        "event": "Ship completes ascent"
+      },
+      {
+        "time": "~16:00–27:00",
+        "event": "Simulators and imaging satellites released"
+      },
+      {
+        "time": "~66:00",
+        "event": "Ship completes two-engine splashdown"
+      }
+    ],
+    "landings": [
+      {
+        "vehicle": "Booster 19 · impact site",
+        "coordinates": "25°01′N · 94°10′W",
+        "latitude": 25.016666666666666,
+        "longitude": -94.16666666666667,
+        "precision": "Published estimate",
+        "note": "Approximate position published by @mcrs987 on 23 May 2026. About 318 km downrange and 310 km from the intended landing target. This marks the booster’s impact location; it is not the target or the ship’s splashdown.",
+        "source": "https://x.com/mcrs987/status/2057988319842074718"
+      }
+    ],
+    "analysis": [
+      {
+        "title": "Color-coding the boostback engine sequence",
+        "kind": "Footage analysis",
+        "published": "2026-05-23",
+        "summary": "He color-coded Booster 19’s engine startup and shutdown sequence to illustrate how one engine event affected the rest of the boostback. His post notes three other engines failing to fully ignite before the energetic event.",
+        "source": "https://x.com/mcrs987/status/2058104321259041200",
+        "context": null,
+        "context_label": ""
+      },
+      {
+        "title": "Finding the far-downrange booster impact",
+        "kind": "Geolocation",
+        "published": "2026-05-23",
+        "summary": "He published an approximate Booster 19 impact position at 25°01′N, 94°10′W, about 318 km downrange and 310 km from the intended target. The recovery-geography panel preserves the published minute precision and links to a map. This is the impact estimate, not a successful landing.",
+        "source": "https://x.com/mcrs987/status/2057988319842074718",
+        "context": null,
+        "context_label": ""
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "date": "2025-10-13",
+    "title": "Closing the V2 chapter.",
+    "summary": "The final second-generation ship deployed eight simulators, restarted a Raptor and tested a banking maneuver before splashdown.",
+    "booster": "Soft splashdown",
+    "ship": "Soft splashdown",
+    "milestone": "Final V2 mission",
+    "outcome": "Test complete",
+    "details": [
+      "Ship 38 completed the final second-generation Starship mission. It released eight Starlink mass simulators during coast and restarted a Raptor in space. As on Flight 10, the payloads were deliberately suborbital and did not remain in Earth orbit.",
+      "The ship tested its thermal protection during reentry and executed a dynamic banking maneuver to explore how future ships could return toward Starbase. It then completed its landing flip and controlled Indian Ocean splashdown, about 66 minutes after launch.",
+      "Booster 15 flew for a second time after its Flight 8 catch. Its ocean return tested a landing-burn profile intended for the next generation of hardware. Both stages completed their main flight objectives, closing the V2 campaign ahead of the V3 vehicle and Raptor 3 debut."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-11",
+    "photo": {
+      "flight": 11,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/IFT-11/i-BRwcMV2",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 11 campaign, photographed by Max Evans",
+      "path": "/photos/flight-11",
+      "originalSha256": "1bf8f72633f7778ab1f6139822f1e9e994da5f0496cc473bcedbd853a0c9e277",
+      "originalBytes": 3482851,
+      "jxlBytes": 2948561
+    },
+    "booster_id": "B15 · second flight",
+    "ship_id": "S38",
+    "generation": "V2",
+    "launch_time": "23:23 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "8 Starlink mass simulators · deployed",
+    "trajectory": "Suborbital · Indian Ocean return",
+    "detail_headings": [
+      "A final V2 demonstration",
+      "Preparing a future return to Starbase",
+      "Reuse on the first stage"
+    ],
+    "timeline": [
+      {
+        "time": "~06:36",
+        "event": "Reused booster completes splashdown"
+      },
+      {
+        "time": "~19:00–26:00",
+        "event": "Eight mass simulators deployed"
+      },
+      {
+        "time": "~38:00",
+        "event": "In-space Raptor relight"
+      },
+      {
+        "time": "~66:00",
+        "event": "Ship completes controlled splashdown"
+      }
+    ],
+    "landings": [],
+    "analysis": [
+      {
+        "title": "Ship 38’s descent over a virtual Starbase",
+        "kind": "Reconstruction",
+        "published": "2025-10-17",
+        "summary": "He reconstructed the Flight 11 descent and overlaid it on Starbase’s second launch tower to visualize a possible future return-to-launch-site catch. The real flight ended at sea; the tower overlay is a visualization, not an actual approach or catch attempt. A real-time 4K breakdown explains the reconstruction.",
+        "source": "https://x.com/mcrs987/status/1979231198699237519",
+        "context": "https://www.youtube.com/watch?v=j5UAwZo5Cxc",
+        "context_label": "Watch the breakdown"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "date": "2025-08-26",
+    "title": "Payloads away.",
+    "summary": "Eight simulators left the dispenser for the first time. An in-space relight and two controlled ocean returns completed the V2 mission profile.",
+    "booster": "Soft splashdown",
+    "ship": "Soft splashdown",
+    "milestone": "First payload deployment",
+    "outcome": "Milestone",
+    "details": [
+      "Ship 37 completed ascent and released eight Starlink mass simulators, the first successful Starship payload deployment. The objects followed a suborbital trajectory and were intended to reenter. A Raptor was restarted during coast, demonstrating the relight capability again.",
+      "The heat shield included deliberately missing tiles and experimental configurations. Starship endured substantial damage during entry but retained enough control for a landing flip and controlled Indian Ocean splashdown. This completed the upper-stage objectives that Flights 7, 8 and 9 had not reached.",
+      "Booster 16 tested a backup landing-engine sequence before its planned ocean splashdown. Ship 37 had replaced Ship 36, which was destroyed during ground testing in June. Flight 10 returned the campaign to a complete ascent, coast and reentry demonstration."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-10",
+    "photo": {
+      "flight": 10,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/IFT-10/i-PTmMXwS",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 10 campaign, photographed by Max Evans",
+      "path": "/photos/flight-10",
+      "originalSha256": "bd5a6cc208b345ff815233ae8220b40bfe9d8db7d2fe8a8c6c2127059b1bebc3",
+      "originalBytes": 1256009,
+      "jxlBytes": 1092536
+    },
+    "booster_id": "B16",
+    "ship_id": "S37",
+    "generation": "V2",
+    "launch_time": "23:30 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "8 Starlink mass simulators · deployed",
+    "trajectory": "Suborbital · Indian Ocean return",
+    "detail_headings": [
+      "Completing the mission profile",
+      "A deliberately demanding return",
+      "A backup-engine experiment"
+    ],
+    "timeline": [
+      {
+        "time": "~06:30",
+        "event": "Booster completes ocean return"
+      },
+      {
+        "time": "~09:00",
+        "event": "Ship finishes ascent burn"
+      },
+      {
+        "time": "~19:00–26:00",
+        "event": "Eight mass simulators deployed"
+      },
+      {
+        "time": "~38:00",
+        "event": "Raptor restarts in space"
+      },
+      {
+        "time": "~66:00",
+        "event": "Ship completes controlled splashdown"
+      }
+    ],
+    "landings": [],
+    "analysis": [
+      {
+        "title": "The ship attitude display as a timelapse",
+        "kind": "Footage processing",
+        "published": "2025-08-27",
+        "summary": "He condensed the broadcast’s ship-attitude graphic into a short timelapse. It offers a continuous view of how the displayed orientation changed across the flight, using the webcast graphic rather than an independently measured trajectory.",
+        "source": "https://x.com/mcrs987/status/1960724698825707659",
+        "context": null,
+        "context_label": ""
+      },
+      {
+        "title": "Highlighting the departing heat-shield tiles",
+        "kind": "Image annotation",
+        "published": "2025-08-28",
+        "summary": "He annotated imagery of Ship 37’s final descent to highlight objects trailing the vehicle, identifying them as heat-shield tiles. The image makes his observation easy to inspect, but it does not establish a complete tile-loss count or a detailed cause for each loss.",
+        "source": "https://x.com/mcrs987/status/1961172157708325123",
+        "context": "https://x.com/mcrs987/status/1961176223981391889",
+        "context_label": "Follow-up view"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "date": "2025-05-27",
+    "title": "Super Heavy flies again.",
+    "summary": "Booster 14 made the first Super Heavy reflight. Ship 35 completed ascent, then lost control during its coast toward the Indian Ocean.",
+    "booster": "Lost during landing burn",
+    "ship": "Lost during reentry",
+    "milestone": "First booster reflight",
+    "outcome": "Vehicle lost",
+    "details": [
+      "Booster 14 returned to flight after its Flight 7 tower catch, marking the first reuse of a Super Heavy. This mission deliberately targeted an ocean return and a more demanding descent, rather than another catch. The booster was lost during its landing-burn test.",
+      "Ship 35 completed its ascent burn and reached its intended suborbital trajectory. The payload door failed to open, preventing deployment of eight Starlink mass simulators. The flight nevertheless extended second-generation ship operation beyond the ascent failures of Flights 7 and 8.",
+      "A propellant leak and subsequent attitude-control problem prevented the planned Raptor relight and controlled entry attitude. The ship was passivated and communications ended during its Indian Ocean return around 47 minutes after liftoff. A full V2 mission still remained to be completed."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-9",
+    "photo": {
+      "flight": 9,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/IFT-9/i-8zPB3gs",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 9 campaign, photographed by Max Evans",
+      "path": "/photos/flight-9",
+      "originalSha256": "91487feccd44ec860ea966b22d6a6d062d065190af143e26a082ac242c546d54",
+      "originalBytes": 859711,
+      "jxlBytes": 756366
+    },
+    "booster_id": "B14 · second flight",
+    "ship_id": "S35",
+    "generation": "V2",
+    "launch_time": "23:36:28 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "8 Starlink mass simulators · not deployed",
+    "trajectory": "Suborbital · uncontrolled return",
+    "detail_headings": [
+      "A flight-proven booster",
+      "The dispenser stays closed",
+      "Coast without control"
+    ],
+    "timeline": [
+      {
+        "time": "00:00",
+        "event": "First reused Super Heavy launches"
+      },
+      {
+        "time": "~06:00",
+        "event": "Booster lost during landing test"
+      },
+      {
+        "time": "~09:00",
+        "event": "Ship completes ascent burn"
+      },
+      {
+        "time": "~18:00",
+        "event": "Payload-door test fails"
+      },
+      {
+        "time": "~47:00",
+        "event": "Ship lost on atmospheric return"
+      }
+    ],
+    "landings": [],
+    "analysis": [
+      {
+        "title": "Locating the start of the booster anomaly",
+        "kind": "Footage analysis",
+        "published": "2025-05-29",
+        "summary": "Using SpaceX and ground footage, he placed the initial Booster 14-2 explosion in the aft section and considered a hard engine shutdown as a possible trigger. That is a proposed mechanism from visible evidence, not a confirmed diagnosis. His initial speed estimate was subsequently corrected, so it is not repeated here.",
+        "source": "https://x.com/mcrs987/status/1927899978485150057",
+        "context": null,
+        "context_label": ""
+      },
+      {
+        "title": "Predicting the intended ocean-return zone",
+        "kind": "Preflight tracking",
+        "published": "2025-05-27",
+        "summary": "Before launch, he tracked Hannah Ray toward the roughly 30 km offshore area associated with Booster 13, rather than the farther-out Booster 11 zone. This was a prediction of the intended landing area from vessel movement; it is not the location where Booster 14-2 was actually lost.",
+        "source": "https://x.com/mcrs987/status/1927352576967639243",
+        "context": null,
+        "context_label": ""
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "date": "2025-03-06",
+    "title": "A catch amid a setback.",
+    "summary": "Booster 15 became the third Super Heavy caught at Starbase. Ship 34 lost engines and attitude control before completing ascent.",
+    "booster": "Tower catch",
+    "ship": "Lost during ascent",
+    "milestone": "Third booster catch",
+    "outcome": "Vehicle lost",
+    "details": [
+      "Flight 8 repeated the second-generation ship’s attempt to complete ascent and test its payload dispenser. Before launch, a 60-second static fire explored engine operating conditions and hardware changes following Flight 7. Four Starlink mass simulators remained aboard when the flight ended.",
+      "Booster 15 completed its return and was caught by the tower around seven minutes after launch. This was the third successful Super Heavy catch, even though some engines failed to restart during the return sequence.",
+      "Ship 34 suffered an aft-section event followed by multiple engine shutdowns and loss of attitude control. Telemetry ended before the planned in-space operations. SpaceX attributed the initiating event to a hardware failure in a center Raptor engine; payload deployment and controlled reentry were not demonstrated."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-8",
+    "photo": {
+      "flight": 8,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-8/i-FPhXLfb",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 8 campaign, photographed by Max Evans",
+      "path": "/photos/flight-8",
+      "originalSha256": "149b88347d630ca5130e477690dd450ac3e658677d13986b7d1fe8f8d0903b6a",
+      "originalBytes": 556546,
+      "jxlBytes": 498184
+    },
+    "booster_id": "B15 · first flight",
+    "ship_id": "S34",
+    "generation": "V2",
+    "launch_time": "23:30:31 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "4 Starlink mass simulators · not deployed",
+    "trajectory": "Ascent terminated before coast",
+    "detail_headings": [
+      "A second V2 upper stage",
+      "The booster reaches the tower",
+      "A different engine failure"
+    ],
+    "timeline": [
+      {
+        "time": "00:00",
+        "event": "Second V2 ship launches"
+      },
+      {
+        "time": "~07:02",
+        "event": "Tower catches Booster 15"
+      },
+      {
+        "time": "~08:30",
+        "event": "Ship loses engines and attitude control"
+      },
+      {
+        "time": "~09:35",
+        "event": "Ship destroyed before planned coast"
+      }
+    ],
+    "landings": [],
+    "analysis": [
+      {
+        "title": "Rebuilding Ship 34’s final flight",
+        "kind": "Reconstruction",
+        "published": "2025-03-09",
+        "summary": "He produced a 3D reconstruction of Flight 8’s breakup using multiple available views. The animation combines engine-state information and camera perspectives to make the loss of orientation and subsequent breakup easier to follow.",
+        "source": "https://x.com/mcrs987/status/1898811140391460893",
+        "context": null,
+        "context_label": ""
+      },
+      {
+        "title": "Stabilizing the breakup footage",
+        "kind": "Footage processing",
+        "published": "2025-03-09",
+        "summary": "He manually stabilized his footage and identified the visible detonation at approximately T+9 minutes 30 seconds. This is his video timing estimate; the mission timeline remains approximate rather than implying frame-perfect agreement across different recordings.",
+        "source": "https://x.com/mcrs987/status/1898575859331527069",
+        "context": null,
+        "context_label": ""
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "date": "2025-01-16",
+    "title": "The second-generation debut.",
+    "summary": "A redesigned ship entered flight testing. Booster 14 returned to the tower, but an aft-section fire ended Ship 33’s ascent.",
+    "booster": "Tower catch",
+    "ship": "Lost during ascent",
+    "milestone": "First V2 flight",
+    "outcome": "Vehicle lost",
+    "details": [
+      "Ship 33 introduced the second-generation upper stage, with larger propellant tanks, revised avionics and smaller forward flaps moved away from the hottest part of the flow. Ten Starlink mass simulators were carried for a deployment test, but never released.",
+      "Super Heavy completed its boostback and returned to the tower for the program’s second catch. Booster 14 survived the flight and later became the first Super Heavy to launch again, on Flight 9.",
+      "The ship lost engines and communications during ascent, about eight and a half minutes after launch. SpaceX’s investigation linked the failure to stronger-than-expected vibration, propellant leaks and an aft-section fire. Debris descended over the Caribbean, and the planned coast, deployment and reentry experiments were not reached."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-7",
+    "photo": {
+      "path": "/images/flight-7",
+      "credit": "SpaceX",
+      "url": "https://www.spacex.com/launches/starship-flight-7",
+      "alt": "Starship Flight 7, photographed by SpaceX"
+    },
+    "booster_id": "B14 · first flight",
+    "ship_id": "S33",
+    "generation": "V2",
+    "launch_time": "22:37 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "10 Starlink mass simulators · not deployed",
+    "trajectory": "Ascent terminated before coast",
+    "detail_headings": [
+      "More capacity, new hardware",
+      "A booster recovered again",
+      "The upper-stage investigation"
+    ],
+    "timeline": [
+      {
+        "time": "00:00",
+        "event": "First V2 ship lifts off"
+      },
+      {
+        "time": "~06:55",
+        "event": "Tower catches Booster 14"
+      },
+      {
+        "time": "~08:26",
+        "event": "Ship communications end during ascent"
+      }
+    ],
+    "landings": [],
+    "analysis": [
+      {
+        "title": "A preliminary 3D breakup sequence",
+        "kind": "Reconstruction",
+        "published": "2025-01-18",
+        "summary": "He reconstructed Ship 33’s motion from the first engine problems to breakup, using onboard views and later ground footage. His methodology explicitly notes a lack of data after loss of signal and before breakup, so the intervening orientation is estimated.",
+        "source": "https://x.com/mcrs987/status/1880527467641032742",
+        "context": "https://x.com/mcrs987/status/1880527470333698253",
+        "context_label": "Method and limitations"
+      },
+      {
+        "title": "A longer failure-timeline study",
+        "kind": "Hypothesis",
+        "published": "2025-02-03",
+        "summary": "A later 26-post thread assembled a proposed engine-failure, fire, loss-of-signal and debris timeline. It includes a geolocation exercise using several breakup videos, but expressly allows that its explanation may be wrong. Its detailed failure mechanisms are hypotheses, separate from SpaceX’s investigation.",
+        "source": "https://threadreaderapp.com/thread/1886386447478816849.html",
+        "context": "https://x.com/mcrs987/status/1886386447478816849",
+        "context_label": "Original thread"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "date": "2024-11-19",
+    "title": "A restart above Earth.",
+    "summary": "Starship restarted a Raptor in space for the first time and returned in daylight. Super Heavy diverted safely from the tower.",
+    "booster": "Soft splashdown",
+    "ship": "Soft splashdown",
+    "milestone": "First in-space relight",
+    "outcome": "Milestone",
+    "details": [
+      "Flight 6 was the last mission for the first-generation Starship upper stage. Booster 13 was initially intended to return to the tower, but the catch was called off after a tower-system problem. The booster instead performed a controlled Gulf of Mexico splashdown.",
+      "Ship 31 restarted a single Raptor during coast, demonstrating an engine operation needed for future orbital insertion and deorbit burns. This was a relight demonstration on a suborbital flight, rather than a commitment to a sustained Earth orbit.",
+      "The ship tested altered heat-shield coverage and a more demanding entry profile. It completed a landing flip and soft Indian Ocean splashdown in daylight, giving clearer views of the final descent. A plush banana stayed aboard as the mission’s zero-gravity indicator."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-6",
+    "photo": {
+      "flight": 6,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-6/i-Z5LW3fX",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 6 campaign, photographed by Max Evans",
+      "path": "/photos/flight-6",
+      "originalSha256": "d09610a45ba0f8c6dddd1afcc65713af60f43945855d376d6686b3f69098c8c6",
+      "originalBytes": 6983939,
+      "jxlBytes": 6118030
+    },
+    "booster_id": "B13",
+    "ship_id": "S31",
+    "generation": "V1",
+    "launch_time": "22:00 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "Banana zero-gravity indicator",
+    "trajectory": "Suborbital · Indian Ocean return",
+    "detail_headings": [
+      "An offshore diversion",
+      "The engine relight milestone",
+      "Testing the edge of the envelope"
+    ],
+    "timeline": [
+      {
+        "time": "~07:00",
+        "event": "Booster completes diverted ocean landing"
+      },
+      {
+        "time": "~37:46",
+        "event": "First Raptor restart in space"
+      },
+      {
+        "time": "~47:00",
+        "event": "Ship begins atmospheric return"
+      },
+      {
+        "time": "~65:00",
+        "event": "First daylight ship splashdown"
+      }
+    ],
+    "landings": [],
+    "analysis": [
+      {
+        "title": "Counting the tiles removed from Ship 31",
+        "kind": "Hardware survey",
+        "published": "2024-11-12",
+        "summary": "After comparing heat-shield imagery, he counted 1,370 removed tiles and calculated a reduction from 18,492 to 17,122. These are his image-based counts, not a SpaceX inventory. His earlier comparison visualizes the altered coverage ahead of Flight 6.",
+        "source": "https://x.com/mcrs987/status/1856386476470145422",
+        "context": "https://x.com/mcrs987/status/1856070438788689957",
+        "context_label": "Heat-shield comparison"
+      },
+      {
+        "title": "Tracking the booster after splashdown",
+        "kind": "Vessel tracking",
+        "published": "2024-11-20",
+        "summary": "The day after Flight 6, he reported that Booster 13 had been sunk and that both nearby vessels had left the area. This is a post-landing status report and does not establish a precise touchdown position.",
+        "source": "https://x.com/mcrs987/status/1859301139444826376",
+        "context": null,
+        "context_label": ""
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "date": "2024-10-13",
+    "title": "Caught on the first attempt.",
+    "summary": "The launch tower caught Booster 12. Ship 30 completed its own return to a precisely targeted Indian Ocean splashdown.",
+    "booster": "Tower catch",
+    "ship": "Soft splashdown",
+    "milestone": "First booster catch",
+    "outcome": "Milestone",
+    "details": [
+      "For the first booster catch, Super Heavy returned to Starbase rather than an offshore splashdown zone. Vehicle and tower health checks had to pass before the return was authorized. Booster 12 slowed beside the tower and settled onto its mechanical arms about seven minutes after launch.",
+      "Ship 30 flew with revised heat-shield tiles and a backup ablative layer. It completed its suborbital coast and atmospheric return, then relit its landing engines for a controlled splashdown in the Indian Ocean. A pre-positioned camera buoy filmed the final descent at night.",
+      "The booster was recovered at the launch site, while the ship was intentionally expended at sea and burned after tipping over. The tower catch demonstrated a central part of the planned reuse system; recovering an upper stage remained a separate challenge."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-5",
+    "photo": {
+      "flight": 5,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-5/i-TFcrWJ2",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 5 campaign, photographed by Max Evans",
+      "path": "/photos/flight-5",
+      "originalSha256": "3bdad51c9b9d980901d77cae453ec33c189860df7cada2c021f27f70d755de52",
+      "originalBytes": 1828360,
+      "jxlBytes": 1622319
+    },
+    "booster_id": "B12",
+    "ship_id": "S30",
+    "generation": "V1",
+    "launch_time": "12:25 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "Upgraded heat-shield test",
+    "trajectory": "Suborbital · Indian Ocean return",
+    "detail_headings": [
+      "Returning to the launch tower",
+      "An upgraded thermal shield",
+      "Two very different recoveries"
+    ],
+    "timeline": [
+      {
+        "time": "~02:40",
+        "event": "Stages separate through hot staging"
+      },
+      {
+        "time": "~06:54",
+        "event": "Tower arms catch Booster 12"
+      },
+      {
+        "time": "~48:00",
+        "event": "Ship begins atmospheric return"
+      },
+      {
+        "time": "~66:00",
+        "event": "Ship splashes down beside camera buoy"
+      }
+    ],
+    "landings": [
+      {
+        "vehicle": "Flight 5 · discarded hot-stage ring",
+        "coordinates": "26°00′07″N · 97°03′00″W",
+        "latitude": 26.001944444444444,
+        "longitude": -97.05,
+        "precision": "Published estimate · ±0.5 km",
+        "note": "Estimated ring location published by @mcrs987 on 15 October 2024, using video and offshore vessel activity. He quoted a ±0.5 km margin. This marks the discarded adapter, rather than a booster or ship landing.",
+        "source": "https://x.com/mcrs987/status/1846331559718146194"
+      }
+    ],
+    "analysis": [
+      {
+        "title": "A trajectory drawn from video frames",
+        "kind": "Frame composite",
+        "published": "2024-10-22",
+        "summary": "He combined frames from one of his Flight 5 videos into a simulated long exposure. The result makes the vehicle’s path easier to see in one image; it is a frame composite, not a photograph made with a single long exposure.",
+        "source": "https://x.com/mcrs987/status/1848855623842336805",
+        "context": null,
+        "context_label": ""
+      },
+      {
+        "title": "Examining an experimental coated tile",
+        "kind": "Footage observation",
+        "published": "2024-11-05",
+        "summary": "While aligning the livestream into a continuous timelapse, he highlighted a bright aluminum-coated tile on Ship 30 and interpreted its appearance as melting. The post supplies a useful close look at a heat-shield experiment; the thermal interpretation is his observation from the footage.",
+        "source": "https://x.com/mcrs987/status/1853871016230990129",
+        "context": null,
+        "context_label": ""
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "date": "2024-06-06",
+    "title": "Two stages. Two splashdowns.",
+    "summary": "Super Heavy and Starship both completed controlled ocean descents for the first time, despite severe damage to a ship flap.",
+    "booster": "Soft splashdown",
+    "ship": "Soft splashdown",
+    "milestone": "First dual splashdown",
+    "outcome": "Milestone",
+    "details": [
+      "Booster 11 completed ascent, boostback and a landing burn before a soft splashdown in the Gulf of Mexico. The hot-stage ring was jettisoned after separation to reduce the mass carried through the return. The booster’s ocean landing provided a rehearsal for a future tower catch.",
+      "Ship 29 survived atmospheric entry even as heating visibly eroded a forward flap and damaged its camera view. The remaining structure and control authority were sufficient to guide the ship through descent, ignite the landing engines and execute the flip to a vertical attitude.",
+      "The ship splashed down in the Indian Ocean roughly 66 minutes after launch. Neither stage was intended to be recovered intact, but both completed their controlled return sequences. Surviving reentry was the key advance over Flight 3."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-4",
+    "photo": {
+      "path": "/images/flight-4",
+      "credit": "SpaceX",
+      "url": "https://www.spacex.com/launches/starship-flight-4",
+      "alt": "Starship Flight 4, photographed by SpaceX"
+    },
+    "booster_id": "B11",
+    "ship_id": "S29",
+    "generation": "V1",
+    "launch_time": "12:50 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "Heat-shield test configuration",
+    "trajectory": "Suborbital · Indian Ocean return",
+    "detail_headings": [
+      "Bringing the booster back",
+      "A damaged flap keeps working",
+      "The foundation for a catch"
+    ],
+    "timeline": [
+      {
+        "time": "~03:00",
+        "event": "Hot staging and boostback"
+      },
+      {
+        "time": "~07:24",
+        "event": "Booster completes soft splashdown"
+      },
+      {
+        "time": "~48:00",
+        "event": "Ship encounters reentry heating"
+      },
+      {
+        "time": "~66:00",
+        "event": "Ship completes controlled splashdown"
+      }
+    ],
+    "landings": [],
+    "analysis": [
+      {
+        "title": "Visualizing the damaged forward flap",
+        "kind": "Reconstruction",
+        "published": "2024-06-08",
+        "summary": "He created a short CG recreation of Ship 29’s landing flip to show his interpretation of the damaged forward flap’s movement. His description proposed complete detachment of the Y+ forward flap; the reconstruction should be read as an interpretation of footage, rather than an official structural assessment.",
+        "source": "https://x.com/mcrs987/status/1799497044362424636",
+        "context": null,
+        "context_label": ""
+      },
+      {
+        "title": "Following the Booster 11 recovery vessel",
+        "kind": "Vessel tracking",
+        "published": "2024-09-17",
+        "summary": "In September, he tracked HOS Ridgewind lingering near his estimated Booster 11 splashdown area. He distinguished the vessel’s position from the estimated landing point and considered possible debris drift. A later post reported that booster debris was being recovered from the Gulf.",
+        "source": "https://x.com/mcrs987/status/1836133345778110678",
+        "context": "https://x.com/mcrs987/status/1837990608952320030",
+        "context_label": "Recovery follow-up"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "date": "2024-03-14",
+    "title": "Through the plasma.",
+    "summary": "A full ascent burn, a payload-door test and an internal propellant transfer. Reentry ended the ship’s first extended spaceflight.",
+    "booster": "Lost during descent",
+    "ship": "Lost during reentry",
+    "milestone": "First full ascent burn",
+    "outcome": "Vehicle lost",
+    "details": [
+      "Ship 28 completed its ascent burn and entered a long coast toward the Indian Ocean. Its trajectory deliberately intersected the atmosphere, allowing a return without first entering a stable orbit. Live onboard views showed the curvature of Earth and plasma forming during descent.",
+      "During coast, Starship opened and closed its payload door and demonstrated a transfer of liquid oxygen between onboard tanks. This was an internal transfer experiment, an early step toward managing cryogenic propellant in space. A planned Raptor relight was skipped because of the ship’s roll.",
+      "Booster 10 failed to complete its landing burn. The ship also lost attitude control and broke up during reentry, with communications ending around 49 minutes after launch. Both ascent and in-space experiments progressed further than on the preceding flight."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-3",
+    "photo": {
+      "flight": 3,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-3/i-PG2b6Qx",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 3 campaign, photographed by Max Evans",
+      "path": "/photos/flight-3",
+      "originalSha256": "0b1b1b932d484714f89e182d4b2f730a1ff5938c8904c864540271db53241bb0",
+      "originalBytes": 3427410,
+      "jxlBytes": 2984484
+    },
+    "booster_id": "B10",
+    "ship_id": "S28",
+    "generation": "V1",
+    "launch_time": "13:25 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "Door and propellant-transfer tests",
+    "trajectory": "Suborbital · Indian Ocean return",
+    "detail_headings": [
+      "A full-duration burn",
+      "Working during coast",
+      "The return remained unfinished"
+    ],
+    "timeline": [
+      {
+        "time": "~08:35",
+        "event": "Ship completes ascent burn"
+      },
+      {
+        "time": "~12:00",
+        "event": "Payload door opens"
+      },
+      {
+        "time": "~25:00",
+        "event": "Internal propellant-transfer experiment"
+      },
+      {
+        "time": "~49:00",
+        "event": "Ship lost during reentry"
+      }
+    ],
+    "landings": [],
+    "analysis": [
+      {
+        "title": "Reconstructing Booster 10’s orientation",
+        "kind": "Reconstruction",
+        "published": "2024-04-01",
+        "summary": "He aligned a booster descent model to onboard camera views and added a rough trajectory with atmospheric drag. The reconstruction was labeled a work in progress. He used it to explore whether the boostback thrust direction contributed to the booster’s underperformance.",
+        "source": "https://x.com/mcrs987/status/1774630488860217750",
+        "context": "https://x.com/mcrs987/status/1774630490634375235",
+        "context_label": "Trajectory follow-up"
+      },
+      {
+        "title": "A thrust-direction hypothesis, corrected",
+        "kind": "Hypothesis",
+        "published": "2024-04-01",
+        "summary": "His interpretation was that much of the boostback thrust pointed across the direction of travel, reducing its useful component. A follow-up corrected his wording from “parallel” to “perpendicular.” This remains his proposed explanation from a preliminary reconstruction, not an established mission finding.",
+        "source": "https://x.com/mcrs987/status/1774633053194797470",
+        "context": "https://x.com/mcrs987/status/1774645869641429308",
+        "context_label": "Author’s correction"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "date": "2023-11-18",
+    "title": "Separation. Then space.",
+    "summary": "The first hot-stage separation sent Ship 25 above the atmosphere. Both stages were lost before their planned returns.",
+    "booster": "Lost after separation",
+    "ship": "Lost during ascent",
+    "milestone": "First hot-stage separation",
+    "outcome": "Vehicle lost",
+    "details": [
+      "All 33 booster engines operated through ascent. Starship then ignited its engines while still attached to Super Heavy, pushing the stages apart through a newly added vented hot-stage ring. This demonstrated the separation method that became standard on later flights.",
+      "Booster 9 was lost during its boostback sequence. Ship 25 continued to an altitude of about 149 kilometers, but did not complete its ascent burn. SpaceX linked its loss to a fire associated with venting excess liquid oxygen near the end of ascent.",
+      "The flight lasted about eight minutes for the ship, more than twice the first integrated test’s duration. It demonstrated hot staging and extended upper-stage operation, while leaving controlled reentry, payload operations and vehicle recovery for later missions."
+    ],
+    "source": "https://www.spacex.com/launches/starship-flight-2",
+    "photo": {
+      "flight": 2,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-2/i-kQP3WLr",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 2 campaign, photographed by Max Evans",
+      "path": "/photos/flight-2",
+      "originalSha256": "03a5d9c228924f01ec2b1c7ad9d92b143661e415a2096570692a43c16f39054a",
+      "originalBytes": 1463006,
+      "jxlBytes": 1304802
+    },
+    "booster_id": "B9",
+    "ship_id": "S25",
+    "generation": "V1",
+    "launch_time": "13:02:50 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "No deployed payload",
+    "trajectory": "Space reached · suborbital",
+    "detail_headings": [
+      "A different way to separate",
+      "Two separate failures",
+      "A longer view of ascent"
+    ],
+    "timeline": [
+      {
+        "time": "00:00",
+        "event": "All 33 booster engines power liftoff"
+      },
+      {
+        "time": "~02:41",
+        "event": "First hot-stage separation"
+      },
+      {
+        "time": "~03:00",
+        "event": "Booster lost during boostback"
+      },
+      {
+        "time": "~08:00",
+        "event": "Ship lost near the end of ascent"
+      }
+    ],
+    "landings": [],
+    "analysis": [
+      {
+        "title": "Inside the tanks during hot staging",
+        "kind": "Illustrative render",
+        "published": "2023-12-07",
+        "summary": "A cutaway animation combines internal propellant motion, vehicle orientation and engine activity during separation and the booster’s flip. He explicitly described the render as imperfect: it illustrates possible propellant motion during the maneuver, rather than proving a failure cause or reproducing SpaceX’s internal simulation.",
+        "source": "https://x.com/mcrs987/status/1732602695180042472",
+        "context": null,
+        "context_label": ""
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "date": "2023-04-20",
+    "title": "The first integrated flight.",
+    "summary": "Booster 7 and Ship 24 flew together for the first time. The stack cleared the pad, but never separated.",
+    "booster": "Flight terminated",
+    "ship": "Did not separate",
+    "milestone": "First integrated flight",
+    "outcome": "Vehicle lost",
+    "details": [
+      "This was the first launch of a complete Starship system: the methane-fueled Super Heavy booster beneath the Starship upper stage. Earlier prototypes had tested the ship’s atmospheric descent and landing separately. The integrated vehicle lifted off from Starbase and began climbing over the Gulf of Mexico.",
+      "Several booster engines stopped during ascent. The stack lost control, tumbled and failed to separate, so Ship 24 never began its own powered flight. The flight termination system destroyed both stages roughly four minutes after launch; neither vehicle reached its planned ocean return.",
+      "The launch also damaged the concrete beneath the mount. Subsequent flights introduced a water-cooled steel plate and deluge system, alongside changes to the vehicle and flight termination system. The mission established the starting point for testing the two stages together."
+    ],
+    "source": "https://www.spacex.com/launches/mission/?missionId=starship-flight-test",
+    "photo": {
+      "flight": 1,
+      "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-Integrated-Flight-Test/i-PHdSpGc",
+      "credit": "Max Evans / NSF",
+      "alt": "Starship Flight 1 campaign, photographed by Max Evans",
+      "path": "/photos/flight-1",
+      "originalSha256": "65439037b398b6fddafd36f83a142bfb22145e4f382505b3d00df447e7635164",
+      "originalBytes": 2143573,
+      "jxlBytes": 1917117
+    },
+    "booster_id": "B7",
+    "ship_id": "S24",
+    "generation": "V1",
+    "launch_time": "13:33:09 UTC",
+    "launch_site": "Starbase · Pad 1",
+    "payload": "No deployed payload",
+    "trajectory": "Atmospheric test flight",
+    "detail_headings": [
+      "A complete stack, at last",
+      "An ascent cut short",
+      "The next iteration"
+    ],
+    "timeline": [
+      {
+        "time": "00:00",
+        "event": "Integrated stack lifts off"
+      },
+      {
+        "time": "~03:00",
+        "event": "Vehicle tumbles; stages remain attached"
+      },
+      {
+        "time": "~04:00",
+        "event": "Flight termination ends the test"
+      }
+    ],
+    "landings": [],
+    "analysis": [
+      {
+        "title": "The ground debris field",
+        "kind": "Record review",
+        "published": "2024-11-04",
+        "summary": "In November 2024, he shared a Flight 1 debris-field map within a review of Fish and Wildlife Service records obtained through FOIA. The map distinguishes vehicle debris, concrete and Fondag material around the launch area. This is a retrospective document review, rather than an analysis posted during the flight.",
+        "source": "https://x.com/mcrs987/status/1853444999465029762",
+        "context": "https://threadreaderapp.com/thread/1853443340953330163.html",
+        "context_label": "Full record thread"
+      }
+    ]
+  }
+]

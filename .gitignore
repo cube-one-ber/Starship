@@ -1,4 +1,4 @@
-target/
-native/runtime/
-dist/
+/target/
+/dist/
 __pycache__/
+*.py[cod]

@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Starship Journal
-Comment=Starship flight history and launch countdowns
-Exec=starship-journal
-Icon=org.starship.journal
-Categories=Education;Science;
-Terminal=false
