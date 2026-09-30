@@ -1,0 +1,47 @@
+name: Windows
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+      - name: Install the Windows SDK
+        run: |
+          mapfile -t packages < native/windows/packages.txt
+          pacman -S --needed --noconfirm "${packages[@]}"
+      - name: Test packaging logic
+        run: python -m unittest discover -s scripts/tests -v
+      - name: Build and package
+        run: bash scripts/build-windows.sh
+      - name: Test the portable package without the SDK
+        shell: pwsh
+        run: |
+          $destination = Join-Path $env:RUNNER_TEMP "Starship portable 🛰"
+          Expand-Archive dist/Starship-Journal-windows-x64.zip $destination
+          ./scripts/check-windows.ps1 -PackagePath "$destination/Starship-Journal-windows-x64"
+      - name: Upload portable app
+        uses: actions/upload-artifact@v4
+        with:
+          name: Starship-Journal-windows-x64
+          path: dist/Starship-Journal-windows-x64.zip
+          if-no-files-found: error
+      - name: Upload UI previews and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-UI-previews
+          path: target/windows-smoke-tests/
+          if-no-files-found: ignore

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Starship Journal
+Comment=Explore Starship flights and the next launch countdown
+Exec=starship-journal
+Icon=org.starship.journal
+Terminal=false
+Categories=Education;Science;Astronomy;
+Keywords=SpaceX;Starship;Space;Launch;
+StartupWMClass=org.starship.journal

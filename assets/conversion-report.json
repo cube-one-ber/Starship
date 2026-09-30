@@ -1,0 +1,132 @@
+{
+  "flight-1": {
+    "flight": 1,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-Integrated-Flight-Test/i-PHdSpGc",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 1 campaign, photographed by Max Evans",
+    "path": "/photos/flight-1",
+    "originalSha256": "65439037b398b6fddafd36f83a142bfb22145e4f382505b3d00df447e7635164",
+    "originalBytes": 2143573,
+    "jxlBytes": 1917117
+  },
+  "flight-2": {
+    "flight": 2,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-2/i-kQP3WLr",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 2 campaign, photographed by Max Evans",
+    "path": "/photos/flight-2",
+    "originalSha256": "03a5d9c228924f01ec2b1c7ad9d92b143661e415a2096570692a43c16f39054a",
+    "originalBytes": 1463006,
+    "jxlBytes": 1304802
+  },
+  "flight-3": {
+    "flight": 3,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-3/i-PG2b6Qx",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 3 campaign, photographed by Max Evans",
+    "path": "/photos/flight-3",
+    "originalSha256": "0b1b1b932d484714f89e182d4b2f730a1ff5938c8904c864540271db53241bb0",
+    "originalBytes": 3427410,
+    "jxlBytes": 2984484
+  },
+  "flight-5": {
+    "flight": 5,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-5/i-TFcrWJ2",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 5 campaign, photographed by Max Evans",
+    "path": "/photos/flight-5",
+    "originalSha256": "3bdad51c9b9d980901d77cae453ec33c189860df7cada2c021f27f70d755de52",
+    "originalBytes": 1828360,
+    "jxlBytes": 1622319
+  },
+  "flight-6": {
+    "flight": 6,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-6/i-Z5LW3fX",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 6 campaign, photographed by Max Evans",
+    "path": "/photos/flight-6",
+    "originalSha256": "d09610a45ba0f8c6dddd1afcc65713af60f43945855d376d6686b3f69098c8c6",
+    "originalBytes": 6983939,
+    "jxlBytes": 6118030
+  },
+  "flight-8": {
+    "flight": 8,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-8/i-FPhXLfb",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 8 campaign, photographed by Max Evans",
+    "path": "/photos/flight-8",
+    "originalSha256": "149b88347d630ca5130e477690dd450ac3e658677d13986b7d1fe8f8d0903b6a",
+    "originalBytes": 556546,
+    "jxlBytes": 498184
+  },
+  "flight-9": {
+    "flight": 9,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/IFT-9/i-8zPB3gs",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 9 campaign, photographed by Max Evans",
+    "path": "/photos/flight-9",
+    "originalSha256": "91487feccd44ec860ea966b22d6a6d062d065190af143e26a082ac242c546d54",
+    "originalBytes": 859711,
+    "jxlBytes": 756366
+  },
+  "flight-10": {
+    "flight": 10,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/IFT-10/i-PTmMXwS",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 10 campaign, photographed by Max Evans",
+    "path": "/photos/flight-10",
+    "originalSha256": "bd5a6cc208b345ff815233ae8220b40bfe9d8db7d2fe8a8c6c2127059b1bebc3",
+    "originalBytes": 1256009,
+    "jxlBytes": 1092536
+  },
+  "flight-11": {
+    "flight": 11,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/IFT-11/i-BRwcMV2",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 11 campaign, photographed by Max Evans",
+    "path": "/photos/flight-11",
+    "originalSha256": "1bf8f72633f7778ab1f6139822f1e9e994da5f0496cc473bcedbd853a0c9e277",
+    "originalBytes": 3482851,
+    "jxlBytes": 2948561
+  },
+  "flight-12": {
+    "flight": 12,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-12/i-zQH9382",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 12 campaign, photographed by Max Evans",
+    "path": "/photos/flight-12",
+    "originalSha256": "ce7bac681b50af1ae3e2f186e66702b8fe5e9cde693320941a6ded766cbcf6f1",
+    "originalBytes": 2205437,
+    "jxlBytes": 1924285
+  },
+  "flight-13": {
+    "flight": 13,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-13/i-qxMHn8q",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 13 campaign, photographed by Max Evans",
+    "path": "/photos/flight-13",
+    "originalSha256": "090baf2f561140f34444029c608ad81ca79be8a045626bb94ae6164640456769",
+    "originalBytes": 2233625,
+    "jxlBytes": 1786081
+  },
+  "flight-14": {
+    "flight": 14,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-Flight-14/i-g86WbBR",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 14 campaign, photographed by Max Evans",
+    "path": "/photos/flight-14",
+    "originalSha256": "4b703ff6f7e955724e201ee37977b6d1ef88f3c800f00441750aaae1dbb2e8ce",
+    "originalBytes": 7055951,
+    "jxlBytes": 6180929
+  },
+  "hero": {
+    "flight": 14,
+    "url": "https://maxevans.smugmug.com/Rockets/SpaceX/Starship-Flight-14/i-gTxZJ8F",
+    "credit": "Max Evans / NSF",
+    "alt": "Starship Flight 14 lifting off through clouds of illuminated exhaust at Starbase",
+    "path": "/photos/hero",
+    "originalSha256": "4eaa5b19eed3c0e5af0fdbd2da96fdb693d7b56c59907fcdf7d4232cebc8bcc7",
+    "originalBytes": 2279110,
+    "jxlBytes": 2008928
+  }
+}

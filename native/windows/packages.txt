@@ -1,0 +1,13 @@
+mingw-w64-ucrt-x86_64-gcc
+mingw-w64-ucrt-x86_64-rust
+mingw-w64-ucrt-x86_64-pkgconf
+mingw-w64-ucrt-x86_64-python
+mingw-w64-ucrt-x86_64-qt6-base
+mingw-w64-ucrt-x86_64-qt6-declarative
+mingw-w64-ucrt-x86_64-qt6-svg
+mingw-w64-ucrt-x86_64-kirigami
+mingw-w64-ucrt-x86_64-qqc2-desktop-style
+mingw-w64-ucrt-x86_64-breeze
+mingw-w64-ucrt-x86_64-breeze-icons
+mingw-w64-ucrt-x86_64-sonnet
+mingw-w64-ucrt-x86_64-libjxl
