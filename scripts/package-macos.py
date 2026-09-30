@@ -55,7 +55,6 @@ def main():
     scan = STAGE / 'qml-scan'
     shutil.copytree(ROOT / 'native/qml', scan)
     (scan / 'Deployment.qml').write_text('import QtQuick\nimport QtQuick.Controls.Basic\nimport org.kde.desktop\nimport org.kde.sonnet\nItem {}\n')
-    shutil.copytree(SDK / 'qml/org/kde', resources / 'qml/org/kde', symlinks=True)
     icons = APP / 'Contents/MacOS/icons/breeze'
     icons.mkdir(parents=True)
     shutil.copy2(next(SDK.rglob('breeze-icons.rcc')), icons / 'breeze-icons.rcc')
@@ -80,8 +79,10 @@ def main():
                         shutil.copy2(notice, destination)
     (resources / 'runtime-packages.txt').write_text(subprocess.check_output(['brew', 'list', '--versions'], text=True) + '\nKDE Frameworks 6.30.0\n')
     (resources / 'README.txt').write_text('Starship Journal — macOS 14+ Apple Silicon\nQt, KDE Kirigami, and JPEG XL are bundled.\nThis development app has an ad-hoc signature; it is not Apple-notarized.\nDependency sources: https://download.kde.org/stable/frameworks/6.30/ and https://github.com/Homebrew/homebrew-core\nPhoto credits: photo-credits.json.\n')
-    run(brew / 'bin/macdeployqt', APP, '-always-overwrite', f'-qmldir={scan}',
-        f'-qmlimport={SDK / "qml"}', f'-libpath={SDK / "lib"}', '-verbose=2')
+    # A fresh bundle lets macdeployqt rewrite every QML plugin and deploy each
+    # shared framework once. Precopying QML would bypass its relocation logic.
+    run(brew / 'bin/macdeployqt', APP, '-no-codesign', f'-qmldir={scan}',
+        f'-qmlimport={SDK / "qml"}', f'-libpath={SDK / "lib"}', '-verbose=1')
     (resources / 'qt.conf').write_text('[Paths]\nPlugins=PlugIns\nQmlImports=Resources/qml\n')
     # Clearing PATH does not hide absolute Mach-O dependencies; reject SDK paths too.
     visited = set()
