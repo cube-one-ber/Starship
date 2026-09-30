@@ -82,8 +82,15 @@ def main():
     (resources / 'README.txt').write_text('Starship Journal — macOS 14+ Apple Silicon\nQt, KDE Kirigami, and JPEG XL are bundled.\nThis development app has an ad-hoc signature; it is not Apple-notarized.\nDependency sources: https://download.kde.org/stable/frameworks/6.30/ and https://github.com/Homebrew/homebrew-core\nPhoto credits: photo-credits.json.\n')
     # A fresh bundle lets macdeployqt rewrite every QML plugin and deploy each
     # shared framework once. Precopying QML would bypass its relocation logic.
+    executable = APP / 'Contents/MacOS/starship-journal'
+    load_commands = subprocess.check_output(['otool', '-l', str(executable)], text=True)
+    if f'path {brew / "lib"} (' not in load_commands:
+        # macdeployqt resolves @rpath imports using executable load commands,
+        # including QtSvg, which is loaded by plugins rather than Rust itself.
+        run('install_name_tool', '-add_rpath', brew / 'lib', executable)
     run(brew / 'bin/macdeployqt', APP, '-no-codesign', f'-qmldir={scan}',
-        f'-qmlimport={SDK / "qml"}', f'-libpath={SDK / "lib"}', '-verbose=1')
+        f'-qmlimport={SDK / "qml"}', f'-libpath={SDK / "lib"}',
+        f'-libpath={brew / "lib"}', '-verbose=1')
     (resources / 'qt.conf').write_text('[Paths]\nPlugins=PlugIns\nQmlImports=Resources/qml\n')
     # Clearing PATH does not hide absolute Mach-O dependencies; reject SDK paths too.
     visited = set()
@@ -96,11 +103,25 @@ def main():
             magic = file.read(4)
         if magic not in (b'\xcf\xfa\xed\xfe', b'\xfe\xed\xfa\xcf', b'\xca\xfe\xba\xbe', b'\xca\xfe\xba\xbf'):
             continue
+        identifiers = subprocess.check_output(['otool', '-D', str(binary)], text=True).splitlines()[1:]
+        for identifier in identifiers:
+            if identifier.strip().startswith((str(brew), str(SDK), '/usr/local/')):
+                frameworks = APP / 'Contents/Frameworks'
+                relative = binary.relative_to(frameworks) if binary.is_relative_to(frameworks) else Path(binary.name)
+                run('install_name_tool', '-id', '@rpath/' + relative.as_posix(), binary)
+        identifiers = {line.strip() for line in subprocess.check_output(
+            ['otool', '-D', str(binary)], text=True).splitlines()[1:]}
         imports = subprocess.check_output(['otool', '-L', str(binary)], text=True)
         for line in imports.splitlines()[1:]:
             dependency = line.strip().split(' (')[0]
+            if dependency in identifiers:
+                continue
             if dependency.startswith((str(brew), str(SDK), '/usr/local/')):
                 raise RuntimeError(f'Unbundled SDK dependency in {binary}: {dependency}')
+            if dependency.startswith('@rpath/'):
+                bundled = APP / 'Contents/Frameworks' / dependency.removeprefix('@rpath/')
+                if not bundled.is_file():
+                    raise RuntimeError(f'Missing bundled library in {binary}: {dependency}')
         commands = subprocess.check_output(['otool', '-l', str(binary)], text=True)
         for block in commands.split('Load command'):
             field = 'minos' if 'cmd LC_BUILD_VERSION' in block else 'version' if 'cmd LC_VERSION_MIN_MACOSX' in block else None
@@ -108,6 +129,8 @@ def main():
                 parts = tuple(int(part) for part in match[1].split('.'))
                 minimum_macos = max(minimum_macos, parts + (0,) * (3 - len(parts)))
     minimum_version = '.'.join(str(part) for part in minimum_macos)
+    readme = resources / 'README.txt'
+    readme.write_text(readme.read_text().replace('macOS 14+', f'macOS {minimum_version}+'))
     info['LSMinimumSystemVersion'] = minimum_version
     with (APP / 'Contents/Info.plist').open('wb') as file:
         plistlib.dump(info, file)
