@@ -17,8 +17,11 @@ assets=(
   dist/Starship-Journal-linux-x86_64.rpm
   dist/Starship-Journal-macos-arm64.zip
   dist/Starship-Journal-macos-arm64.dmg
+  dist/Starship-Journal-macos-arm64.json
 )
 for asset in "${assets[@]}"; do test -s "$asset"; done
+macos_minimum=$(python3 -c 'import json; print(json.load(open("dist/Starship-Journal-macos-arm64.json"))["minimum_macos"])')
+[[ "$macos_minimum" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]] || { echo 'Invalid macOS compatibility metadata' >&2; exit 1; }
 tag="build-$GITHUB_SHA"
 short_sha="${GITHUB_SHA:0:7}"
 notes=$(mktemp)
@@ -34,7 +37,7 @@ Windows 10/11 x64: extract **Starship-Journal-windows-x64.zip** and run **starsh
 
 Linux x86_64: choose the **AppImage**, portable **tar.gz**, **DEB**, or **RPM**. The bundled runtime requires glibc 2.41 or newer (Debian 13+, Ubuntu 25.04+, Fedora 42+). For the AppImage, make it executable and launch it; use **--appimage-extract-and-run** if FUSE is unavailable. For the tarball, extract and run **AppRun**.
 
-macOS 14+ Apple Silicon: open the **DMG** and drag **Starship Journal.app** to Applications, or extract the **ZIP**. The development app is ad-hoc signed, not Apple-notarized; macOS may require allowing it in Privacy & Security.
+macOS $macos_minimum+ Apple Silicon: open the **DMG** and drag **Starship Journal.app** to Applications, or extract the **ZIP**. The development app is ad-hoc signed, not Apple-notarized; macOS may require allowing it in Privacy & Security. The compatibility JSON records the requirements of this build.
 
 All three platform builds, backend tests, and desktop/narrow packaged-app checks passed before publication. Screenshots and diagnostics are available in the [build run](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID).
 

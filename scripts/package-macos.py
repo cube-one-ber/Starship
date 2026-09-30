@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import plistlib
+import re
 import shlex
 import shutil
 import subprocess
@@ -86,6 +87,7 @@ def main():
     (resources / 'qt.conf').write_text('[Paths]\nPlugins=PlugIns\nQmlImports=Resources/qml\n')
     # Clearing PATH does not hide absolute Mach-O dependencies; reject SDK paths too.
     visited = set()
+    minimum_macos = (14, 0, 0)
     for binary in APP.rglob('*'):
         if not binary.is_file() or binary.resolve() in visited:
             continue
@@ -99,6 +101,20 @@ def main():
             dependency = line.strip().split(' (')[0]
             if dependency.startswith((str(brew), str(SDK), '/usr/local/')):
                 raise RuntimeError(f'Unbundled SDK dependency in {binary}: {dependency}')
+        commands = subprocess.check_output(['otool', '-l', str(binary)], text=True)
+        for block in commands.split('Load command'):
+            field = 'minos' if 'cmd LC_BUILD_VERSION' in block else 'version' if 'cmd LC_VERSION_MIN_MACOSX' in block else None
+            if field and (match := re.search(rf'\b{field}\s+(\d+(?:\.\d+){{1,2}})', block)):
+                parts = tuple(int(part) for part in match[1].split('.'))
+                minimum_macos = max(minimum_macos, parts + (0,) * (3 - len(parts)))
+    minimum_version = '.'.join(str(part) for part in minimum_macos)
+    info['LSMinimumSystemVersion'] = minimum_version
+    with (APP / 'Contents/Info.plist').open('wb') as file:
+        plistlib.dump(info, file)
+    compatibility = {'architecture': 'arm64', 'minimum_macos': minimum_version,
+                     'signature': 'ad-hoc', 'notarized': False}
+    (DIST / 'Starship-Journal-macos-arm64.json').write_text(json.dumps(compatibility, indent=2) + '\n')
+    print('Minimum macOS version from bundled dependencies:', minimum_version, flush=True)
     # Sign nested code after deployment rewrites its library references.
     run('codesign', '--force', '--deep', '--sign', '-', APP)
     run('codesign', '--verify', '--deep', '--strict', APP)
