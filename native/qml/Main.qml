@@ -85,6 +85,7 @@ Kirigami.ApplicationWindow {
         }
         topContent: [SectionLabel { text: "MISSION DIRECTORY"; color: SpaceStyle.dim; leftPadding: 24; bottomPadding: 16; font.pointSize: 6.75; font.letterSpacing: 1 }]
         modal: root.width < Kirigami.Units.gridUnit * 45
+        onModalChanged: if (modal) close()
         collapsed: false
         isMenu: false
         actions: [
