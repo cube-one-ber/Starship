@@ -82,15 +82,15 @@ def main():
     (resources / 'README.txt').write_text('Starship Journal — macOS 14+ Apple Silicon\nQt, KDE Kirigami, and JPEG XL are bundled.\nThis development app has an ad-hoc signature; it is not Apple-notarized.\nDependency sources: https://download.kde.org/stable/frameworks/6.30/ and https://github.com/Homebrew/homebrew-core\nPhoto credits: photo-credits.json.\n')
     # A fresh bundle lets macdeployqt rewrite every QML plugin and deploy each
     # shared framework once. Precopying QML would bypass its relocation logic.
-    executable = APP / 'Contents/MacOS/starship-journal'
-    load_commands = subprocess.check_output(['otool', '-l', str(executable)], text=True)
-    if f'path {brew / "lib"} (' not in load_commands:
-        # macdeployqt resolves @rpath imports using executable load commands,
-        # including QtSvg, which is loaded by plugins rather than Rust itself.
-        run('install_name_tool', '-add_rpath', brew / 'lib', executable)
+    # Include the renderer as an additional executable during deployment so
+    # QtSvg is discovered even though the app only loads it through plugins.
+    svg_helper = APP / 'Contents/MacOS/qt-svg-deployment'
+    shutil.copy2(renderer, svg_helper)
     run(brew / 'bin/macdeployqt', APP, '-no-codesign', f'-qmldir={scan}',
+        f'-executable={svg_helper}',
         f'-qmlimport={SDK / "qml"}', f'-libpath={SDK / "lib"}',
         f'-libpath={brew / "lib"}', '-verbose=1')
+    svg_helper.unlink()
     (resources / 'qt.conf').write_text('[Paths]\nPlugins=PlugIns\nQmlImports=Resources/qml\n')
     # Clearing PATH does not hide absolute Mach-O dependencies; reject SDK paths too.
     visited = set()
