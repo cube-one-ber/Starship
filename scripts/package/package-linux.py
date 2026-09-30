@@ -101,7 +101,7 @@ exec "$app_dir/usr/bin/starship-journal" "$@"
     for directory in Path('/usr/share/doc').iterdir():
         if (directory / 'copyright').is_file():
             copy(directory / 'copyright', notices / f'{directory.name}.copyright')
-    (APP / 'README.txt').write_text('Starship Journal — Linux x86_64\nRun ./AppRun. Requires glibc 2.41 or newer (Debian 13+, Ubuntu 25.04+, Fedora 42+).\nQt, KDE, and libjxl are bundled. Package versions and copyright notices accompany the app.\nDependency sources: https://sources.debian.org/\nPhotographs remain their credited creators’ property.\n')
+    (APP / 'README.txt').write_text('Starship — Linux x86_64\nRun ./AppRun. Requires glibc 2.41 or newer (Debian 13+, Ubuntu 25.04+, Fedora 42+).\nQt, KDE, and libjxl are bundled. Package versions and copyright notices accompany the app.\nDependency sources: https://sources.debian.org/\nPhotographs remain their credited creators’ property.\n')
     check(APP / 'AppRun', 'portable')
     with tarfile.open(DIST / 'Starship-Journal-linux-x86_64.tar.gz', 'w:gz') as archive:
         archive.add(APP, arcname='Starship-Journal-linux-x86_64')
@@ -132,7 +132,7 @@ exec "$app_dir/usr/bin/starship-journal" "$@"
     deb = STAGE / 'deb'
     shutil.copytree(package_root, deb, symlinks=True)
     (deb / 'DEBIAN').mkdir()
-    (deb / 'DEBIAN/control').write_text(f'Package: starship-journal\nVersion: {version}\nArchitecture: amd64\nMaintainer: Starship Journal <cube-one-ber@users.noreply.github.com>\nDepends: libc6 (>= 2.41)\nSection: education\nPriority: optional\nDescription: Starship flight history and countdowns with a bundled KDE runtime\n')
+    (deb / 'DEBIAN/control').write_text(f'Package: starship-journal\nVersion: {version}\nArchitecture: amd64\nMaintainer: Starship <cube-one-ber@users.noreply.github.com>\nDepends: libc6 (>= 2.41)\nSection: education\nPriority: optional\nDescription: Starship flight history and countdowns with a bundled KDE runtime\n')
     run('dpkg-deb', '--root-owner-group', '--build', deb, DIST / 'Starship-Journal-linux-x86_64.deb')
     extracted = STAGE / 'deb-extracted'
     run('dpkg-deb', '--extract', DIST / 'Starship-Journal-linux-x86_64.deb', extracted)
@@ -144,7 +144,7 @@ exec "$app_dir/usr/bin/starship-journal" "$@"
     spec.write_text(f'''Name: starship-journal
 Version: {version}
 Release: 1
-Summary: Starship flight journal
+Summary: Starship flight archive
 License: LicenseRef-Unspecified
 AutoReqProv: no
 Requires: glibc >= 2.41

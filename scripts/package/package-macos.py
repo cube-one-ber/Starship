@@ -30,7 +30,7 @@ def main():
     resources.mkdir()
     shutil.copy2(ROOT / 'target/release/starship-journal', APP / 'Contents/MacOS/starship-journal')
     version = json.loads(subprocess.check_output(['cargo', 'metadata', '--no-deps', '--format-version', '1'], text=True))['packages'][0]['version']
-    info = {'CFBundleName': 'Starship Journal', 'CFBundleDisplayName': 'Starship Journal',
+    info = {'CFBundleName': 'Starship', 'CFBundleDisplayName': 'Starship',
             'CFBundleIdentifier': 'org.starship.journal', 'CFBundleExecutable': 'starship-journal',
             'CFBundlePackageType': 'APPL', 'CFBundleShortVersionString': version,
             'CFBundleVersion': version, 'LSMinimumSystemVersion': '14.0',
@@ -79,7 +79,7 @@ def main():
                     else:
                         shutil.copy2(notice, destination)
     (resources / 'runtime-packages.txt').write_text(subprocess.check_output(['brew', 'list', '--versions'], text=True) + '\nKDE Frameworks 6.30.0\n')
-    (resources / 'README.txt').write_text('Starship Journal — macOS 14+ Apple Silicon\nQt, KDE Kirigami, and JPEG XL are bundled.\nThis development app has an ad-hoc signature; it is not Apple-notarized.\nDependency sources: https://download.kde.org/stable/frameworks/6.30/ and https://github.com/Homebrew/homebrew-core\nPhoto credits: photo-credits.json.\n')
+    (resources / 'README.txt').write_text('Starship — macOS 14+ Apple Silicon\nQt, KDE Kirigami, and JPEG XL are bundled.\nThis development app has an ad-hoc signature; it is not Apple-notarized.\nDependency sources: https://download.kde.org/stable/frameworks/6.30/ and https://github.com/Homebrew/homebrew-core\nPhoto credits: photo-credits.json.\n')
     # A fresh bundle lets macdeployqt rewrite every QML plugin and deploy each
     # shared framework once. Precopying QML would bypass its relocation logic.
     # Include the renderer as an additional executable during deployment so

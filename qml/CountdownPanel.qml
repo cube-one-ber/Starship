@@ -9,6 +9,17 @@ Kirigami.AbstractCard {
     id: panel
     objectName: "launchPanel"
     required property var schedule
+    required property var scheduleState
+    readonly property bool collapsed: collapsible && !expanded
+    readonly property string freshnessText: {
+        const state = scheduleState
+        if (state.origin === "bundled") return "Bundled snapshot · " + schedule.checkedAt
+        if (state.ageSeconds === null) return "Saved schedule · update time unknown"
+        const minutes = Math.floor(state.ageSeconds / 60)
+        const age = minutes < 1 ? "just now" : minutes < 60 ? minutes + " min ago"
+            : minutes < 1440 ? Math.floor(minutes / 60) + " h ago" : Math.floor(minutes / 1440) + " days ago"
+        return (state.origin === "live" ? "Updated " : "Saved · updated ") + age
+    }
     property var countdown: null
     property bool busy: false
     property bool motionEnabled: true
@@ -16,12 +27,12 @@ Kirigami.AbstractCard {
     property bool collapsible: false
     property bool expanded: false
     readonly property bool detailsVisible: !collapsible || expanded
-    readonly property string windowText: countdown && schedule.launchAt
+    readonly property string windowText: schedule.launchAt && !isNaN(Date.parse(schedule.launchAt))
         ? new Date(schedule.launchAt).toISOString().slice(0, 16).replace("T", " · ") + " UTC"
         : schedule.status.split(" · ")[0]
     property string errorMessage: ""
     signal refreshRequested()
-    padding: 16
+    padding: collapsed ? 12 : 16
     background: Rectangle {
         parent: panel
         radius: SpaceStyle.radius
@@ -56,14 +67,15 @@ Kirigami.AbstractCard {
             text: panel.windowText
             FadeBehavior on text { motionEnabled: panel.motionEnabled }
             font.family: SpaceStyle.serif
-            font.pointSize: panel.compact ? 21 : 24
+            font.pointSize: panel.collapsed ? 17 : panel.compact ? 21 : 24
             font.letterSpacing: -0.5
             color: SpaceStyle.text
             wrapMode: Text.WordWrap
         }
         Controls.Label {
             Layout.fillWidth: true
-            text: panel.countdown
+            visible: !panel.collapsed
+            text: panel.scheduleState.stale ? "Timing needs a refresh" : panel.countdown
                 ? (panel.countdown.elapsed ? "Launch window reached · awaiting confirmation" : "Target launch time · subject to change")
                 : (panel.schedule.status.indexOf(" · ") >= 0 ? panel.schedule.status.split(" · ").slice(1).join(" · ") : "No confirmed liftoff time")
             font.family: SpaceStyle.sans
@@ -109,12 +121,22 @@ Kirigami.AbstractCard {
             Rectangle { Layout.fillWidth: true; implicitHeight: 1; color: SpaceStyle.line }
             Controls.Label {
                 Layout.fillWidth: true
-                text: panel.schedule.provider + " · checked " + panel.schedule.checkedAt
+                text: panel.schedule.provider + " · " + panel.schedule.checkedAt
                 color: SpaceStyle.dim
                 font.family: SpaceStyle.sans
                 font.pointSize: 9
                 wrapMode: Text.WordWrap
             }
+        }
+        Controls.Label {
+            objectName: "scheduleFreshness"
+            Layout.fillWidth: true
+            text: panel.freshnessText + (panel.scheduleState.stale ? " · stale" : "")
+            color: panel.scheduleState.stale ? SpaceStyle.accent : SpaceStyle.dim
+            font.family: SpaceStyle.sans
+            font.pointSize: 9
+            wrapMode: Text.WordWrap
+            Accessible.description: panel.scheduleState.stale ? "Schedule is stale. Refresh to confirm launch timing. Countdown paused." : "Schedule timing is current."
         }
         // Failed refreshes stay visible even when the launch summary is collapsed.
         Kirigami.InlineMessage { Layout.fillWidth: true; visible: panel.errorMessage.length > 0; text: panel.errorMessage; type: Kirigami.MessageType.Warning }

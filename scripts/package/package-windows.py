@@ -133,7 +133,7 @@ def package(exe: Path, qmake: str, output: Path) -> Path:
         (stage / "runtime-packages.txt").write_text(run("pacman", "-Q") + "\n", encoding="utf-8")
         shutil.copy2(ROOT / "resources/data/photos.json", stage / "photo-credits.json")
         (stage / "README.txt").write_text(
-            "Starship Journal — Windows x64\n\n"
+            "Starship — Windows x64\n\n"
             "Extract the entire folder and double-click starship-journal.exe.\n"
             "Windows 10/11, 64-bit. No separate Qt, KDE or Rust installation is needed.\n"
             "Keep the DLLs, qml, plugins and icons beside the executable.\n\n"

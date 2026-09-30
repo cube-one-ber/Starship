@@ -17,7 +17,7 @@ The repository separates application source, resources shipped in the executable
 │   ├── data/                   Flights, schedule snapshot, and photo credits
 │   ├── fonts/                  Bundled fonts and provenance
 │   ├── themes/                 Application color scheme
-│   ├── photos/                 Prepared journal photography
+│   ├── photos/                 Prepared flight photography
 │   ├── images/                 SpaceX photographs for Flights 4 and 7
 │   └── icon.svg                Application icon
 ├── assets/archive/

@@ -29,7 +29,7 @@ fn main() {
         .unwrap()
         .load(&QUrl::from("qrc:/qt/qml/org/starship/journal/qml/Main.qml"));
     if qt::rootCount(engine.as_ref().unwrap()) == 0 {
-        eprintln!("Could not load the Starship Journal interface.");
+        eprintln!("Could not load the Starship interface.");
         std::process::exit(1);
     }
     let exit_code = app

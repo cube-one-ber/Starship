@@ -50,7 +50,7 @@ inline void configureApplication() {
     const QDir appDirectory(QCoreApplication::applicationDirPath());
     if (appDirectory.exists("plugins")) QCoreApplication::addLibraryPath(appDirectory.filePath("plugins"));
     if (const auto imports = localBreezeImports(); !imports.isEmpty()) QCoreApplication::addLibraryPath(QDir(imports).filePath("../plugins"));
-    QCoreApplication::setApplicationName("Starship Journal");
+    QCoreApplication::setApplicationName("Starship");
     QCoreApplication::setOrganizationName("StarshipJournal");
     QCoreApplication::setOrganizationDomain("starship.journal");
     QCoreApplication::setApplicationVersion("0.1.0");

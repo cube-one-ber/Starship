@@ -2,7 +2,7 @@
 name = "starship-journal"
 version = "0.1.0"
 edition = "2024"
-description = "A native Kirigami journal of Starship flights"
+description = "A native Kirigami archive of Starship flights"
 build = "build.rs"
 
 [[bin]]

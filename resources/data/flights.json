@@ -9,9 +9,18 @@
     "milestone": "First sustained orbit",
     "outcome": "Milestone",
     "details": [
-      "Flight 14 began on a suborbital ascent profile so the ship could return even without an insertion burn. A vacuum Raptor shut down early, but controllers reviewed the vehicle’s condition and cleared it to continue. A short single-engine burn about 25 minutes after launch placed Ship 41 into sustained Earth orbit.",
-      "The dispenser released 26 operational Starlink V3 satellites between roughly 34 and 65 minutes after liftoff. Three carried additional cameras to examine the ship’s thermal protection. The shield also tested revised tile geometry and two tiles previously flown on Ship 40.",
-      "The original plan called for six orbits and a Pacific return west of Chile. Controllers instead ordered an early deorbit around two hours and 12 minutes into flight. Starship completed a controlled splashdown north of Hawaii after about three hours and eight minutes, then tipped over and burned. Booster 21 had already completed its Gulf of Mexico return."
+      {
+        "heading": "Committing to orbit",
+        "body": "Flight 14 began on a suborbital ascent profile so the ship could return even without an insertion burn. A vacuum Raptor shut down early, but controllers reviewed the vehicle’s condition and cleared it to continue. A short single-engine burn about 25 minutes after launch placed Ship 41 into sustained Earth orbit."
+      },
+      {
+        "heading": "The first orbital delivery",
+        "body": "The dispenser released 26 operational Starlink V3 satellites between roughly 34 and 65 minutes after liftoff. Three carried additional cameras to examine the ship’s thermal protection. The shield also tested revised tile geometry and two tiles previously flown on Ship 40."
+      },
+      {
+        "heading": "A shorter flight, a different landing zone",
+        "body": "The original plan called for six orbits and a Pacific return west of Chile. Controllers instead ordered an early deorbit around two hours and 12 minutes into flight. Starship completed a controlled splashdown north of Hawaii after about three hours and eight minutes, then tipped over and burned. Booster 21 had already completed its Gulf of Mexico return."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-14",
     "photo": {
@@ -31,11 +40,6 @@
     "launch_site": "Starbase · Pad 2",
     "payload": "26 Starlink V3 satellites · orbital delivery",
     "trajectory": "Earth orbit · Pacific return",
-    "detail_headings": [
-      "Committing to orbit",
-      "The first orbital delivery",
-      "A shorter flight, a different landing zone"
-    ],
     "timeline": [
       {
         "time": "~07:00",
@@ -106,7 +110,14 @@
         "context": null,
         "context_label": ""
       }
-    ]
+    ],
+    "booster_outcome": "completed",
+    "ship_outcome": "completed",
+    "debrief": {
+      "changed": "Starship entered sustained orbit and delivered operational satellites.",
+      "worked": "Twenty-six satellites deployed; both stages completed ocean returns.",
+      "fell_short": "An ascent engine shut down early, and the planned six-orbit flight was shortened."
+    }
   },
   {
     "id": 13,
@@ -118,9 +129,18 @@
     "milestone": "Intact ocean landing",
     "outcome": "Milestone",
     "details": [
-      "Ship 40 released 20 working Starlink V3 satellites after completing ascent. SpaceX communicated with each using radio and laser links and downloaded telemetry. These were functional hardware tests, but the objects followed a deliberately suborbital path and reentered about 20 minutes after deployment.",
-      "The ship restarted a Raptor in space, survived entry and performed a banking maneuver before a soft Indian Ocean splashdown. All three landing engines initially restarted. Booster 20 completed the high-thrust part of boostback but ended it early and suffered a hard splashdown after an incomplete landing-engine restart.",
-      "Ship 40 remained intact and afloat after tipping over, allowing close inspection of the heat shield. Recovery vessels tracked the drifting ship. It was subsequently taken to waters near Christmas Island, where engineers collected samples and data before it was loaded onto the heavy-lift vessel Forte in August."
+      {
+        "heading": "Working satellites, deliberately suborbital",
+        "body": "Ship 40 released 20 working Starlink V3 satellites after completing ascent. SpaceX communicated with each using radio and laser links and downloaded telemetry. These were functional hardware tests, but the objects followed a deliberately suborbital path and reentered about 20 minutes after deployment."
+      },
+      {
+        "heading": "A complete upper-stage return",
+        "body": "The ship restarted a Raptor in space, survived entry and performed a banking maneuver before a soft Indian Ocean splashdown. All three landing engines initially restarted. Booster 20 completed the high-thrust part of boostback but ended it early and suffered a hard splashdown after an incomplete landing-engine restart."
+      },
+      {
+        "heading": "An intact ship to examine",
+        "body": "Ship 40 remained intact and afloat after tipping over, allowing close inspection of the heat shield. Recovery vessels tracked the drifting ship. It was subsequently taken to waters near Christmas Island, where engineers collected samples and data before it was loaded onto the heavy-lift vessel Forte in August."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-13",
     "photo": {
@@ -140,11 +160,6 @@
     "launch_site": "Starbase · Pad 2",
     "payload": "20 Starlink V3 satellites · suborbital test",
     "trajectory": "Suborbital · Indian Ocean return",
-    "detail_headings": [
-      "Working satellites, deliberately suborbital",
-      "A complete upper-stage return",
-      "An intact ship to examine"
-    ],
     "timeline": [
       {
         "time": "~07:00",
@@ -197,7 +212,14 @@
         "context": "https://x.com/mcrs987/status/2082202679657349249",
         "context_label": "Earlier drift update"
       }
-    ]
+    ],
+    "booster_outcome": "lost",
+    "ship_outcome": "completed",
+    "debrief": {
+      "changed": "Working Starlink V3 satellites were tested on a suborbital path.",
+      "worked": "Ship 40 relit a Raptor, landed softly and remained intact afloat.",
+      "fell_short": "Booster 20 ended boostback early and suffered a hard splashdown."
+    }
   },
   {
     "id": 12,
@@ -209,9 +231,18 @@
     "milestone": "First V3 flight",
     "outcome": "Milestone",
     "details": [
-      "The first V3 mission also introduced Raptor 3 engines and Starbase’s second orbital launch pad. Ship 39 reached its planned suborbital trajectory despite a vacuum-engine shutdown during ascent. It deployed 20 Starlink V3 mass simulators and two modified Starlink satellites equipped for imaging.",
-      "The planned in-space relight was skipped. During return, the ship tested its aft-flap structure and a banking maneuver relevant to future returns to Starbase. It retained control through atmospheric entry, then flipped upright and completed an Indian Ocean splashdown using two Raptor engines.",
-      "Booster 19 suffered engine-start failures during boostback and did not return to its intended near-coastal zone. Its hard impact occurred far downrange. A published geolocation estimate places it about 318 kilometers from launch and 310 kilometers from the intended landing target; the coordinates below identify that impact, rather than a successful landing."
+      {
+        "heading": "A new propulsion generation",
+        "body": "The first V3 mission also introduced Raptor 3 engines and Starbase’s second orbital launch pad. Ship 39 reached its planned suborbital trajectory despite a vacuum-engine shutdown during ascent. It deployed 20 Starlink V3 mass simulators and two modified Starlink satellites equipped for imaging."
+      },
+      {
+        "heading": "Deployment and a two-engine landing",
+        "body": "The planned in-space relight was skipped. During return, the ship tested its aft-flap structure and a banking maneuver relevant to future returns to Starbase. It retained control through atmospheric entry, then flipped upright and completed an Indian Ocean splashdown using two Raptor engines."
+      },
+      {
+        "heading": "A booster return cut short",
+        "body": "Booster 19 suffered engine-start failures during boostback and did not return to its intended near-coastal zone. Its hard impact occurred far downrange. A published geolocation estimate places it about 318 kilometers from launch and 310 kilometers from the intended landing target; the coordinates below identify that impact, rather than a successful landing."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-12",
     "photo": {
@@ -231,11 +262,6 @@
     "launch_site": "Starbase · Pad 2",
     "payload": "20 V3 simulators + 2 imaging satellites",
     "trajectory": "Suborbital · Indian Ocean return",
-    "detail_headings": [
-      "A new propulsion generation",
-      "Deployment and a two-engine landing",
-      "A booster return cut short"
-    ],
     "timeline": [
       {
         "time": "00:00",
@@ -288,7 +314,14 @@
         "context": null,
         "context_label": ""
       }
-    ]
+    ],
+    "booster_outcome": "lost",
+    "ship_outcome": "completed",
+    "debrief": {
+      "changed": "V3 vehicles, Raptor 3 engines and Pad 2 debuted together.",
+      "worked": "Ship 39 deployed test payloads and completed a two-engine splashdown.",
+      "fell_short": "The in-space relight was skipped; Booster 19 impacted far beyond its target."
+    }
   },
   {
     "id": 11,
@@ -300,9 +333,18 @@
     "milestone": "Final V2 mission",
     "outcome": "Test complete",
     "details": [
-      "Ship 38 completed the final second-generation Starship mission. It released eight Starlink mass simulators during coast and restarted a Raptor in space. As on Flight 10, the payloads were deliberately suborbital and did not remain in Earth orbit.",
-      "The ship tested its thermal protection during reentry and executed a dynamic banking maneuver to explore how future ships could return toward Starbase. It then completed its landing flip and controlled Indian Ocean splashdown, about 66 minutes after launch.",
-      "Booster 15 flew for a second time after its Flight 8 catch. Its ocean return tested a landing-burn profile intended for the next generation of hardware. Both stages completed their main flight objectives, closing the V2 campaign ahead of the V3 vehicle and Raptor 3 debut."
+      {
+        "heading": "A final V2 demonstration",
+        "body": "Ship 38 completed the final second-generation Starship mission. It released eight Starlink mass simulators during coast and restarted a Raptor in space. As on Flight 10, the payloads were deliberately suborbital and did not remain in Earth orbit."
+      },
+      {
+        "heading": "Preparing a future return to Starbase",
+        "body": "The ship tested its thermal protection during reentry and executed a dynamic banking maneuver to explore how future ships could return toward Starbase. It then completed its landing flip and controlled Indian Ocean splashdown, about 66 minutes after launch."
+      },
+      {
+        "heading": "Reuse on the first stage",
+        "body": "Booster 15 flew for a second time after its Flight 8 catch. Its ocean return tested a landing-burn profile intended for the next generation of hardware. Both stages completed their main flight objectives, closing the V2 campaign ahead of the V3 vehicle and Raptor 3 debut."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-11",
     "photo": {
@@ -322,11 +364,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "8 Starlink mass simulators · deployed",
     "trajectory": "Suborbital · Indian Ocean return",
-    "detail_headings": [
-      "A final V2 demonstration",
-      "Preparing a future return to Starbase",
-      "Reuse on the first stage"
-    ],
     "timeline": [
       {
         "time": "~06:36",
@@ -356,7 +393,14 @@
         "context": "https://www.youtube.com/watch?v=j5UAwZo5Cxc",
         "context_label": "Watch the breakdown"
       }
-    ]
+    ],
+    "booster_outcome": "completed",
+    "ship_outcome": "completed",
+    "debrief": {
+      "changed": "The final V2 flight tested a banking maneuver for future returns.",
+      "worked": "Eight simulators deployed, a Raptor relit, and both stages completed their objectives.",
+      "fell_short": "Payloads remained deliberately suborbital; the ship was not recovered."
+    }
   },
   {
     "id": 10,
@@ -368,9 +412,18 @@
     "milestone": "First payload deployment",
     "outcome": "Milestone",
     "details": [
-      "Ship 37 completed ascent and released eight Starlink mass simulators, the first successful Starship payload deployment. The objects followed a suborbital trajectory and were intended to reenter. A Raptor was restarted during coast, demonstrating the relight capability again.",
-      "The heat shield included deliberately missing tiles and experimental configurations. Starship endured substantial damage during entry but retained enough control for a landing flip and controlled Indian Ocean splashdown. This completed the upper-stage objectives that Flights 7, 8 and 9 had not reached.",
-      "Booster 16 tested a backup landing-engine sequence before its planned ocean splashdown. Ship 37 had replaced Ship 36, which was destroyed during ground testing in June. Flight 10 returned the campaign to a complete ascent, coast and reentry demonstration."
+      {
+        "heading": "Completing the mission profile",
+        "body": "Ship 37 completed ascent and released eight Starlink mass simulators, the first successful Starship payload deployment. The objects followed a suborbital trajectory and were intended to reenter. A Raptor was restarted during coast, demonstrating the relight capability again."
+      },
+      {
+        "heading": "A deliberately demanding return",
+        "body": "The heat shield included deliberately missing tiles and experimental configurations. Starship endured substantial damage during entry but retained enough control for a landing flip and controlled Indian Ocean splashdown. This completed the upper-stage objectives that Flights 7, 8 and 9 had not reached."
+      },
+      {
+        "heading": "A backup-engine experiment",
+        "body": "Booster 16 tested a backup landing-engine sequence before its planned ocean splashdown. Ship 37 had replaced Ship 36, which was destroyed during ground testing in June. Flight 10 returned the campaign to a complete ascent, coast and reentry demonstration."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-10",
     "photo": {
@@ -390,11 +443,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "8 Starlink mass simulators · deployed",
     "trajectory": "Suborbital · Indian Ocean return",
-    "detail_headings": [
-      "Completing the mission profile",
-      "A deliberately demanding return",
-      "A backup-engine experiment"
-    ],
     "timeline": [
       {
         "time": "~06:30",
@@ -437,7 +485,14 @@
         "context": "https://x.com/mcrs987/status/1961176223981391889",
         "context_label": "Follow-up view"
       }
-    ]
+    ],
+    "booster_outcome": "completed",
+    "ship_outcome": "completed",
+    "debrief": {
+      "changed": "Starship successfully deployed payload simulators for the first time.",
+      "worked": "Eight simulators deployed, a Raptor relit, and both stages splashed down softly.",
+      "fell_short": "The ship sustained substantial entry damage despite completing its return."
+    }
   },
   {
     "id": 9,
@@ -449,9 +504,18 @@
     "milestone": "First booster reflight",
     "outcome": "Vehicle lost",
     "details": [
-      "Booster 14 returned to flight after its Flight 7 tower catch, marking the first reuse of a Super Heavy. This mission deliberately targeted an ocean return and a more demanding descent, rather than another catch. The booster was lost during its landing-burn test.",
-      "Ship 35 completed its ascent burn and reached its intended suborbital trajectory. The payload door failed to open, preventing deployment of eight Starlink mass simulators. The flight nevertheless extended second-generation ship operation beyond the ascent failures of Flights 7 and 8.",
-      "A propellant leak and subsequent attitude-control problem prevented the planned Raptor relight and controlled entry attitude. The ship was passivated and communications ended during its Indian Ocean return around 47 minutes after liftoff. A full V2 mission still remained to be completed."
+      {
+        "heading": "A flight-proven booster",
+        "body": "Booster 14 returned to flight after its Flight 7 tower catch, marking the first reuse of a Super Heavy. This mission deliberately targeted an ocean return and a more demanding descent, rather than another catch. The booster was lost during its landing-burn test."
+      },
+      {
+        "heading": "The dispenser stays closed",
+        "body": "Ship 35 completed its ascent burn and reached its intended suborbital trajectory. The payload door failed to open, preventing deployment of eight Starlink mass simulators. The flight nevertheless extended second-generation ship operation beyond the ascent failures of Flights 7 and 8."
+      },
+      {
+        "heading": "Coast without control",
+        "body": "A propellant leak and subsequent attitude-control problem prevented the planned Raptor relight and controlled entry attitude. The ship was passivated and communications ended during its Indian Ocean return around 47 minutes after liftoff. A full V2 mission still remained to be completed."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-9",
     "photo": {
@@ -471,11 +535,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "8 Starlink mass simulators · not deployed",
     "trajectory": "Suborbital · uncontrolled return",
-    "detail_headings": [
-      "A flight-proven booster",
-      "The dispenser stays closed",
-      "Coast without control"
-    ],
     "timeline": [
       {
         "time": "00:00",
@@ -518,7 +577,14 @@
         "context": null,
         "context_label": ""
       }
-    ]
+    ],
+    "booster_outcome": "lost",
+    "ship_outcome": "lost",
+    "debrief": {
+      "changed": "Booster 14 made the first Super Heavy reflight.",
+      "worked": "Ship 35 completed ascent, extending V2 operation beyond Flights 7 and 8.",
+      "fell_short": "The payload door stayed closed; both stages were lost on return."
+    }
   },
   {
     "id": 8,
@@ -530,9 +596,18 @@
     "milestone": "Third booster catch",
     "outcome": "Vehicle lost",
     "details": [
-      "Flight 8 repeated the second-generation ship’s attempt to complete ascent and test its payload dispenser. Before launch, a 60-second static fire explored engine operating conditions and hardware changes following Flight 7. Four Starlink mass simulators remained aboard when the flight ended.",
-      "Booster 15 completed its return and was caught by the tower around seven minutes after launch. This was the third successful Super Heavy catch, even though some engines failed to restart during the return sequence.",
-      "Ship 34 suffered an aft-section event followed by multiple engine shutdowns and loss of attitude control. Telemetry ended before the planned in-space operations. SpaceX attributed the initiating event to a hardware failure in a center Raptor engine; payload deployment and controlled reentry were not demonstrated."
+      {
+        "heading": "A second V2 upper stage",
+        "body": "Flight 8 repeated the second-generation ship’s attempt to complete ascent and test its payload dispenser. Before launch, a 60-second static fire explored engine operating conditions and hardware changes following Flight 7. Four Starlink mass simulators remained aboard when the flight ended."
+      },
+      {
+        "heading": "The booster reaches the tower",
+        "body": "Booster 15 completed its return and was caught by the tower around seven minutes after launch. This was the third successful Super Heavy catch, even though some engines failed to restart during the return sequence."
+      },
+      {
+        "heading": "A different engine failure",
+        "body": "Ship 34 suffered an aft-section event followed by multiple engine shutdowns and loss of attitude control. Telemetry ended before the planned in-space operations. SpaceX attributed the initiating event to a hardware failure in a center Raptor engine; payload deployment and controlled reentry were not demonstrated."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-8",
     "photo": {
@@ -552,11 +627,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "4 Starlink mass simulators · not deployed",
     "trajectory": "Ascent terminated before coast",
-    "detail_headings": [
-      "A second V2 upper stage",
-      "The booster reaches the tower",
-      "A different engine failure"
-    ],
     "timeline": [
       {
         "time": "00:00",
@@ -595,7 +665,14 @@
         "context": null,
         "context_label": ""
       }
-    ]
+    ],
+    "booster_outcome": "completed",
+    "ship_outcome": "lost",
+    "debrief": {
+      "changed": "The V2 campaign repeated its ascent and dispenser test attempt.",
+      "worked": "Booster 15 returned for the third Super Heavy catch.",
+      "fell_short": "Ship engine failures and loss of attitude control ended ascent."
+    }
   },
   {
     "id": 7,
@@ -607,9 +684,18 @@
     "milestone": "First V2 flight",
     "outcome": "Vehicle lost",
     "details": [
-      "Ship 33 introduced the second-generation upper stage, with larger propellant tanks, revised avionics and smaller forward flaps moved away from the hottest part of the flow. Ten Starlink mass simulators were carried for a deployment test, but never released.",
-      "Super Heavy completed its boostback and returned to the tower for the program’s second catch. Booster 14 survived the flight and later became the first Super Heavy to launch again, on Flight 9.",
-      "The ship lost engines and communications during ascent, about eight and a half minutes after launch. SpaceX’s investigation linked the failure to stronger-than-expected vibration, propellant leaks and an aft-section fire. Debris descended over the Caribbean, and the planned coast, deployment and reentry experiments were not reached."
+      {
+        "heading": "More capacity, new hardware",
+        "body": "Ship 33 introduced the second-generation upper stage, with larger propellant tanks, revised avionics and smaller forward flaps moved away from the hottest part of the flow. Ten Starlink mass simulators were carried for a deployment test, but never released."
+      },
+      {
+        "heading": "A booster recovered again",
+        "body": "Super Heavy completed its boostback and returned to the tower for the program’s second catch. Booster 14 survived the flight and later became the first Super Heavy to launch again, on Flight 9."
+      },
+      {
+        "heading": "The upper-stage investigation",
+        "body": "The ship lost engines and communications during ascent, about eight and a half minutes after launch. SpaceX’s investigation linked the failure to stronger-than-expected vibration, propellant leaks and an aft-section fire. Debris descended over the Caribbean, and the planned coast, deployment and reentry experiments were not reached."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-7",
     "photo": {
@@ -625,11 +711,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "10 Starlink mass simulators · not deployed",
     "trajectory": "Ascent terminated before coast",
-    "detail_headings": [
-      "More capacity, new hardware",
-      "A booster recovered again",
-      "The upper-stage investigation"
-    ],
     "timeline": [
       {
         "time": "00:00",
@@ -664,7 +745,14 @@
         "context": "https://x.com/mcrs987/status/1886386447478816849",
         "context_label": "Original thread"
       }
-    ]
+    ],
+    "booster_outcome": "completed",
+    "ship_outcome": "lost",
+    "debrief": {
+      "changed": "The second-generation ship introduced larger tanks and revised flaps.",
+      "worked": "Booster 14 returned for the program’s second tower catch.",
+      "fell_short": "An aft-section fire ended ship ascent before deployment and reentry tests."
+    }
   },
   {
     "id": 6,
@@ -676,9 +764,18 @@
     "milestone": "First in-space relight",
     "outcome": "Milestone",
     "details": [
-      "Flight 6 was the last mission for the first-generation Starship upper stage. Booster 13 was initially intended to return to the tower, but the catch was called off after a tower-system problem. The booster instead performed a controlled Gulf of Mexico splashdown.",
-      "Ship 31 restarted a single Raptor during coast, demonstrating an engine operation needed for future orbital insertion and deorbit burns. This was a relight demonstration on a suborbital flight, rather than a commitment to a sustained Earth orbit.",
-      "The ship tested altered heat-shield coverage and a more demanding entry profile. It completed a landing flip and soft Indian Ocean splashdown in daylight, giving clearer views of the final descent. A plush banana stayed aboard as the mission’s zero-gravity indicator."
+      {
+        "heading": "An offshore diversion",
+        "body": "Flight 6 was the last mission for the first-generation Starship upper stage. Booster 13 was initially intended to return to the tower, but the catch was called off after a tower-system problem. The booster instead performed a controlled Gulf of Mexico splashdown."
+      },
+      {
+        "heading": "The engine relight milestone",
+        "body": "Ship 31 restarted a single Raptor during coast, demonstrating an engine operation needed for future orbital insertion and deorbit burns. This was a relight demonstration on a suborbital flight, rather than a commitment to a sustained Earth orbit."
+      },
+      {
+        "heading": "Testing the edge of the envelope",
+        "body": "The ship tested altered heat-shield coverage and a more demanding entry profile. It completed a landing flip and soft Indian Ocean splashdown in daylight, giving clearer views of the final descent. A plush banana stayed aboard as the mission’s zero-gravity indicator."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-6",
     "photo": {
@@ -698,11 +795,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "Banana zero-gravity indicator",
     "trajectory": "Suborbital · Indian Ocean return",
-    "detail_headings": [
-      "An offshore diversion",
-      "The engine relight milestone",
-      "Testing the edge of the envelope"
-    ],
     "timeline": [
       {
         "time": "~07:00",
@@ -741,7 +833,14 @@
         "context": null,
         "context_label": ""
       }
-    ]
+    ],
+    "booster_outcome": "completed",
+    "ship_outcome": "completed",
+    "debrief": {
+      "changed": "The ship demonstrated its first Raptor relight in space.",
+      "worked": "Both stages completed controlled splashdowns, with the ship returning in daylight.",
+      "fell_short": "A tower-system problem called off the planned booster catch."
+    }
   },
   {
     "id": 5,
@@ -753,9 +852,18 @@
     "milestone": "First booster catch",
     "outcome": "Milestone",
     "details": [
-      "For the first booster catch, Super Heavy returned to Starbase rather than an offshore splashdown zone. Vehicle and tower health checks had to pass before the return was authorized. Booster 12 slowed beside the tower and settled onto its mechanical arms about seven minutes after launch.",
-      "Ship 30 flew with revised heat-shield tiles and a backup ablative layer. It completed its suborbital coast and atmospheric return, then relit its landing engines for a controlled splashdown in the Indian Ocean. A pre-positioned camera buoy filmed the final descent at night.",
-      "The booster was recovered at the launch site, while the ship was intentionally expended at sea and burned after tipping over. The tower catch demonstrated a central part of the planned reuse system; recovering an upper stage remained a separate challenge."
+      {
+        "heading": "Returning to the launch tower",
+        "body": "For the first booster catch, Super Heavy returned to Starbase rather than an offshore splashdown zone. Vehicle and tower health checks had to pass before the return was authorized. Booster 12 slowed beside the tower and settled onto its mechanical arms about seven minutes after launch."
+      },
+      {
+        "heading": "An upgraded thermal shield",
+        "body": "Ship 30 flew with revised heat-shield tiles and a backup ablative layer. It completed its suborbital coast and atmospheric return, then relit its landing engines for a controlled splashdown in the Indian Ocean. A pre-positioned camera buoy filmed the final descent at night."
+      },
+      {
+        "heading": "Two very different recoveries",
+        "body": "The booster was recovered at the launch site, while the ship was intentionally expended at sea and burned after tipping over. The tower catch demonstrated a central part of the planned reuse system; recovering an upper stage remained a separate challenge."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-5",
     "photo": {
@@ -775,11 +883,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "Upgraded heat-shield test",
     "trajectory": "Suborbital · Indian Ocean return",
-    "detail_headings": [
-      "Returning to the launch tower",
-      "An upgraded thermal shield",
-      "Two very different recoveries"
-    ],
     "timeline": [
       {
         "time": "~02:40",
@@ -828,7 +931,14 @@
         "context": null,
         "context_label": ""
       }
-    ]
+    ],
+    "booster_outcome": "completed",
+    "ship_outcome": "completed",
+    "debrief": {
+      "changed": "The booster returned to the tower for its first catch.",
+      "worked": "Booster 12 was caught; Ship 30 reached its targeted splashdown zone.",
+      "fell_short": "The ship was intentionally expended at sea; upper-stage recovery remained ahead."
+    }
   },
   {
     "id": 4,
@@ -840,9 +950,18 @@
     "milestone": "First dual splashdown",
     "outcome": "Milestone",
     "details": [
-      "Booster 11 completed ascent, boostback and a landing burn before a soft splashdown in the Gulf of Mexico. The hot-stage ring was jettisoned after separation to reduce the mass carried through the return. The booster’s ocean landing provided a rehearsal for a future tower catch.",
-      "Ship 29 survived atmospheric entry even as heating visibly eroded a forward flap and damaged its camera view. The remaining structure and control authority were sufficient to guide the ship through descent, ignite the landing engines and execute the flip to a vertical attitude.",
-      "The ship splashed down in the Indian Ocean roughly 66 minutes after launch. Neither stage was intended to be recovered intact, but both completed their controlled return sequences. Surviving reentry was the key advance over Flight 3."
+      {
+        "heading": "Bringing the booster back",
+        "body": "Booster 11 completed ascent, boostback and a landing burn before a soft splashdown in the Gulf of Mexico. The hot-stage ring was jettisoned after separation to reduce the mass carried through the return. The booster’s ocean landing provided a rehearsal for a future tower catch."
+      },
+      {
+        "heading": "A damaged flap keeps working",
+        "body": "Ship 29 survived atmospheric entry even as heating visibly eroded a forward flap and damaged its camera view. The remaining structure and control authority were sufficient to guide the ship through descent, ignite the landing engines and execute the flip to a vertical attitude."
+      },
+      {
+        "heading": "The foundation for a catch",
+        "body": "The ship splashed down in the Indian Ocean roughly 66 minutes after launch. Neither stage was intended to be recovered intact, but both completed their controlled return sequences. Surviving reentry was the key advance over Flight 3."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-4",
     "photo": {
@@ -858,11 +977,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "Heat-shield test configuration",
     "trajectory": "Suborbital · Indian Ocean return",
-    "detail_headings": [
-      "Bringing the booster back",
-      "A damaged flap keeps working",
-      "The foundation for a catch"
-    ],
     "timeline": [
       {
         "time": "~03:00",
@@ -901,7 +1015,14 @@
         "context": "https://x.com/mcrs987/status/1837990608952320030",
         "context_label": "Recovery follow-up"
       }
-    ]
+    ],
+    "booster_outcome": "completed",
+    "ship_outcome": "completed",
+    "debrief": {
+      "changed": "Both stages demonstrated controlled ocean descents.",
+      "worked": "The ship retained control through entry despite severe flap damage.",
+      "fell_short": "A forward flap suffered significant thermal damage; neither vehicle was recovered intact."
+    }
   },
   {
     "id": 3,
@@ -913,9 +1034,18 @@
     "milestone": "First full ascent burn",
     "outcome": "Vehicle lost",
     "details": [
-      "Ship 28 completed its ascent burn and entered a long coast toward the Indian Ocean. Its trajectory deliberately intersected the atmosphere, allowing a return without first entering a stable orbit. Live onboard views showed the curvature of Earth and plasma forming during descent.",
-      "During coast, Starship opened and closed its payload door and demonstrated a transfer of liquid oxygen between onboard tanks. This was an internal transfer experiment, an early step toward managing cryogenic propellant in space. A planned Raptor relight was skipped because of the ship’s roll.",
-      "Booster 10 failed to complete its landing burn. The ship also lost attitude control and broke up during reentry, with communications ending around 49 minutes after launch. Both ascent and in-space experiments progressed further than on the preceding flight."
+      {
+        "heading": "A full-duration burn",
+        "body": "Ship 28 completed its ascent burn and entered a long coast toward the Indian Ocean. Its trajectory deliberately intersected the atmosphere, allowing a return without first entering a stable orbit. Live onboard views showed the curvature of Earth and plasma forming during descent."
+      },
+      {
+        "heading": "Working during coast",
+        "body": "During coast, Starship opened and closed its payload door and demonstrated a transfer of liquid oxygen between onboard tanks. This was an internal transfer experiment, an early step toward managing cryogenic propellant in space. A planned Raptor relight was skipped because of the ship’s roll."
+      },
+      {
+        "heading": "The return remained unfinished",
+        "body": "Booster 10 failed to complete its landing burn. The ship also lost attitude control and broke up during reentry, with communications ending around 49 minutes after launch. Both ascent and in-space experiments progressed further than on the preceding flight."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-3",
     "photo": {
@@ -935,11 +1065,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "Door and propellant-transfer tests",
     "trajectory": "Suborbital · Indian Ocean return",
-    "detail_headings": [
-      "A full-duration burn",
-      "Working during coast",
-      "The return remained unfinished"
-    ],
     "timeline": [
       {
         "time": "~08:35",
@@ -978,7 +1103,14 @@
         "context": "https://x.com/mcrs987/status/1774645869641429308",
         "context_label": "Author’s correction"
       }
-    ]
+    ],
+    "booster_outcome": "lost",
+    "ship_outcome": "lost",
+    "debrief": {
+      "changed": "The ship completed its first full ascent burn and extended coast.",
+      "worked": "Payload-door operation and internal liquid-oxygen transfer were demonstrated.",
+      "fell_short": "The relight was skipped; neither stage completed its return."
+    }
   },
   {
     "id": 2,
@@ -990,9 +1122,18 @@
     "milestone": "First hot-stage separation",
     "outcome": "Vehicle lost",
     "details": [
-      "All 33 booster engines operated through ascent. Starship then ignited its engines while still attached to Super Heavy, pushing the stages apart through a newly added vented hot-stage ring. This demonstrated the separation method that became standard on later flights.",
-      "Booster 9 was lost during its boostback sequence. Ship 25 continued to an altitude of about 149 kilometers, but did not complete its ascent burn. SpaceX linked its loss to a fire associated with venting excess liquid oxygen near the end of ascent.",
-      "The flight lasted about eight minutes for the ship, more than twice the first integrated test’s duration. It demonstrated hot staging and extended upper-stage operation, while leaving controlled reentry, payload operations and vehicle recovery for later missions."
+      {
+        "heading": "A different way to separate",
+        "body": "All 33 booster engines operated through ascent. Starship then ignited its engines while still attached to Super Heavy, pushing the stages apart through a newly added vented hot-stage ring. This demonstrated the separation method that became standard on later flights."
+      },
+      {
+        "heading": "Two separate failures",
+        "body": "Booster 9 was lost during its boostback sequence. Ship 25 continued to an altitude of about 149 kilometers, but did not complete its ascent burn. SpaceX linked its loss to a fire associated with venting excess liquid oxygen near the end of ascent."
+      },
+      {
+        "heading": "A longer view of ascent",
+        "body": "The flight lasted about eight minutes for the ship, more than twice the first integrated test’s duration. It demonstrated hot staging and extended upper-stage operation, while leaving controlled reentry, payload operations and vehicle recovery for later missions."
+      }
     ],
     "source": "https://www.spacex.com/launches/starship-flight-2",
     "photo": {
@@ -1012,11 +1153,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "No deployed payload",
     "trajectory": "Space reached · suborbital",
-    "detail_headings": [
-      "A different way to separate",
-      "Two separate failures",
-      "A longer view of ascent"
-    ],
     "timeline": [
       {
         "time": "00:00",
@@ -1046,7 +1182,14 @@
         "context": null,
         "context_label": ""
       }
-    ]
+    ],
+    "booster_outcome": "lost",
+    "ship_outcome": "lost",
+    "debrief": {
+      "changed": "Hot staging introduced a new separation method.",
+      "worked": "All 33 booster engines operated through ascent; hot staging succeeded.",
+      "fell_short": "Both stages were lost before completing their planned returns."
+    }
   },
   {
     "id": 1,
@@ -1058,9 +1201,18 @@
     "milestone": "First integrated flight",
     "outcome": "Vehicle lost",
     "details": [
-      "This was the first launch of a complete Starship system: the methane-fueled Super Heavy booster beneath the Starship upper stage. Earlier prototypes had tested the ship’s atmospheric descent and landing separately. The integrated vehicle lifted off from Starbase and began climbing over the Gulf of Mexico.",
-      "Several booster engines stopped during ascent. The stack lost control, tumbled and failed to separate, so Ship 24 never began its own powered flight. The flight termination system destroyed both stages roughly four minutes after launch; neither vehicle reached its planned ocean return.",
-      "The launch also damaged the concrete beneath the mount. Subsequent flights introduced a water-cooled steel plate and deluge system, alongside changes to the vehicle and flight termination system. The mission established the starting point for testing the two stages together."
+      {
+        "heading": "A complete stack, at last",
+        "body": "This was the first launch of a complete Starship system: the methane-fueled Super Heavy booster beneath the Starship upper stage. Earlier prototypes had tested the ship’s atmospheric descent and landing separately. The integrated vehicle lifted off from Starbase and began climbing over the Gulf of Mexico."
+      },
+      {
+        "heading": "An ascent cut short",
+        "body": "Several booster engines stopped during ascent. The stack lost control, tumbled and failed to separate, so Ship 24 never began its own powered flight. The flight termination system destroyed both stages roughly four minutes after launch; neither vehicle reached its planned ocean return."
+      },
+      {
+        "heading": "The next iteration",
+        "body": "The launch also damaged the concrete beneath the mount. Subsequent flights introduced a water-cooled steel plate and deluge system, alongside changes to the vehicle and flight termination system. The mission established the starting point for testing the two stages together."
+      }
     ],
     "source": "https://www.spacex.com/launches/mission/?missionId=starship-flight-test",
     "photo": {
@@ -1080,11 +1232,6 @@
     "launch_site": "Starbase · Pad 1",
     "payload": "No deployed payload",
     "trajectory": "Atmospheric test flight",
-    "detail_headings": [
-      "A complete stack, at last",
-      "An ascent cut short",
-      "The next iteration"
-    ],
     "timeline": [
       {
         "time": "00:00",
@@ -1110,6 +1257,13 @@
         "context": "https://threadreaderapp.com/thread/1853443340953330163.html",
         "context_label": "Full record thread"
       }
-    ]
+    ],
+    "booster_outcome": "lost",
+    "ship_outcome": "lost",
+    "debrief": {
+      "changed": "First flight of the integrated Ship and Super Heavy stack.",
+      "worked": "The complete stack lifted off and cleared the launch pad.",
+      "fell_short": "Engine losses and loss of control prevented stage separation."
+    }
   }
 ]

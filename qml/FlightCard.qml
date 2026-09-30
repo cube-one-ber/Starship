@@ -122,7 +122,7 @@ Kirigami.AbstractCard {
                 Layout.fillWidth: true
                 spacing: 5
                 Repeater {
-                    model: [{ label: "Ship", result: card.flight.ship }, { label: "Booster", result: card.flight.booster }]
+                    model: [{ label: "Ship", result: card.flight.ship, outcome: card.flight.ship_outcome }, { label: "Booster", result: card.flight.booster, outcome: card.flight.booster_outcome }]
                     delegate: RowLayout {
                         id: vehicleResult
                         required property var modelData
@@ -136,7 +136,7 @@ Kirigami.AbstractCard {
                             font.pointSize: 9.75
                             font.weight: Font.Medium
                             wrapMode: Text.WordWrap
-                            color: /lost|terminated|did not|hard|impact/i.test(text) ? SpaceStyle.accent : SpaceStyle.positive
+                            color: vehicleResult.modelData.outcome === "completed" ? SpaceStyle.positive : SpaceStyle.accent
                         }
                     }
                 }

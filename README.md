@@ -1,6 +1,6 @@
-# Starship · The Flight Journal
+# Starship
 
-A native desktop journal of Starship's integrated flights, built with **Rust, Qt 6, and KDE Kirigami**. Explore the flight archive, read mission debriefs, and follow the next launch in an interface shaped by spaceflight photography, orbital diagrams, and a navy-and-gold palette.
+A native desktop archive of Starship's integrated flights, built with **Rust, Qt 6, and KDE Kirigami**. Explore the flight archive, read mission debriefs, and follow the next launch in an interface shaped by spaceflight photography, orbital diagrams, and a navy-and-gold palette.
 
 ![Starship lifting off at Starbase through illuminated exhaust clouds](resources/photos/hero.jpg)
 
@@ -8,11 +8,11 @@ A native desktop journal of Starship's integrated flights, built with **Rust, Qt
 
 [Download builds](https://github.com/cube-one-ber/Starship/releases) · [Build from source](#build-from-source) · [Photo credits](#photography-and-credits) · [Build and release details](docs/building.md)
 
-## Explore the journal
+## Explore Starship
 
 - **Flight archive:** integrated Flights 1–14, with search, year filters, separate Ship and Booster results, and photographic cards. Early prototype hops are outside the archive.
 - **Mission debriefs:** vehicle serials, UTC liftoff times, payloads, flight logs, approximate timelines, section shortcuts, previous/next-flight navigation, and links to official reports and replays.
-- **Independent analysis:** 26 entries across all 14 flights from @mcrs987 / TheSpaceEngineer, including reconstructions, footage studies, hardware surveys, and recovery tracking. [Browse the source index](docs/mcrs987-flight-index.md).
+- **Independent analysis:** 26 entries across all 14 flights, including reconstructions, footage studies, hardware surveys, and recovery tracking. [Browse the source index](docs/mcrs987-flight-index.md).
 - **Landing locations:** sourced impact estimates and independent geolocations, with precision labels, maps, and links to the original analysis.
 - **Next launch:** a refreshed launch window, expandable details in narrow archive windows, and a countdown when a precise, confirmed liftoff time is available.
 - **Adaptive interface:** a compact header and three-column archive that becomes a single column in narrow windows, readable metadata, preserved filters and scroll position when returning from debriefs, keyboard navigation, and a persistent **Reduce motion** setting.
@@ -40,7 +40,7 @@ A native desktop journal of Starship's integrated flights, built with **Rust, Qt
 
 ![Flight 14 landing-coordinate panels with source and map actions](docs/previews/flight14-coordinates.png)
 
-![Animated preview of the journal's navigation and transitions](docs/previews/motion.gif)
+![Animated preview of the app's navigation and transitions](docs/previews/motion.gif)
 
 Animations follow the desktop animation-speed setting through Kirigami's standard durations. **Reduce motion** finishes pending transitions immediately and persists between runs.
 
@@ -122,11 +122,13 @@ Coordinates preserve their sources' stated precision. Independent geolocations a
 
 ## Photography and credits
 
+**Independent analysis and geolocation:** [The Space Engineer (@mcrs987)](https://x.com/mcrs987), whose reconstructions, observations, and location estimates inform the flight archive.
+
 ![Starship Flight 5 campaign photographed at the launch tower](resources/photos/flight-5.jpg)
 
 *Flight 5 photography by [Max Evans / NSF](https://maxevans.smugmug.com/Rockets/SpaceX/Starship-IFT-5/i-TFcrWJ2).*
 
-The journal includes 13 selected photographs from **Max Evans / NSF** (12 flight images and the hero), downloaded with gallery-dl. Flights 4 and 7 use credited **SpaceX** photography. Source URLs and credits are recorded in [`assets/archive/selection.json`](assets/archive/selection.json) and [`resources/data/photos.json`](resources/data/photos.json).
+The archive includes 13 selected photographs from **Max Evans / NSF** (12 flight images and the hero), downloaded with gallery-dl. Flights 4 and 7 use credited **SpaceX** photography. Source URLs and credits are recorded in [`assets/archive/selection.json`](assets/archive/selection.json) and [`resources/data/photos.json`](resources/data/photos.json).
 
 | Location | Contents |
 | --- | --- |

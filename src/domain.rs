@@ -35,6 +35,23 @@ pub struct IndependentAnalysis {
     pub context_label: String,
 }
 #[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct FlightDetail {
+    pub heading: String,
+    pub body: String,
+}
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
+#[serde(rename_all = "lowercase")]
+pub enum VehicleOutcome {
+    Completed,
+    Lost,
+}
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct Debrief {
+    pub changed: String,
+    pub worked: String,
+    pub fell_short: String,
+}
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Flight {
     pub id: u32,
     pub date: String,
@@ -44,8 +61,10 @@ pub struct Flight {
     pub ship: String,
     pub milestone: String,
     pub outcome: String,
-    pub details: Vec<String>,
-    pub detail_headings: Vec<String>,
+    pub details: Vec<FlightDetail>,
+    pub booster_outcome: VehicleOutcome,
+    pub ship_outcome: VehicleOutcome,
+    pub debrief: Debrief,
     pub booster_id: String,
     pub ship_id: String,
     pub generation: String,
@@ -70,7 +89,7 @@ pub fn filter_flights(all: &[Flight], year: &str, query: &str) -> Vec<Flight> {
             (year == "All years" || f.date.starts_with(year))
                 && (query.is_empty()
                     || format!(
-                        "flight {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}",
+                        "flight {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}",
                         f.id,
                         f.title,
                         f.summary,
@@ -83,8 +102,14 @@ pub fn filter_flights(all: &[Flight], year: &str, query: &str) -> Vec<Flight> {
                         f.payload,
                         f.trajectory,
                         f.launch_site,
-                        f.detail_headings.join(" "),
-                        f.details.join(" "),
+                        f.details
+                            .iter()
+                            .map(|d| format!("{} {}", d.heading, d.body))
+                            .collect::<Vec<_>>()
+                            .join(" "),
+                        f.debrief.changed,
+                        f.debrief.worked,
+                        f.debrief.fell_short,
                         f.timeline
                             .iter()
                             .map(|e| e.event.as_str())
@@ -129,6 +154,31 @@ impl Default for Schedule {
     }
 }
 pub const SCHEDULE_URL: &str = "https://nextspaceflight.com/launches/?q=Starship";
+
+// Three missed ten-minute refreshes make launch timing too old for a countdown.
+pub const SCHEDULE_MAX_AGE_SECONDS: i64 = 30 * 60;
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ScheduleState {
+    pub origin: String,
+    pub stale: bool,
+    pub age_seconds: Option<i64>,
+}
+
+pub fn schedule_state(schedule: &Schedule, origin: &str, now: DateTime<Utc>) -> ScheduleState {
+    // Older caches used date-only checks. Preserve their windows, but require a
+    // successful refresh before treating their timing as current.
+    let age = DateTime::parse_from_rfc3339(&schedule.checked_at)
+        .ok()
+        .map(|checked| now.timestamp() - checked.timestamp());
+    ScheduleState {
+        origin: origin.into(),
+        stale: origin == "bundled"
+            || age.is_none_or(|age| !(-60..=SCHEDULE_MAX_AGE_SECONDS).contains(&age)),
+        age_seconds: age.map(|age| age.max(0)),
+    }
+}
 
 // Parse serialized public-page data as JSON without executing website JavaScript.
 pub fn parse_nextspaceflight(html: &str) -> Result<Value, String> {
@@ -202,7 +252,7 @@ pub fn normalize_schedule(data: &Value, now: DateTime<Utc>) -> Result<Schedule, 
         precision: "unknown".into(),
         status: "Awaiting launch window".into(),
         source: SCHEDULE_URL.into(),
-        checked_at: now.format("%Y-%m-%d").to_string(),
+        checked_at: now.to_rfc3339_opts(chrono::SecondsFormat::Secs, true),
         ..default
     };
     if let Some((n, launch)) = candidates.first() {
@@ -263,7 +313,9 @@ pub struct Countdown {
     pub elapsed: bool,
 }
 pub fn countdown(schedule: &Schedule, now: DateTime<Utc>) -> Option<Countdown> {
-    if !["second", "minute"].contains(&schedule.precision.as_str()) {
+    if !["second", "minute"].contains(&schedule.precision.as_str())
+        || schedule_state(schedule, "cached", now).stale
+    {
         return None;
     }
     let target = DateTime::parse_from_rfc3339(schedule.launch_at.as_ref()?).ok()?;
@@ -312,7 +364,17 @@ mod tests {
                     .or_else(|_| chrono::NaiveTime::parse_from_str(time, "%H:%M"))
                     .is_ok()
             );
-            assert_eq!(flight.details.len(), flight.detail_headings.len());
+            assert!(
+                flight
+                    .details
+                    .iter()
+                    .all(|detail| !detail.heading.is_empty() && !detail.body.is_empty())
+            );
+            assert!(
+                !flight.debrief.changed.is_empty()
+                    && !flight.debrief.worked.is_empty()
+                    && !flight.debrief.fell_short.is_empty()
+            );
             assert!(flight.timeline.len() >= 3);
             assert!(!flight.booster_id.is_empty() && !flight.ship_id.is_empty());
             assert!(!flight.payload.is_empty() && !flight.trajectory.is_empty());
@@ -428,10 +490,36 @@ mod tests {
     }
     #[test]
     fn expired_time_clamps_at_zero() {
-        let schedule = normalize_schedule(&feed(2, "Second"), now()).unwrap();
-        let c = countdown(&schedule, "2027-01-01T00:00:00Z".parse().unwrap()).unwrap();
+        let checked = "2026-09-30T13:03:00Z".parse().unwrap();
+        let schedule = normalize_schedule(&feed(2, "Second"), checked).unwrap();
+        let c = countdown(&schedule, checked).unwrap();
         assert_eq!(c.days, "00");
         assert!(c.elapsed)
+    }
+    #[test]
+    fn stale_legacy_and_future_checks_disable_countdowns() {
+        let mut schedule = normalize_schedule(&feed(2, "Second"), now()).unwrap();
+        assert_eq!(schedule.checked_at, "2026-09-29T12:00:00Z");
+        assert!(
+            countdown(
+                &schedule,
+                now() + chrono::Duration::seconds(SCHEDULE_MAX_AGE_SECONDS)
+            )
+            .is_some()
+        );
+        assert!(
+            countdown(
+                &schedule,
+                now() + chrono::Duration::seconds(SCHEDULE_MAX_AGE_SECONDS + 1)
+            )
+            .is_none()
+        );
+        assert!(countdown(&schedule, now() - chrono::Duration::seconds(61)).is_none());
+        assert!(schedule_state(&schedule, "bundled", now()).stale);
+        for checked in ["2026-09-29", "invalid", ""] {
+            schedule.checked_at = checked.into();
+            assert!(countdown(&schedule, now()).is_none());
+        }
     }
     #[test]
     fn missing_or_malformed_feed_is_safe() {

@@ -15,7 +15,7 @@ Kirigami.AbstractCard {
     padding: 0
     background: Rectangle { color: SpaceStyle.surface; radius: SpaceStyle.radius }
     contentItem: Item {
-        implicitHeight: Math.max(hero.compact ? 180 : 260, heroContent.implicitHeight + (hero.compact ? 32 : 48))
+        implicitHeight: Math.max(hero.compact ? 124 : 260, heroContent.implicitHeight + (hero.compact ? 32 : 48))
         clip: true
         Photo {
             anchors.fill: parent
@@ -54,7 +54,7 @@ Kirigami.AbstractCard {
             RowLayout {
                 Layout.fillWidth: true
                 Rectangle { implicitWidth: 6; implicitHeight: 6; radius: 3; color: SpaceStyle.accent }
-                SectionLabel { Layout.fillWidth: true; text: "STARSHIP / FLIGHT JOURNAL" }
+                SectionLabel { Layout.fillWidth: true; text: hero.compact ? "STARSHIP / " + hero.flightCount + " FLIGHTS" : "STARSHIP / FLIGHT ARCHIVE" }
                 SectionLabel { visible: hero.width > 520; text: "EST. 2023"; color: "#b8c3d0" }
             }
             Item { Layout.fillHeight: true; visible: !hero.compact }
@@ -63,15 +63,16 @@ Kirigami.AbstractCard {
                 spacing: -4
                 Controls.Label {
                     Layout.fillWidth: true
-                    text: "Built for"
+                    text: hero.compact ? "The flight archive." : "Built for"
                     font.family: SpaceStyle.serif
-                    font.pointSize: hero.compact ? 25.5 : 33
+                    font.pointSize: hero.compact ? 24 : 33
                     font.letterSpacing: -1.2
                     color: SpaceStyle.text
                     wrapMode: Text.WordWrap
                 }
                 Controls.Label {
                     Layout.fillWidth: true
+                    visible: !hero.compact
                     text: "what comes next."
                     font.family: SpaceStyle.serif
                     font.italic: true

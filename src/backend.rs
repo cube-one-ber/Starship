@@ -38,6 +38,7 @@ pub mod qobject {
         #[qproperty(QString, flights_json)]
         #[qproperty(QString, schedule_json)]
         #[qproperty(QString, countdown_json)]
+        #[qproperty(QString, schedule_state_json)]
         #[qproperty(QString, error_message)]
         #[qproperty(bool, busy)]
         #[qproperty(bool, supports_jxl)]
@@ -68,29 +69,39 @@ pub struct FlightBackendRust {
     flights_json: QString,
     schedule_json: QString,
     countdown_json: QString,
+    schedule_state_json: QString,
     error_message: QString,
     busy: bool,
     supports_jxl: bool,
     all: Vec<Flight>,
     schedule: Schedule,
+    schedule_origin: String,
 }
 impl Default for FlightBackendRust {
     fn default() -> Self {
         let all = domain::flights();
-        let schedule: Schedule = std::fs::read(cache_path())
+        let cached: Option<Schedule> = std::fs::read(cache_path())
             .ok()
             .and_then(|bytes| serde_json::from_slice::<Schedule>(&bytes).ok())
-            .filter(|schedule| schedule.provider == "NextSpaceflight")
-            .unwrap_or_default();
+            .filter(|schedule| schedule.provider == "NextSpaceflight");
+        let origin = if cached.is_some() {
+            "cached"
+        } else {
+            "bundled"
+        };
+        let schedule = cached.unwrap_or_default();
+        let state = domain::schedule_state(&schedule, origin, Utc::now());
         Self {
             flights_json: QString::from(serde_json::to_string(&all).unwrap().as_str()),
             schedule_json: QString::from(serde_json::to_string(&schedule).unwrap().as_str()),
             countdown_json: QString::from("null"),
+            schedule_state_json: QString::from(serde_json::to_string(&state).unwrap().as_str()),
             error_message: QString::default(),
             busy: false,
             supports_jxl: qobject::supportsJxl(),
             all,
             schedule,
+            schedule_origin: origin.into(),
         }
     }
 }
@@ -118,8 +129,18 @@ impl qobject::FlightBackend {
         let flight = self.rust().all.iter().find(|f| f.id as i32 == id);
         QString::from(serde_json::to_string(&flight).unwrap().as_str())
     }
-    pub fn tick(self: Pin<&mut Self>) {
-        let countdown = domain::countdown(&self.rust().schedule, Utc::now());
+    pub fn tick(mut self: Pin<&mut Self>) {
+        let now = Utc::now();
+        let state =
+            domain::schedule_state(&self.rust().schedule, &self.rust().schedule_origin, now);
+        let countdown = if state.stale {
+            None
+        } else {
+            domain::countdown(&self.rust().schedule, now)
+        };
+        self.as_mut().set_schedule_state_json(QString::from(
+            serde_json::to_string(&state).unwrap().as_str(),
+        ));
         self.set_countdown_json(QString::from(
             serde_json::to_string(&countdown).unwrap().as_str(),
         ));
@@ -145,13 +166,18 @@ impl qobject::FlightBackend {
                             serde_json::to_string(&schedule).unwrap().as_str(),
                         ));
                         backend.as_mut().rust_mut().schedule = schedule;
+                        backend.as_mut().rust_mut().schedule_origin = "live".into();
                         backend.as_mut().tick();
                     }
                     Err(error) => {
+                        if backend.rust().schedule_origin == "live" {
+                            backend.as_mut().rust_mut().schedule_origin = "cached".into();
+                        }
                         eprintln!("Schedule refresh: {error}");
                         backend.as_mut().set_error_message(QString::from(
                             "Unable to refresh. Showing the saved schedule.",
                         ));
+                        backend.as_mut().tick();
                     }
                 }
                 backend.set_busy(false);

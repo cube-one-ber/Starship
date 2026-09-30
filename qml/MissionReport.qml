@@ -19,7 +19,7 @@ ColumnLayout {
         model: report.flight.details
         delegate: ColumnLayout {
             id: entry
-            required property string modelData
+            required property var modelData
             required property int index
             Layout.fillWidth: true
             spacing: 10
@@ -29,7 +29,7 @@ ColumnLayout {
                 SectionLabel { text: String(entry.index + 1).padStart(2, "0"); font.letterSpacing: 0 }
                 Kirigami.Heading {
                     Layout.fillWidth: true
-                    text: report.flight.detail_headings[entry.index]
+                    text: entry.modelData.body.heading
                     level: 3
                     font.family: SpaceStyle.serif
                     font.pointSize: 18
@@ -39,7 +39,7 @@ ColumnLayout {
             }
             Kirigami.SelectableLabel {
                 Layout.fillWidth: true
-                text: entry.modelData
+                text: entry.modelData.body
                 font.family: SpaceStyle.sans
                 font.pointSize: 11.25
                 color: SpaceStyle.muted
@@ -55,10 +55,10 @@ ColumnLayout {
         ColumnLayout {
             Layout.fillWidth: true
             spacing: 8
-            SectionLabel { id: analysisHeading; Layout.fillWidth: true; text: "INDEPENDENT ANALYSIS / @MCRS987"; elide: Text.ElideNone; wrapMode: Text.WordWrap }
+            SectionLabel { id: analysisHeading; Layout.fillWidth: true; text: "INDEPENDENT ANALYSIS"; elide: Text.ElideNone; wrapMode: Text.WordWrap }
             Controls.Label {
                 Layout.fillWidth: true
-                text: "Reconstructions, observations and estimates from TheSpaceEngineer."
+                text: "Reconstructions, observations and estimates."
                 font.family: SpaceStyle.sans
                 font.pointSize: 9.75
                 color: SpaceStyle.dim
