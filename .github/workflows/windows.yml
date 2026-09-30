@@ -97,7 +97,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install macOS SDK
-        run: brew install cmake ninja pkgconf qtbase qtdeclarative qtsvg qtshadertools jpeg-xl
+        run: brew install cmake ninja pkgconf qtbase qtdeclarative qtsvg qtshadertools qttools jpeg-xl
       - name: Build KDE runtime and macOS app
         run: bash scripts/build-macos.sh
       - uses: actions/upload-artifact@v4
