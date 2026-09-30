@@ -58,4 +58,11 @@ fn main() {
         })
         .build();
     }
+    if windows {
+        // MinGW scans import archives in order. These libraries are used by our
+        // C++ helpers, so resolve them again after CXX-Qt's generated archive.
+        for library in ["Qt6Quick", "Qt6Widgets", "jxl"] {
+            println!("cargo:rustc-link-arg-bin=starship-journal=-l{library}");
+        }
+    }
 }
