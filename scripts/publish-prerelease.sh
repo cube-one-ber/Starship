@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Publish only the portable ZIP produced by the successful Windows build job.
+# Publish the packages produced by all successful platform build jobs.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -9,31 +9,43 @@ cd "$(dirname "$0")/.."
 : "${GITHUB_REF_NAME:?Missing branch}"
 [[ "$GITHUB_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo 'Invalid build commit' >&2; exit 1; }
 
-archive=dist/Starship-Journal-windows-x64.zip
-test -s "$archive"
+assets=(
+  dist/Starship-Journal-windows-x64.zip
+  dist/Starship-Journal-linux-x86_64.AppImage
+  dist/Starship-Journal-linux-x86_64.tar.gz
+  dist/Starship-Journal-linux-x86_64.deb
+  dist/Starship-Journal-linux-x86_64.rpm
+  dist/Starship-Journal-macos-arm64.zip
+  dist/Starship-Journal-macos-arm64.dmg
+)
+for asset in "${assets[@]}"; do test -s "$asset"; done
 tag="build-$GITHUB_SHA"
 short_sha="${GITHUB_SHA:0:7}"
 notes=$(mktemp)
 trap 'rm -f "$notes"' EXIT
 (
   cd dist
-  sha256sum Starship-Journal-windows-x64.zip > SHA256SUMS.txt
+  sha256sum Starship-Journal-* > SHA256SUMS.txt
 )
 cat > "$notes" <<EOF
 Automated prerelease for commit [$short_sha](https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA) on \`$GITHUB_REF_NAME\`.
 
 Windows 10/11 x64: extract **Starship-Journal-windows-x64.zip** and run **starship-journal.exe**. Qt, KDE Breeze, Kirigami, and JPEG XL dependencies are included.
 
-Backend tests and the desktop/narrow portable-app checks passed before publication. Screenshots and diagnostics are available in the [build run](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID).
+Linux x86_64: choose the **AppImage**, portable **tar.gz**, **DEB**, or **RPM**. The bundled runtime requires glibc 2.41 or newer (Debian 13+, Ubuntu 25.04+, Fedora 42+). For the AppImage, make it executable and launch it; use **--appimage-extract-and-run** if FUSE is unavailable. For the tarball, extract and run **AppRun**.
 
-This is a development build. SHA256SUMS.txt contains the ZIP checksum.
+macOS 14+ Apple Silicon: open the **DMG** and drag **Starship Journal.app** to Applications, or extract the **ZIP**. The development app is ad-hoc signed, not Apple-notarized; macOS may require allowing it in Privacy & Security.
+
+All three platform builds, backend tests, and desktop/narrow packaged-app checks passed before publication. Screenshots and diagnostics are available in the [build run](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID).
+
+This is a development build. SHA256SUMS.txt contains checksums for every package.
 EOF
 
 if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
   # Rerunning a successful commit refreshes its assets instead of duplicating releases.
-  gh release upload "$tag" "$archive" dist/SHA256SUMS.txt --clobber --repo "$GITHUB_REPOSITORY"
+  gh release upload "$tag" "${assets[@]}" dist/SHA256SUMS.txt --clobber --repo "$GITHUB_REPOSITORY"
 else
-  gh release create "$tag" "$archive" dist/SHA256SUMS.txt \
+  gh release create "$tag" "${assets[@]}" dist/SHA256SUMS.txt \
     --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
     --title "Development build $short_sha" --prerelease --latest=false \
     --notes-file "$notes"

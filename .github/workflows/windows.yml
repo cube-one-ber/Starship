@@ -1,4 +1,4 @@
-name: Windows
+name: Builds and prereleases
 on:
   push:
     branches: ['**']
@@ -53,9 +53,68 @@ jobs:
           name: Windows-UI-previews
           path: target/windows-smoke-tests/
           if-no-files-found: ignore
+  linux:
+    name: Linux x86_64 packages
+    runs-on: ubuntu-24.04
+    container: debian:trixie
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Install Linux SDK
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates curl git build-essential pkg-config python3 \
+            qt6-base-dev qt6-declarative-dev qt6-declarative-dev-tools qt6-tools-dev-tools libjxl-dev \
+            qml6-module-org-kde-kirigami qml6-module-org-kde-breeze qml6-module-qtqml-workerscript \
+            qml6-module-qtqml-models qml6-module-qtquick-controls qml6-module-qtquick-layouts \
+            qml6-module-qtquick-templates qml6-module-qtquick-shapes \
+            qml6-module-qtquick-window qml6-module-qtquick-dialogs qt6-svg-dev qt6-image-formats-plugins \
+            qt6-wayland breeze-icon-theme fonts-dejavu-core patchelf rpm zstd file libarchive-tools
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup.sh
+          sh /tmp/rustup.sh -y --profile minimal
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+      - uses: actions/checkout@v4
+      - name: Build, package, and test Linux formats
+        run: bash scripts/build-linux.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Starship-Journal-linux-x86_64
+          path: dist/*
+          if-no-files-found: error
+      - name: Upload Linux diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Linux-UI-previews
+          path: target/linux-smoke-tests/
+          if-no-files-found: ignore
+  macos:
+    name: macOS Apple Silicon
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install macOS SDK
+        run: brew install cmake ninja pkgconf qtbase qtdeclarative qtsvg qtshadertools jpeg-xl
+      - name: Build KDE runtime and macOS app
+        run: bash scripts/build-macos.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Starship-Journal-macos-arm64
+          path: dist/*
+          if-no-files-found: error
+      - name: Upload macOS diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-UI-previews
+          path: target/macos-smoke-tests/
+          if-no-files-found: ignore
   prerelease:
     name: Publish commit prerelease
-    needs: build
+    needs: [build, linux, macos]
     if: github.event_name != 'pull_request' && startsWith(github.ref, 'refs/heads/')
     runs-on: ubuntu-latest
     permissions:
@@ -67,9 +126,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
-          name: Starship-Journal-windows-x64
+          pattern: Starship-Journal-*
           path: dist
-      - name: Publish tested Windows build
+          merge-multiple: true
+      - name: Publish tested platform packages
         env:
           GH_TOKEN: ${{ github.token }}
         run: bash scripts/publish-prerelease.sh
