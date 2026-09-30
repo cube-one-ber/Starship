@@ -38,6 +38,8 @@ Windows keeps the KDE appearance using Breeze and qqc2-desktop-style, following 
 
 The packager uses Qt's official `windeployqt` and checks the recursive DLL imports of the EXE and all runtime plugins. It fails if a dependency is missing, and includes package versions, license notices, photo credits and SHA-256 checksums.
 
+Before compilation, the build script copies the required SDK DLLs beside MSYS2's Qt host tools and verifies that those tools run with an empty environment. This accommodates CXX-Qt's isolated tool invocations without changing or patching Rust dependencies.
+
 To verify an extracted package from PowerShell:
 
 ```powershell

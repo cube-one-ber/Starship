@@ -19,6 +19,7 @@ export CARGO_TARGET_DIR="$(cygpath -m "$PWD/target/windows")"
 export CARGO_TARGET_X86_64_PC_WINDOWS_GNU_LINKER="$CC"
 rust_info=$("$MINGW_PREFIX/bin/rustc.exe" -vV)
 [[ "$rust_info" == *'host: x86_64-pc-windows-gnu'* ]] || { echo 'Install the UCRT64 Rust package.' >&2; exit 1; }
+"$MINGW_PREFIX/bin/python.exe" scripts/package-windows.py --prepare-build-tools
 "$MINGW_PREFIX/bin/cargo.exe" test --locked --target x86_64-pc-windows-gnu
 "$MINGW_PREFIX/bin/cargo.exe" build --release --locked --target x86_64-pc-windows-gnu
 "$MINGW_PREFIX/bin/python.exe" scripts/package-windows.py --exe target/windows/x86_64-pc-windows-gnu/release/starship-journal.exe

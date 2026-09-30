@@ -62,6 +62,26 @@ def copy_tree(source: Path, destination: Path, required: bool = True) -> None:
     shutil.copytree(source, destination, dirs_exist_ok=True)
 
 
+def prepare_build_tools(qmake: str) -> None:
+    """Make MSYS2's Qt host tools runnable when CXX-Qt clears their environment."""
+    sdk_bin = Path(run(qmake, "-query", "QT_INSTALL_BINS"))
+    tools = Path(run(qmake, "-query", "QT_HOST_LIBEXECS"))
+    objdump = sdk_bin / "objdump.exe"
+    copy_dll_dependencies(tools, sdk_bin, Path(os.environ["SystemRoot"]) / "System32",
+                          lambda path: imports(path, objdump))
+    # DLLs moved beside the tools must still resolve the original SDK's QML/plugins.
+    paths = {"Prefix": "QT_INSTALL_PREFIX", "Binaries": "QT_INSTALL_BINS",
+             "Libraries": "QT_INSTALL_LIBS", "Headers": "QT_INSTALL_HEADERS",
+             "LibraryExecutables": "QT_INSTALL_LIBEXECS", "Plugins": "QT_INSTALL_PLUGINS",
+             "QmlImports": "QT_INSTALL_QML", "Data": "QT_INSTALL_DATA", "ArchData": "QT_INSTALL_ARCHDATA"}
+    configuration = "[Paths]\n" + "".join(f"{key}={run(qmake, '-query', value)}\n" for key, value in paths.items())
+    (tools / "qt.conf").write_text(configuration, encoding="utf-8")
+    for name in ("moc", "rcc", "qmltyperegistrar", "qmlcachegen"):
+        subprocess.run([str(tools / f"{name}.exe"), "--help"], env={}, check=True,
+                       stdout=subprocess.DEVNULL)
+    print("Qt build tools run successfully without PATH.", flush=True)
+
+
 def package(exe: Path, qmake: str, output: Path) -> Path:
     sdk = Path(run(qmake, "-query", "QT_INSTALL_PREFIX"))
     sdk_bin = Path(run(qmake, "-query", "QT_INSTALL_BINS"))
@@ -138,8 +158,12 @@ if __name__ == "__main__":
     parser.add_argument("--exe", type=Path, default=ROOT / "target/windows/x86_64-pc-windows-gnu/release/starship-journal.exe")
     parser.add_argument("--qmake", default=os.environ.get("QMAKE", "qmake6"))
     parser.add_argument("--output", type=Path, default=ROOT / "dist")
+    parser.add_argument("--prepare-build-tools", action="store_true", help="Prepare and verify the MSYS2 Qt host tools before Cargo builds")
     args = parser.parse_args()
     try:
-        print(package(args.exe.resolve(), args.qmake, args.output.resolve()))
+        if args.prepare_build_tools:
+            prepare_build_tools(args.qmake)
+        else:
+            print(package(args.exe.resolve(), args.qmake, args.output.resolve()))
     except (RuntimeError, OSError, subprocess.CalledProcessError) as error:
         parser.exit(1, f"Windows packaging failed: {error}\n")
