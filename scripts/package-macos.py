@@ -86,8 +86,15 @@ def main():
     # QtSvg is discovered even though the app only loads it through plugins.
     svg_helper = APP / 'Contents/MacOS/qt-svg-deployment'
     shutil.copy2(renderer, svg_helper)
+    # macdeployqt deliberately excludes the offscreen platform. Bundle it
+    # explicitly for reproducible packaged UI checks without WindowServer.
+    qt_plugins = Path(subprocess.check_output(
+        [str(brew / 'bin/qmake'), '-query', 'QT_INSTALL_PLUGINS'], text=True).strip())
+    offscreen = APP / 'Contents/PlugIns/platforms/libqoffscreen.dylib'
+    offscreen.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(qt_plugins / 'platforms/libqoffscreen.dylib', offscreen)
     run(brew / 'bin/macdeployqt', APP, '-no-codesign', f'-qmldir={scan}',
-        f'-executable={svg_helper}',
+        f'-executable={svg_helper}', f'-executable={offscreen}',
         f'-qmlimport={SDK / "qml"}', f'-libpath={SDK / "lib"}',
         f'-libpath={brew / "lib"}', '-verbose=1')
     svg_helper.unlink()
