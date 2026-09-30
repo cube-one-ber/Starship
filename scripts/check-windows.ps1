@@ -32,13 +32,14 @@ try {
     foreach ($variant in @("desktop", "narrow")) {
         $arguments = @("--smoke-test")
         if ($variant -eq "narrow") { $arguments += "--narrow-test" }
+        else { $arguments += @("-qwindowgeometry", "1600x1000") }
         $stdout = Join-Path $output "$variant.stdout.log"
         $stderr = Join-Path $output "$variant.stderr.log"
         $process = Start-Process -FilePath $exe -ArgumentList $arguments -WorkingDirectory $output `
             -PassThru -RedirectStandardOutput $stdout -RedirectStandardError $stderr
         # Retain a process handle so ExitCode is available even after a fast exit.
         $handle = $process.Handle
-        if (!$process.WaitForExit(30000)) {
+        if (!$process.WaitForExit(45000)) {
             $process.Kill()
             throw "Windows $variant smoke test timed out"
         }

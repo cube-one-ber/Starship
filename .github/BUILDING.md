@@ -12,6 +12,8 @@ Download packages from [Releases](https://github.com/cube-one-ber/Starship/relea
 
 Qt, Kirigami, icons, and JPEG XL runtime dependencies are bundled. Each release includes `SHA256SUMS.txt` for every download. Windows runs `starship-journal.exe`; Linux's portable archive runs `AppRun`; macOS's DMG installs by dragging the app to Applications. The macOS development builds have an ad-hoc signature and are not Apple-notarized.
 
+Packaged UI checks use a 1600×1000 desktop window and a 420×880 narrow window. Fixed dimensions exercise the same layouts despite different platform font metrics.
+
 Linux builds in a Debian 13 container. `scripts/build-linux.sh` and `scripts/package-linux.py` build all four formats, extract each package, and test both layouts. AppImage tests use extraction so they do not require FUSE in CI. The DEB and RPM install the bundled runtime under `/opt/starship-journal` with a desktop entry and command launcher.
 
 macOS builds on an Apple Silicon runner with Homebrew Qt and libjxl, plus pinned official KDE Frameworks 6.30.0 sources. `scripts/build-macos.sh` builds those KDE dependencies; `scripts/package-macos.py` uses official `macdeployqt`, signs the bundled code, creates ZIP/DMG, and tests both the extracted ZIP and the mounted DMG.
