@@ -72,7 +72,11 @@ def main():
                   'styles', 'kf6/kirigami/platform', 'kiconthemes6/iconengines'):
         if (qt_plugins / group).is_dir():
             shutil.copytree(qt_plugins / group, APP / 'usr/plugins' / group, symlinks=False)
-    shutil.copytree('/usr/share/icons/breeze', APP / 'usr/share/icons/breeze', symlinks=False)
+    # Debian's theme includes aliases for generated icon sizes it does not ship.
+    # Retain real icons and valid aliases, while omitting only dangling symlinks.
+    shutil.copytree('/usr/share/icons/breeze', APP / 'usr/share/icons/breeze', symlinks=False,
+                    ignore=lambda source, names: [name for name in names
+                        if (Path(source) / name).is_symlink() and not (Path(source) / name).exists()])
     copy(ROOT / 'native/assets/icon.svg', APP / 'org.starship.journal.svg')
     copy(ROOT / 'native/assets/icon.svg', APP / 'usr/share/icons/hicolor/scalable/apps/org.starship.journal.svg')
     copy(ROOT / 'native/linux/org.starship.journal.desktop', APP / 'org.starship.journal.desktop')

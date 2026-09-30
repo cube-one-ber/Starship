@@ -58,11 +58,39 @@ def main():
         if (source / 'LICENSES').is_dir():
             shutil.copytree(source / 'LICENSES', licenses / source.name)
     brew = Path(subprocess.check_output(['brew', '--prefix'], text=True).strip())
+    cellar = Path(subprocess.check_output(['brew', '--cellar'], text=True).strip())
+    for formula in cellar.iterdir():
+        for installed in formula.iterdir():
+            if not installed.is_dir():
+                continue
+            for notice in installed.iterdir():
+                if notice.name.upper().startswith(('LICENSE', 'COPYING', 'COPYRIGHT')):
+                    destination = licenses / 'homebrew' / formula.name / installed.name / notice.name
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    if notice.is_dir():
+                        shutil.copytree(notice, destination, dirs_exist_ok=True)
+                    else:
+                        shutil.copy2(notice, destination)
     (resources / 'runtime-packages.txt').write_text(subprocess.check_output(['brew', 'list', '--versions'], text=True) + '\nKDE Frameworks 6.30.0\n')
     (resources / 'README.txt').write_text('Starship Journal — macOS 14+ Apple Silicon\nQt, KDE Kirigami, and JPEG XL are bundled.\nThis development app has an ad-hoc signature; it is not Apple-notarized.\nDependency sources: https://download.kde.org/stable/frameworks/6.30/ and https://github.com/Homebrew/homebrew-core\nPhoto credits: photo-credits.json.\n')
     run(brew / 'bin/macdeployqt', APP, '-always-overwrite', f'-qmldir={scan}',
         f'-qmlimport={SDK / "qml"}', f'-libpath={SDK / "lib"}', '-verbose=2')
     (resources / 'qt.conf').write_text('[Paths]\nPlugins=PlugIns\nQmlImports=Resources/qml\n')
+    # Clearing PATH does not hide absolute Mach-O dependencies; reject SDK paths too.
+    visited = set()
+    for binary in APP.rglob('*'):
+        if not binary.is_file() or binary.resolve() in visited:
+            continue
+        visited.add(binary.resolve())
+        with binary.open('rb') as file:
+            magic = file.read(4)
+        if magic not in (b'\xcf\xfa\xed\xfe', b'\xfe\xed\xfa\xcf', b'\xca\xfe\xba\xbe', b'\xca\xfe\xba\xbf'):
+            continue
+        imports = subprocess.check_output(['otool', '-L', str(binary)], text=True)
+        for line in imports.splitlines()[1:]:
+            dependency = line.strip().split(' (')[0]
+            if dependency.startswith((str(brew), str(SDK), '/usr/local/')):
+                raise RuntimeError(f'Unbundled SDK dependency in {binary}: {dependency}')
     # Sign nested code after deployment rewrites its library references.
     run('codesign', '--force', '--deep', '--sign', '-', APP)
     run('codesign', '--verify', '--deep', '--strict', APP)
