@@ -1,4 +1,5 @@
 mingw-w64-ucrt-x86_64-gcc
+mingw-w64-ucrt-x86_64-libgomp
 mingw-w64-ucrt-x86_64-rust
 mingw-w64-ucrt-x86_64-pkgconf
 mingw-w64-ucrt-x86_64-python
