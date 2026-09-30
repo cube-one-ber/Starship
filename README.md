@@ -27,7 +27,7 @@ Kirigami provides the navigation, cards, dialogs and adaptive layouts. Rust hand
 The Windows build targets **Windows 10/11 x64** and uses [MSYS2 UCRT64](https://www.msys2.org/). Install MSYS2, open its **UCRT64** terminal, run `pacman -Syu`, and follow any instructions to restart the terminal and finish updating. Then, from this project directory:
 
 ```sh
-mapfile -t packages < native/windows/packages.txt
+mapfile -t packages < <(tr -d '\r' < native/windows/packages.txt)
 pacman -S --needed --noconfirm "${packages[@]}"
 bash scripts/build-windows.sh
 ```

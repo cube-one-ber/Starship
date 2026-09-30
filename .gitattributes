@@ -1,0 +1,7 @@
+# Shell scripts and package lists must remain usable in MSYS2 on Windows.
+* text=auto eol=lf
+
+*.jpg binary
+*.png binary
+*.jxl binary
+*.ico binary
