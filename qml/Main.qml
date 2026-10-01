@@ -87,8 +87,14 @@ Kirigami.ApplicationWindow {
     }
 
     globalDrawer: Kirigami.GlobalDrawer {
+        id: navigationDrawer
         objectName: "navigationDrawer"
-        preferredSize: 248
+        Component.onCompleted: {
+            // Debian's Kirigami 6.13 predates preferredSize. Keep the newer
+            // sizing API where available without preventing older SDKs loading.
+            if ("preferredSize" in navigationDrawer) navigationDrawer["preferredSize"] = 248
+            else navigationDrawer.width = 248
+        }
         title: ""
         titleIcon: ""
         background: Rectangle {
