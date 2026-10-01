@@ -1,16 +1,18 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls as Controls
+import QtQuick.Controls.Basic as Basic
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.starship.journal
 
-Controls.ItemDelegate {
+Basic.ItemDelegate {
     id: item
     property bool selected: false
     property string number: ""
     property bool motionEnabled: true
     implicitHeight: 46
+    hoverEnabled: true
     leftPadding: 16
     rightPadding: 14
     Accessible.role: Accessible.PageTab

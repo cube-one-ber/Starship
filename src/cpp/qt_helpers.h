@@ -3,6 +3,7 @@
 #include <QApplication>
 #include "jxl_provider.h"
 #include <QIcon>
+#include <QCursor>
 #include <QFontDatabase>
 #include <QDir>
 #include <QFileInfo>
@@ -17,6 +18,10 @@
 #include <QStringList>
 #include <memory>
 #include <vector>
+#ifdef Q_OS_WIN
+#include <qt_windows.h>
+#include <dwmapi.h>
+#endif
 namespace starship {
 inline bool bundledFontsLoaded = false;
 inline std::unique_ptr<QGuiApplication> newApplication(const QStringList &arguments) {
@@ -39,11 +44,29 @@ inline QString localBreezeImports() {
     return {};
 }
 inline bool supportsJxl() { return true; }
+inline void applyWindowAppearance(QWindow *window) {
+#ifdef Q_OS_WIN
+    // Keep the native title bar, system menu, snapping and resize affordances.
+    // Unsupported attributes on older Windows versions are simply ignored.
+    const auto handle = reinterpret_cast<HWND>(window->winId());
+    const BOOL dark = TRUE;
+    DwmSetWindowAttribute(handle, 20 /* DWMWA_USE_IMMERSIVE_DARK_MODE */, &dark, sizeof(dark));
+    const COLORREF caption = RGB(10, 16, 24);
+    const COLORREF text = RGB(243, 239, 231);
+    DwmSetWindowAttribute(handle, 35 /* DWMWA_CAPTION_COLOR */, &caption, sizeof(caption));
+    DwmSetWindowAttribute(handle, 36 /* DWMWA_TEXT_COLOR */, &text, sizeof(text));
+#else
+    Q_UNUSED(window);
+#endif
+}
 inline void installImageProvider(QQmlApplicationEngine &engine) {
     const auto packagedImports = QDir(QCoreApplication::applicationDirPath()).filePath("qml");
     if (QDir(packagedImports).exists()) engine.addImportPath(packagedImports);
     if (const auto imports = localBreezeImports(); !imports.isEmpty()) engine.addImportPath(imports);
     engine.addImageProvider("jxl", new JxlProvider);
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &engine, [](QObject *object, const QUrl &) {
+        if (auto *window = qobject_cast<QWindow *>(object)) applyWindowAppearance(window);
+    });
 }
 inline void exitApplication(int code) { QCoreApplication::exit(code); }
 inline void configureApplication() {
@@ -62,7 +85,13 @@ inline void configureApplication() {
     iconPaths.prepend(appDirectory.filePath("icons"));
     if (!iconPaths.contains(":/icons")) iconPaths.prepend(":/icons");
     QIcon::setThemeSearchPaths(iconPaths);
-    QIcon::setThemeName("breeze");
+    // A small SVG theme avoids malformed paths in SDK-provided Breeze icons.
+    // Keep Breeze as the fallback for Kirigami's other built-in actions.
+#ifdef Q_OS_WIN
+    QIcon::setThemeName("starship");
+#else
+    QIcon::setThemeName(QCoreApplication::arguments().contains("--bundled-icons") ? "starship" : "breeze");
+#endif
     QIcon::setFallbackThemeName("breeze");
     QGuiApplication::setWindowIcon(QIcon(":/icon.svg"));
     bundledFontsLoaded = true;
@@ -90,6 +119,9 @@ inline void configureApplication() {
     flightPalette.setColor(QPalette::Disabled, QPalette::Text, QColor("#91a0b4"));
     flightPalette.setColor(QPalette::Disabled, QPalette::ButtonText, QColor("#91a0b4"));
     QApplication::setPalette(flightPalette);
+    // Offscreen platforms start their virtual pointer at the drawer handle.
+    // Move it away so unattended previews do not contain hover tooltips.
+    if (QCoreApplication::arguments().contains("--smoke-test")) QCursor::setPos(10000, 10000);
     if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
 #ifdef Q_OS_WIN
         // KDE's Windows guidance: use Breeze widgets through the desktop QML style.

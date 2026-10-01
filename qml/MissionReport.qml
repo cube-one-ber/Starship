@@ -68,7 +68,7 @@ ColumnLayout {
         }
         Repeater {
             model: report.flight.analysis
-            delegate: Controls.Control {
+            delegate: JournalPanel {
                 id: analysisEntry
                 objectName: "independentAnalysisEntry"
                 required property var modelData
@@ -104,7 +104,7 @@ ColumnLayout {
                     Flow {
                         Layout.fillWidth: true
                         spacing: 8
-                        Controls.ToolButton {
+                        JournalButton { flat: true;
                             font.family: SpaceStyle.sans
                             action: Kirigami.Action {
                                 text: "Open analysis"
@@ -112,7 +112,7 @@ ColumnLayout {
                                 onTriggered: Qt.openUrlExternally(analysisEntry.modelData.source)
                             }
                         }
-                        Controls.ToolButton {
+                        JournalButton { flat: true;
                             visible: analysisEntry.modelData.context !== null
                             font.family: SpaceStyle.sans
                             action: Kirigami.Action {
@@ -146,7 +146,7 @@ ColumnLayout {
         spacing: 0
         Repeater {
             model: report.flight.timeline
-            delegate: Controls.Control {
+            delegate: JournalPanel {
                 id: eventRow
                 required property var modelData
                 required property int index
@@ -184,7 +184,7 @@ ColumnLayout {
     SectionLabel { id: recoveryHeading; Layout.fillWidth: true; visible: report.flight.landings.length > 0; text: "RECOVERY GEOGRAPHY" }
     Repeater {
         model: report.flight.landings
-        delegate: Controls.Control {
+        delegate: JournalPanel {
             id: landingPanel
             objectName: "landingEstimate"
             required property var modelData
@@ -223,7 +223,7 @@ ColumnLayout {
                 Flow {
                     Layout.fillWidth: true
                     spacing: 8
-                    Controls.ToolButton {
+                    JournalButton { flat: true;
                         font.family: SpaceStyle.sans
                         action: Kirigami.Action {
                             text: "View on map"
@@ -234,7 +234,7 @@ ColumnLayout {
                             }
                         }
                     }
-                    Controls.ToolButton {
+                    JournalButton { flat: true;
                         font.family: SpaceStyle.sans
                         action: Kirigami.Action {
                             text: "Original analysis"

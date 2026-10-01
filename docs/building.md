@@ -14,6 +14,8 @@ Qt, Kirigami, icons, and JPEG XL runtime dependencies are bundled. Each release 
 
 Packaged UI checks use a 1600×1000 desktop window and a 420×880 narrow window. Fixed dimensions exercise the same layouts despite different platform font metrics.
 
+Windows checks run both layouts at 100% and 150% display scaling, including selector popups and panel padding. Their logs must be free of malformed SVG paths, pages created outside the graphics scene, and binding loops. Application controls use Qt's Basic templates for predictable custom geometry while the packaged KDE desktop style still supplies Kirigami's standard controls. The embedded Starship icon theme falls back to bundled Breeze icons for other framework actions.
+
 Linux builds in a Debian 13 container. `scripts/build/build-linux.sh` and `scripts/package/package-linux.py` build all four formats, extract each package, and test both layouts. AppImage tests use extraction so they do not require FUSE in CI. The DEB and RPM install the bundled runtime under `/opt/starship-journal` with a desktop entry and command launcher.
 
 macOS builds on an Apple Silicon runner with Homebrew Qt and libjxl, plus pinned official KDE Frameworks 6.30.0 sources. `scripts/build/build-macos.sh` builds those KDE dependencies; `scripts/package/package-macos.py` uses official `macdeployqt`, signs the bundled code, creates ZIP/DMG, and tests both the extracted ZIP and the mounted DMG.

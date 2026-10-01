@@ -58,8 +58,14 @@ Kirigami.ApplicationWindow {
     Component.onCompleted: {
         flightArchive = flights
         if (narrowTest) { width = 420; height = 880 }
+        pushPage(archivePage)
         flightBackend.tick()
         if (!smokeTest) flightBackend.refresh()
+    }
+    function pushPage(component, properties = {}) {
+        const page = component.createObject(pageStack, properties)
+        if (!page) throw new Error("Could not create journal page")
+        return pageStack.push(page)
     }
     function navigate(component, name) {
         if (name === "archive" && section === "archive") {
@@ -68,21 +74,29 @@ Kirigami.ApplicationWindow {
         } else {
             section = name
             pageStack.clear()
-            pageStack.push(component)
+            pushPage(component)
         }
         if (globalDrawer.modal) globalDrawer.close()
     }
     function showArchive() { navigate(archivePage, "archive") }
-    function openFlight(flight) { pageStack.push(missionPage, { flight: flight }) }
+    function openFlight(flight) { pushPage(missionPage, { flight: flight }) }
+    Connections {
+        target: window.pageStack
+        // Pages created by this window are disposable once they leave the stack.
+        function onPageRemoved(page) { page.destroy() }
+    }
 
     globalDrawer: Kirigami.GlobalDrawer {
+        objectName: "navigationDrawer"
+        preferredSize: 248
         title: ""
         titleIcon: ""
         background: Rectangle {
             gradient: Gradient { GradientStop { position: 0; color: "#111b26" } GradientStop { position: 0.55; color: SpaceStyle.voidColor } }
             Rectangle { anchors.right: parent.right; height: parent.height; width: 1; color: SpaceStyle.line }
         }
-        header: Controls.Control {
+        header: JournalPanel {
+            objectName: "navigationBrand"
             Layout.minimumWidth: 216
             padding: 24
             topPadding: 36
@@ -113,7 +127,7 @@ Kirigami.ApplicationWindow {
         onModalChanged: if (modal) close()
         collapsed: false
         isMenu: false
-        footer: Controls.Control {
+        footer: JournalPanel {
             padding: 24
             contentItem: ColumnLayout {
                 spacing: Kirigami.Units.largeSpacing
@@ -132,8 +146,7 @@ Kirigami.ApplicationWindow {
             }
         }
     }
-    pageStack.initialPage: archivePage
-
+    // Create under the visual stack rather than Kirigami's non-visual page factory.
     Component { id: archivePage; ArchivePage { root: window; backend: flightBackend } }
 
     Component { id: missionPage; MissionPage { root: window; backend: flightBackend } }

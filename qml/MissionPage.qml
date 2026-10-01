@@ -49,7 +49,7 @@ Kirigami.ScrollablePage {
     title: "Flight " + flight.id
     padding: root.narrowTest || root.width < 810 ? 20 : 32
     actions: [Kirigami.Action { text: "Official report"; icon.name: "internet-services"; onTriggered: Qt.openUrlExternally(mission.flight.source) }]
-    header: Controls.Control {
+    header: JournalPanel {
         leftPadding: mission.padding
         rightPadding: mission.padding
         topPadding: 6
@@ -59,17 +59,17 @@ Kirigami.ScrollablePage {
             spacing: 2
             RowLayout {
                 Layout.fillWidth: true
-                Controls.Button { objectName: "returnToArchive"; text: "Flight archive"; icon.name: "view-grid"; font.family: SpaceStyle.sans; onClicked: root.showArchive() }
+                JournalButton { objectName: "returnToArchive"; text: "Flight archive"; icon.name: "view-grid"; font.family: SpaceStyle.sans; onClicked: root.showArchive() }
                 Item { Layout.fillWidth: true }
-                Controls.ToolButton { text: "Flight " + (mission.flight.id - 1); icon.name: "go-previous"; font.family: SpaceStyle.sans; enabled: mission.flight.id > 1; Accessible.name: "Previous flight, Flight " + (mission.flight.id - 1); onClicked: mission.changeFlight(mission.flight.id - 1) }
-                Controls.ToolButton { text: "Flight " + (mission.flight.id + 1); icon.name: "go-next"; font.family: SpaceStyle.sans; visible: mission.flight.id < root.latestFlightId; Accessible.name: "Next flight, Flight " + (mission.flight.id + 1); onClicked: mission.changeFlight(mission.flight.id + 1) }
+                JournalButton { flat: true; text: "Flight " + (mission.flight.id - 1); icon.name: "go-previous"; display: mission.availableWidth < 440 ? Controls.AbstractButton.IconOnly : Controls.AbstractButton.TextBesideIcon; enabled: mission.flight.id > 1; Accessible.name: "Previous flight"; Controls.ToolTip.text: "Previous · Flight " + (mission.flight.id - 1); Controls.ToolTip.visible: hovered && enabled; Controls.ToolTip.delay: 700; onClicked: mission.changeFlight(mission.flight.id - 1) }
+                JournalButton { flat: true; text: "Flight " + (mission.flight.id + 1); icon.name: "go-next"; display: mission.availableWidth < 440 ? Controls.AbstractButton.IconOnly : Controls.AbstractButton.TextBesideIcon; visible: mission.flight.id < root.latestFlightId; Accessible.name: "Next flight"; Controls.ToolTip.text: "Next · Flight " + (mission.flight.id + 1); Controls.ToolTip.visible: hovered && enabled; Controls.ToolTip.delay: 700; onClicked: mission.changeFlight(mission.flight.id + 1) }
             }
             Flow {
                 Layout.fillWidth: true
                 spacing: 4
                 Repeater {
                     model: [{ label: "Overview", section: "overview" }, { label: "Flight log", section: "log" }, { label: "Analysis", section: "analysis" }, { label: "Timeline", section: "timeline" }, { label: "Recovery", section: "recovery" }]
-                    delegate: Controls.ToolButton {
+                    delegate: JournalButton { flat: true;
                         required property var modelData
                         objectName: "missionJump_" + modelData.section
                         visible: modelData.section !== "recovery" || mission.flight.landings.length > 0
@@ -77,7 +77,9 @@ Kirigami.ScrollablePage {
                         checkable: true
                         checked: mission.activeSection === modelData.section
                         font.family: SpaceStyle.sans
-                        font.pointSize: 10
+                        font.pointSize: 9.5
+                        leftPadding: mission.availableWidth < 440 ? 6 : 12
+                        rightPadding: mission.availableWidth < 440 ? 6 : 12
                         onClicked: mission.jumpTo(modelData.section)
                     }
                 }
@@ -91,7 +93,7 @@ Kirigami.ScrollablePage {
         spacing: 20
         Photo {
             Layout.fillWidth: true
-            Layout.preferredHeight: Math.min(mission.width / 3, 200)
+            Layout.preferredHeight: Math.max(160, Math.min(mission.availableWidth / 3, 240))
             cornerRadius: SpaceStyle.radius
             cornerColor: SpaceStyle.voidColor
             path: mission.flight.photo.path
@@ -122,12 +124,13 @@ Kirigami.ScrollablePage {
             Kirigami.Heading { text: mission.flight.title; level: 1; font.family: SpaceStyle.serif; font.pointSize: (mission.width < 600 ? 34 : 44) * 0.75; font.letterSpacing: -0.7; color: SpaceStyle.text; wrapMode: Text.WordWrap; Layout.fillWidth: true }
             Controls.Label { font.family: SpaceStyle.sans; text: mission.flight.summary; wrapMode: Text.WordWrap; Layout.fillWidth: true; color: SpaceStyle.muted; font.pointSize: 12; lineHeight: 1.4 }
             DebriefSummary { Layout.fillWidth: true; flight: mission.flight }
-            Controls.Control {
+            JournalPanel {
+                objectName: "missionFacts"
                 Layout.fillWidth: true
                 padding: 22
                 background: Rectangle { radius: SpaceStyle.radius; color: SpaceStyle.surface; border.color: SpaceStyle.line }
                 contentItem: GridLayout {
-                    columns: mission.width < 650 ? 2 : 3
+                    columns: missionOverview.width < 480 ? 1 : missionOverview.width < 720 ? 2 : 3
                     columnSpacing: 24
                     rowSpacing: 24
                     MissionStat { Layout.fillWidth: true; label: "LIFTOFF / UTC"; value: new Date(mission.flight.date + "T12:00:00Z").toLocaleDateString(Qt.locale(), "dd MMM yyyy") + "\n" + mission.flight.launch_time }
@@ -149,11 +152,14 @@ Kirigami.ScrollablePage {
                 ]
             }
             Kirigami.Separator { Layout.fillWidth: true }
-            RowLayout {
+            GridLayout {
+                objectName: "missionPagination"
                 Layout.fillWidth: true
-                Controls.Button { font.family: SpaceStyle.sans; text: "Previous · Flight " + (mission.flight.id - 1); icon.name: "go-previous"; enabled: mission.flight.id > 1; onClicked: mission.changeFlight(mission.flight.id - 1) }
-                Item { Layout.fillWidth: true }
-                Controls.Button { font.family: SpaceStyle.sans; text: "Next · Flight " + (mission.flight.id + 1); icon.name: "go-next"; enabled: mission.flight.id < root.latestFlightId; onClicked: mission.changeFlight(mission.flight.id + 1) }
+                columns: missionOverview.width < 480 ? 1 : 2
+                columnSpacing: 16
+                rowSpacing: 12
+                JournalButton { Layout.fillWidth: true; text: "Previous · Flight " + (mission.flight.id - 1); icon.name: "go-previous"; visible: mission.flight.id > 1; onClicked: mission.changeFlight(mission.flight.id - 1) }
+                JournalButton { Layout.fillWidth: true; text: "Next · Flight " + (mission.flight.id + 1); icon.name: "go-next"; visible: mission.flight.id < root.latestFlightId; onClicked: mission.changeFlight(mission.flight.id + 1) }
             }
         }
     }

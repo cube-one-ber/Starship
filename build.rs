@@ -41,6 +41,10 @@ fn main() {
             QmlModule::new("org.starship.journal")
                 .qml_file("qml/Main.qml")
                 .qml_file("qml/ArchivePage.qml")
+                .qml_file("qml/JournalPanel.qml")
+                .qml_file("qml/JournalButton.qml")
+                .qml_file("qml/JournalComboBox.qml")
+                .qml_file("qml/JournalTabButton.qml")
                 .qml_file("qml/ComparisonView.qml")
                 .qml_file("qml/MilestoneView.qml")
                 .qml_file("qml/DebriefSummary.qml")
@@ -78,7 +82,7 @@ fn main() {
     if windows {
         // MinGW scans import archives in order. These libraries are used by our
         // C++ helpers, so resolve them again after CXX-Qt's generated archive.
-        for library in ["Qt6Quick", "Qt6Widgets", "jxl"] {
+        for library in ["Qt6Quick", "Qt6Widgets", "jxl", "dwmapi"] {
             println!("cargo:rustc-link-arg-bin=starship-journal=-l{library}");
         }
     }

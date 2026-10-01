@@ -26,11 +26,26 @@ ColumnLayout {
     Component.onCompleted: Qt.callLater(resetSelections)
     Kirigami.Heading { Layout.fillWidth: true; text: "Across two flights."; font.family: SpaceStyle.serif; font.pointSize: 24; wrapMode: Text.WordWrap }
     Controls.Label { Layout.fillWidth: true; text: "Choose flights from the current search and year filter."; color: SpaceStyle.muted; wrapMode: Text.WordWrap }
-    RowLayout {
+    GridLayout {
+        objectName: "comparisonSelectors"
         Layout.fillWidth: true
-        spacing: 12
-        Controls.ComboBox { id: leftChoice; Layout.fillWidth: true; Layout.minimumWidth: 0; model: comparison.choices; Accessible.name: "First flight to compare" }
-        Controls.ComboBox { id: rightChoice; Layout.fillWidth: true; Layout.minimumWidth: 0; model: comparison.choices; Accessible.name: "Second flight to compare" }
+        columns: comparison.width < 540 ? 1 : 2
+        columnSpacing: 16
+        rowSpacing: 12
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            spacing: 8
+            SectionLabel { text: "FIRST FLIGHT"; color: SpaceStyle.dim }
+            JournalComboBox { id: leftChoice; Layout.fillWidth: true; Layout.minimumWidth: 0; model: comparison.choices; Accessible.name: "First flight to compare" }
+        }
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            spacing: 8
+            SectionLabel { text: "SECOND FLIGHT"; color: SpaceStyle.dim }
+            JournalComboBox { id: rightChoice; Layout.fillWidth: true; Layout.minimumWidth: 0; model: comparison.choices; Accessible.name: "Second flight to compare" }
+        }
     }
     Repeater {
         model: [
@@ -41,7 +56,7 @@ ColumnLayout {
             { label: "SHIP RESULT", field: "ship" },
             { label: "BOOSTER RESULT", field: "booster" }
         ]
-        delegate: Controls.Control {
+        delegate: JournalPanel {
             id: fact
             objectName: "comparisonFact"
             required property var modelData
@@ -60,6 +75,7 @@ ColumnLayout {
                             required property var modelData
                             Layout.fillWidth: true
                             Layout.preferredWidth: 1
+                            Layout.alignment: Qt.AlignTop
                             text: !modelData ? "—" : fact.modelData.field === "generation"
                                 ? modelData.generation + " · " + modelData.ship_id + " / " + modelData.booster_id
                                 : modelData[fact.modelData.field]
@@ -78,7 +94,7 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true
         spacing: 12
-        Controls.Button { Layout.fillWidth: true; text: comparison.leftFlight ? "Read Flight " + comparison.leftFlight.id : "Read debrief"; enabled: comparison.leftFlight !== null; onClicked: comparison.openRequested(comparison.leftFlight) }
-        Controls.Button { Layout.fillWidth: true; text: comparison.rightFlight ? "Read Flight " + comparison.rightFlight.id : "Read debrief"; enabled: comparison.rightFlight !== null; onClicked: comparison.openRequested(comparison.rightFlight) }
+        JournalButton { Layout.fillWidth: true; text: comparison.leftFlight ? "Read Flight " + comparison.leftFlight.id : "Read debrief"; enabled: comparison.leftFlight !== null; onClicked: comparison.openRequested(comparison.leftFlight) }
+        JournalButton { Layout.fillWidth: true; text: comparison.rightFlight ? "Read Flight " + comparison.rightFlight.id : "Read debrief"; enabled: comparison.rightFlight !== null; onClicked: comparison.openRequested(comparison.rightFlight) }
     }
 }

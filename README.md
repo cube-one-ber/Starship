@@ -16,6 +16,7 @@ A native desktop archive of Starship's integrated flights, built with **Rust, Qt
 - **Landing locations:** sourced impact estimates and independent geolocations, with precision labels, maps, and links to the original analysis.
 - **Next launch:** a refreshed launch window, expandable details in narrow archive windows, and a countdown when a precise, confirmed liftoff time is available.
 - **Adaptive interface:** a compact header and three-column archive that becomes a single column in narrow windows, readable metadata, preserved filters and scroll position when returning from debriefs, keyboard navigation, and a persistent **Reduce motion** setting.
+- **Windows presentation:** a dark native title bar, consistent navy-and-gold controls, bundled navigation icons, and panels whose spacing remains stable across native styles. Comparison selectors and mission facts adapt to narrow windows.
 - **Bundled archive:** flight data, photos, fonts, and the application color scheme ship with the executable; schedule refreshes use the network.
 
 ### Flight archive
@@ -180,7 +181,7 @@ QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software ./target/debug/starship-jour
 QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software ./target/debug/starship-journal --smoke-test --reduce-motion
 ```
 
-Smoke checks cover filtering, empty results, keyboard focus, interrupted mission transitions, navigation, reduced motion, and all 14 mission images. Screenshots are written to the platform temporary directory; set `STARSHIP_TEST_OUTPUT_DIR` to choose a destination and `QT_FORCE_STDERR_LOGGING=1` to print Qt diagnostics. Add `--motion-preview` to capture 140 numbered frames for a GIF or video.
+Smoke checks cover filtering, empty results, keyboard focus, interrupted mission transitions, navigation, reduced motion, panel padding, selector popups, and all 14 mission images. The native check script also exercises the Windows control style on Linux; add `--bundled-icons` to use the app's Windows icon theme. Screenshots are written to the platform temporary directory; set `STARSHIP_TEST_OUTPUT_DIR` to choose a destination and `QT_FORCE_STDERR_LOGGING=1` to print Qt diagnostics. Add `--motion-preview` to capture 140 numbered frames for a GIF or video.
 
 The optional live schedule test makes network requests:
 
@@ -193,5 +194,7 @@ To verify an extracted Windows package from PowerShell:
 ```powershell
 ./scripts/check/check-windows.ps1 -PackagePath 'C:/path/to/Starship-Journal-windows-x64'
 ```
+
+The Windows check captures desktop and narrow layouts at 100% and 150% display scaling, and rejects malformed icon paths, page creation warnings, and binding loops. Scaled screenshots are saved in a separate `dpi-150/` directory.
 
 [CI](.github/workflows/builds.yml) builds and checks portable packages on all three platforms before publishing commit prereleases. See [the build guide](docs/building.md) for the complete release process.

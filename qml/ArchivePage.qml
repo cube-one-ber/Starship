@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls as Controls
+import QtQuick.Controls.Basic as Basic
 import QtQuick.Layouts
 import QtCore as Core
 import org.kde.kirigami as Kirigami
@@ -77,7 +78,7 @@ Kirigami.ScrollablePage {
             RowLayout {
                 Layout.fillWidth: true
                 Kirigami.Heading { text: archive.availableWidth < 500 ? "Flight archive." : "The flight archive."; level: 1; font.family: SpaceStyle.serif; font.pointSize: archive.availableWidth < 500 ? 24 : 28.5; font.letterSpacing: -0.5; color: SpaceStyle.text; Layout.fillWidth: true; wrapMode: Text.WordWrap }
-                Controls.Control {
+                JournalPanel {
                     padding: 9
                     leftPadding: 12
                     rightPadding: 12
@@ -87,7 +88,8 @@ Kirigami.ScrollablePage {
             }
             Controls.Label { visible: archive.wideHeader; font.family: SpaceStyle.sans; text: "From the first liftoff to orbit. Every test moves the horizon."; color: SpaceStyle.muted; wrapMode: Text.WordWrap; Layout.fillWidth: true }
         }
-        Controls.Control {
+        JournalPanel {
+            objectName: "archiveFilters"
             Layout.fillWidth: true
             padding: 14
             background: Rectangle { radius: SpaceStyle.radius; color: SpaceStyle.surface; border.color: SpaceStyle.line }
@@ -102,12 +104,20 @@ Kirigami.ScrollablePage {
                         font.family: SpaceStyle.sans
                         id: searchField
                         Layout.fillWidth: true
-                        Layout.minimumHeight: 40
+                        Layout.minimumHeight: 42
+                        color: SpaceStyle.text
+                        placeholderTextColor: SpaceStyle.muted
+                        background: Rectangle {
+                            radius: 8
+                            color: SpaceStyle.voidColor
+                            border.color: searchField.activeFocus ? SpaceStyle.accent : SpaceStyle.line
+                            border.width: searchField.activeFocus ? 2 : 1
+                        }
                         placeholderText: archive.availableWidth < 500 ? "Search flights and milestones…" : "Search titles, milestones, or flight numbers…"
                         Accessible.name: "Search the flight archive"
                         onTextChanged: backend.filter(yearFilter.currentText, text)
                     }
-                    Controls.ComboBox {
+                    JournalComboBox {
                         font.family: SpaceStyle.sans
                         id: yearFilter
                         Layout.fillWidth: archive.availableWidth < 500
@@ -130,7 +140,7 @@ Kirigami.ScrollablePage {
                         elide: Text.ElideRight
                         Accessible.role: Accessible.StaticText
                     }
-                    Controls.ToolButton {
+                    JournalButton { flat: true;
                         objectName: "clearFiltersButton"
                         visible: archive.filtersActive
                         text: "Clear filters"
@@ -143,14 +153,19 @@ Kirigami.ScrollablePage {
                 }
             }
         }
-        Controls.TabBar {
+        Basic.TabBar {
+            id: views
             objectName: "archiveViews"
             Layout.fillWidth: true
+            Layout.maximumWidth: 480
+            padding: 4
+            spacing: 4
             currentIndex: archive.viewIndex
             onCurrentIndexChanged: archive.viewIndex = currentIndex
-            Controls.TabButton { text: "Flights" }
-            Controls.TabButton { text: "Compare" }
-            Controls.TabButton { text: "Milestones" }
+            background: Rectangle { radius: 10; color: SpaceStyle.surface; border.color: SpaceStyle.line }
+            JournalTabButton { text: "Flights"; width: (views.availableWidth - 2 * views.spacing) / 3 }
+            JournalTabButton { text: "Compare"; width: (views.availableWidth - 2 * views.spacing) / 3 }
+            JournalTabButton { text: "Milestones"; width: (views.availableWidth - 2 * views.spacing) / 3 }
         }
         ComparisonView {
             Layout.fillWidth: true

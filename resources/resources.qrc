@@ -36,4 +36,24 @@
 <file alias="images/flight-4.jxl">images/flight-4.jxl</file>
 <file alias="images/flight-7.jxl">images/flight-7.jxl</file>
 <file alias="icon.svg">icon.svg</file>
+<file alias="icons/starship/index.theme">icons/starship/index.theme</file>
+<file alias="icons/starship/scalable/actions/application-menu.svg">icons/starship/scalable/actions/application-menu.svg</file>
+<file alias="icons/starship/scalable/actions/camera-photo.svg">icons/starship/scalable/actions/camera-photo.svg</file>
+<file alias="icons/starship/scalable/actions/chronometer.svg">icons/starship/scalable/actions/chronometer.svg</file>
+<file alias="icons/starship/scalable/actions/dialog-ok-apply.svg">icons/starship/scalable/actions/dialog-ok-apply.svg</file>
+<file alias="icons/starship/scalable/actions/document-open.svg">icons/starship/scalable/actions/document-open.svg</file>
+<file alias="icons/starship/scalable/actions/edit-clear.svg">icons/starship/scalable/actions/edit-clear.svg</file>
+<file alias="icons/starship/scalable/actions/edit-find.svg">icons/starship/scalable/actions/edit-find.svg</file>
+<file alias="icons/starship/scalable/actions/go-down.svg">icons/starship/scalable/actions/go-down.svg</file>
+<file alias="icons/starship/scalable/actions/go-next.svg">icons/starship/scalable/actions/go-next.svg</file>
+<file alias="icons/starship/scalable/actions/go-previous.svg">icons/starship/scalable/actions/go-previous.svg</file>
+<file alias="icons/starship/scalable/actions/go-up.svg">icons/starship/scalable/actions/go-up.svg</file>
+<file alias="icons/starship/scalable/actions/help-about.svg">icons/starship/scalable/actions/help-about.svg</file>
+<file alias="icons/starship/scalable/actions/internet-services.svg">icons/starship/scalable/actions/internet-services.svg</file>
+<file alias="icons/starship/scalable/actions/mark-location.svg">icons/starship/scalable/actions/mark-location.svg</file>
+<file alias="icons/starship/scalable/actions/view-grid.svg">icons/starship/scalable/actions/view-grid.svg</file>
+<file alias="icons/starship/scalable/actions/view-refresh.svg">icons/starship/scalable/actions/view-refresh.svg</file>
+<file alias="icons/starship/scalable/actions/search.svg">icons/starship/scalable/actions/search.svg</file>
+<file alias="icons/starship/scalable/actions/edit-clear-locationbar-ltr.svg">icons/starship/scalable/actions/edit-clear-locationbar-ltr.svg</file>
+<file alias="icons/starship/scalable/actions/edit-clear-locationbar-rtl.svg">icons/starship/scalable/actions/edit-clear-locationbar-rtl.svg</file>
 </qresource></RCC>

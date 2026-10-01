@@ -9,6 +9,8 @@ ColumnLayout {
     required property string label
     required property string value
     property color valueColor: SpaceStyle.text
+    Layout.alignment: Qt.AlignTop
+    Layout.preferredWidth: 1
     spacing: 7
     SectionLabel { Layout.fillWidth: true; text: stat.label; color: SpaceStyle.dim }
     Controls.Label { Layout.fillWidth: true; text: stat.value; color: stat.valueColor; font.family: SpaceStyle.sans; font.pointSize: 11.25; font.weight: Font.Medium; wrapMode: Text.WordWrap }

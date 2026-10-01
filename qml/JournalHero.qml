@@ -95,7 +95,7 @@ Kirigami.AbstractCard {
             Item { implicitHeight: 4; visible: !hero.compact }
             RowLayout {
                 Layout.fillWidth: true
-                Controls.Button { font.family: SpaceStyle.sans;
+                JournalButton { font.family: SpaceStyle.sans;
                     id: explore
                     text: "Explore latest flight"
                     font.pointSize: 9.75

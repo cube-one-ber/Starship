@@ -17,7 +17,7 @@ GridLayout {
             { label: "WHAT WORKED", text: summary.flight.debrief.worked, color: SpaceStyle.positive },
             { label: "WHAT FELL SHORT", text: summary.flight.debrief.fell_short, color: SpaceStyle.accent }
         ]
-        delegate: Controls.Control {
+        delegate: JournalPanel {
             id: finding
             required property var modelData
             Layout.fillWidth: true

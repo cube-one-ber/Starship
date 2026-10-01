@@ -25,11 +25,11 @@ Kirigami.ScrollablePage {
             SectionLabel { text: "03 / THE PROGRAM"; color: SpaceStyle.dim }
             Kirigami.Heading { text: "A future beyond Earth."; level: 1; font.family: SpaceStyle.serif; font.pointSize: 31.5; color: SpaceStyle.text; Layout.fillWidth: true; wrapMode: Text.WordWrap }
             Controls.Label { font.family: SpaceStyle.sans; Layout.fillWidth: true; text: "SpaceX’s reusable transportation system in development, designed to carry people and cargo to Earth orbit, the Moon, Mars, and beyond. This independent archive follows each integrated flight test and the lessons learned along the way."; wrapMode: Text.WordWrap }
-            Controls.Button { font.family: SpaceStyle.sans; text: "Starship at SpaceX"; icon.name: "internet-services"; onClicked: Qt.openUrlExternally("https://www.spacex.com/vehicles/starship") }
+            JournalButton { font.family: SpaceStyle.sans; text: "Starship at SpaceX"; icon.name: "internet-services"; onClicked: Qt.openUrlExternally("https://www.spacex.com/vehicles/starship") }
             Kirigami.Separator { Layout.fillWidth: true }
             SectionLabel { text: "CREDITS / SOURCES / PHOTOGRAPHY" }
             Controls.Label { font.family: SpaceStyle.sans; Layout.fillWidth: true; text: "Flight archive: mission reports and researched flight histories, reviewed 30 September 2026.\nIndependent analysis and geolocation: The Space Engineer (@mcrs987); published precision is preserved.\nPhotography: Max Evans / NSF and SpaceX.\nLaunch schedule: NextSpaceflight.\n\nUnaffiliated with SpaceX or NASASpaceflight."; wrapMode: Text.WordWrap; color: SpaceStyle.muted }
-            Controls.Button { font.family: SpaceStyle.sans; text: "Max Evans’s photo galleries"; icon.name: "camera-photo"; onClicked: Qt.openUrlExternally("https://maxevans.smugmug.com/Rockets") }
+            JournalButton { font.family: SpaceStyle.sans; text: "Max Evans’s photo galleries"; icon.name: "camera-photo"; onClicked: Qt.openUrlExternally("https://maxevans.smugmug.com/Rockets") }
         }
     }
 }

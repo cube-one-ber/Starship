@@ -165,7 +165,7 @@ Kirigami.AbstractCard {
             Rectangle { Layout.fillWidth: true; implicitHeight: 1; color: SpaceStyle.line }
             RowLayout {
                 Layout.fillWidth: true
-                Controls.ToolButton {
+                JournalButton { flat: true;
                     font.family: SpaceStyle.sans
                     text: "Read debrief"
                     font.pointSize: 9.75
@@ -177,7 +177,7 @@ Kirigami.AbstractCard {
                     }
                 }
                 Item { Layout.fillWidth: true }
-                Controls.ToolButton { font.family: SpaceStyle.sans;
+                JournalButton { flat: true; font.family: SpaceStyle.sans;
                     text: "Photo credit"
                     icon.name: "camera-photo"
                     display: Controls.AbstractButton.IconOnly

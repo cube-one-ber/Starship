@@ -50,7 +50,7 @@ Kirigami.AbstractCard {
             Layout.fillWidth: true
             SectionLabel { Layout.fillWidth: true; text: "UP NEXT / FLIGHT " + String(panel.schedule.flight).padStart(3, "0"); font.pointSize: 9; font.letterSpacing: 0.6 }
             Controls.BusyIndicator { running: panel.busy; visible: running; Layout.preferredWidth: 22; Layout.preferredHeight: 22 }
-            Controls.ToolButton {
+            JournalButton { flat: true;
                 font.family: SpaceStyle.sans
                 text: "Refresh schedule"
                 icon.name: "view-refresh"
@@ -142,7 +142,7 @@ Kirigami.AbstractCard {
         Kirigami.InlineMessage { Layout.fillWidth: true; visible: panel.errorMessage.length > 0; text: panel.errorMessage; type: Kirigami.MessageType.Warning }
         RowLayout {
             Layout.fillWidth: true
-            Controls.ToolButton {
+            JournalButton { flat: true;
                 objectName: "launchDetailsToggle"
                 visible: panel.collapsible
                 text: panel.expanded ? "Hide details" : "Launch details"
@@ -153,7 +153,7 @@ Kirigami.AbstractCard {
                 onClicked: panel.expanded = !panel.expanded
             }
             Item { Layout.fillWidth: true; visible: panel.collapsible }
-            Controls.ToolButton {
+            JournalButton { flat: true;
                 visible: panel.detailsVisible
                 text: "Launch updates"
                 icon.name: "internet-services"

@@ -15,6 +15,16 @@ Item {
         if (item.children) for (let child of item.children) result = result.concat(descendants(child, name))
         return result
     }
+    function checkPanelSpacing(item) {
+        if (item.journalPanel === true && item.visible && item.width > 0 && item.contentItem) {
+            if (Math.abs(item.contentItem.x - item.leftPadding) > 1
+                || Math.abs(item.contentItem.y - item.topPadding) > 1
+                || item.contentItem.width > item.availableWidth + 1) {
+                throw new Error("Panel padding was overridden by the controls style: " + item.objectName)
+            }
+        }
+        if (item.children) for (const child of item.children) checkPanelSpacing(child)
+    }
     Timer {
         id: previewFrames
         property int frame: 0
@@ -39,11 +49,14 @@ Item {
             try {
                 // The page stack is dynamic; each phase exercises its actual controls.
                 const page = root.pageStack.currentItem
+                checkPanelSpacing(page)
                 if (phase === 0) {
                     if (!backend.appearance_ready()) throw new Error("Breeze style or KDE icons are missing")
                     if (!backend.capture(backend.test_output_path(root.narrowTest ? "starship-kirigami-narrow.png" : "starship-kirigami-desktop.png"))) throw new Error("Could not capture archive")
                     if (root.flights.length !== 14 || root.flightArchive.length !== 14 || page.presentedFlights.length !== 14) throw new Error("Archive must contain 14 flights")
                     if (!root.narrowTest && page.gridControl.columns !== 3) throw new Error("Desktop archive did not retain three columns")
+                    checkPanelSpacing(root.globalDrawer.contentItem)
+                    if (!root.globalDrawer.modal && root.globalDrawer.width < 240) throw new Error("Navigation drawer is too narrow")
                     const firstCard = descendants(page, "flightCard")[0]
                     if (firstCard.mapToItem(page.flickable.contentItem, 0, 0).y + 100 >= page.flickable.height) throw new Error("Initial viewport must show the first flight card")
                     const launch = descendants(page, "launchPanel")[0]
@@ -93,6 +106,9 @@ Item {
                     card.activated(card.flight)
                 } else if (phase === 5) {
                     if (page.flight.id !== 14) throw new Error("Card did not open the mission page")
+                    const facts = descendants(page, "missionFacts")[0]
+                    if (facts.padding !== 22 || facts.leftPadding !== 22) throw new Error("Mission facts lost their panel padding")
+                    if (root.narrowTest && facts.contentItem.columns !== 1) throw new Error("Narrow mission facts must have a readable single column")
                     const headings = descendants(page, "missionLogHeading")
                     if (headings.length !== page.flight.details.length || headings.some((heading, index) => heading.text !== page.flight.details[index].heading)) throw new Error("Mission flight log headings are missing")
                     if (page.flight.landings.length !== 2 || page.flight.landings[1].coordinates !== "25°29′57.46″N · 155°25′39.13″W") throw new Error("Flight 14 geolocations are missing")
@@ -188,6 +204,9 @@ Item {
                     if (comparison.rightFlight.id !== 7 || comparison.rightFlight.ship_outcome !== "lost") throw new Error("Comparison selection did not update vehicle outcomes")
                     const facts = descendants(comparison, "comparisonFact")
                     if (facts.length !== 6 || facts.some(fact => fact.width > page.availableWidth)) throw new Error("Comparison facts do not fit the page")
+                    const selectors = descendants(comparison, "comparisonSelectors")[0]
+                    if (selectors.columns !== (comparison.width < 540 ? 1 : 2)) throw new Error("Comparison selectors did not adapt to available width")
+                    if (root.narrowTest && (comparison.leftControl.contentItem.truncated || comparison.rightControl.contentItem.truncated)) throw new Error("Narrow comparison flight choices are clipped")
                     page.flickable.contentY = Math.max(0, comparison.mapToItem(page.flickable.contentItem, 0, 0).y - 16)
                     if (!backend.capture(backend.test_output_path(root.narrowTest ? "starship-kirigami-compare-narrow.png" : "starship-kirigami-compare.png"))) throw new Error("Could not capture comparison")
                     page.viewIndex = 2
@@ -215,7 +234,22 @@ Item {
                     if (page.activeSection !== "timeline" || !descendants(page, "missionJump_timeline")[0].checked) throw new Error("Mission shortcuts do not follow the active section")
                     page.flickable.contentY = 0
                     if (page.activeSection !== "overview") throw new Error("Scrolling did not reset the active section")
-                    console.log("SMOKE PASS: compact launch details, archive visibility, section navigation, preserved archive state, mission transitions, reduced motion, research content, 14 JPEG XL cards, comparison, chronological milestones, filter continuity, and debrief summaries")
+                    root.showArchive()
+                    const archive = root.pageStack.currentItem
+                    archive.clearFilters()
+                    archive.viewIndex = 1
+                    archive.flickable.contentY = 0
+                } else if (phase === 21) {
+                    const comparison = descendants(page, "flightComparison")[0]
+                    page.flickable.contentY = Math.max(0, comparison.mapToItem(page.flickable.contentItem, 0, 0).y - 16)
+                    comparison.leftControl.popup.open()
+                } else if (phase === 22) {
+                    const comparison = descendants(page, "flightComparison")[0]
+                    const popup = comparison.leftControl.popup
+                    if (!popup.visible || popup.contentItem.count !== 14 || popup.width > page.availableWidth) throw new Error("Flight selector popup does not fit or is missing options")
+                    if (!backend.capture(backend.test_output_path(root.narrowTest ? "starship-kirigami-selector-narrow.png" : "starship-kirigami-selector.png"))) throw new Error("Could not capture flight selector popup")
+                    popup.close()
+                    console.log("SMOKE PASS: panel padding, adaptive navigation and facts, selector popups, compact launch details, archive visibility, section navigation, preserved archive state, mission transitions, reduced motion, research content, 14 JPEG XL cards, comparison, chronological milestones, filter continuity, and debrief summaries")
                     backend.finish_test(true)
                     stop()
                 }
