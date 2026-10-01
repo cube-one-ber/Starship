@@ -28,8 +28,9 @@ ColumnLayout {
                 spacing: 12
                 SectionLabel { text: String(entry.index + 1).padStart(2, "0"); font.letterSpacing: 0 }
                 Kirigami.Heading {
+                    objectName: "missionLogHeading"
                     Layout.fillWidth: true
-                    text: entry.modelData.body.heading
+                    text: entry.modelData.heading
                     level: 3
                     font.family: SpaceStyle.serif
                     font.pointSize: 18

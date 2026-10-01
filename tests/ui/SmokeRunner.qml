@@ -93,6 +93,8 @@ Item {
                     card.activated(card.flight)
                 } else if (phase === 5) {
                     if (page.flight.id !== 14) throw new Error("Card did not open the mission page")
+                    const headings = descendants(page, "missionLogHeading")
+                    if (headings.length !== page.flight.details.length || headings.some((heading, index) => heading.text !== page.flight.details[index].heading)) throw new Error("Mission flight log headings are missing")
                     if (page.flight.landings.length !== 2 || page.flight.landings[1].coordinates !== "25°29′57.46″N · 155°25′39.13″W") throw new Error("Flight 14 geolocations are missing")
                     if (!backend.capture(backend.test_output_path(root.narrowTest ? "starship-kirigami-mission-narrow.png" : "starship-kirigami-mission.png"))) throw new Error("Could not capture mission")
                     const timelineJump = descendants(page, "missionJump_timeline")[0]
@@ -181,7 +183,7 @@ Item {
                     page.viewIndex = 1
                 } else if (phase === 16) {
                     const comparison = descendants(page, "flightComparison")[0]
-                    if (!comparison.visible || comparison.leftFlight.id !== 14 || comparison.rightFlight.id !== 13) throw new Error("Comparison did not initialize with the latest two flights")
+                    if (!comparison.visible || comparison.leftFlight.id !== 14 || comparison.rightFlight.id !== 13) throw new Error("Comparison did not initialize with the latest two flights (visible=" + comparison.visible + ", left=" + comparison.leftFlight.id + ", right=" + comparison.rightFlight.id + ", indices=" + comparison.leftControl.currentIndex + "/" + comparison.rightControl.currentIndex + ")")
                     comparison.rightControl.currentIndex = 7
                     if (comparison.rightFlight.id !== 7 || comparison.rightFlight.ship_outcome !== "lost") throw new Error("Comparison selection did not update vehicle outcomes")
                     const facts = descendants(comparison, "comparisonFact")
@@ -203,6 +205,8 @@ Item {
                     page.searchControl.text = "no matching flight"
                 } else if (phase === 19) {
                     if (!descendants(page, "emptyResults")[0].visible) throw new Error("Alternate archive views lack empty results")
+                    const comparison = descendants(page, "flightComparison")[0]
+                    if (comparison.leftFlight !== null || comparison.rightFlight !== null || comparison.leftControl.currentIndex !== -1 || comparison.rightControl.currentIndex !== -1) throw new Error("Empty comparison retained a flight selection")
                     root.openFlight(JSON.parse(backend.mission(1)))
                 } else if (phase === 20) {
                     const summary = descendants(page, "debriefSummary")[0]

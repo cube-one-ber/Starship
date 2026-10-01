@@ -14,6 +14,8 @@ Kirigami.ScrollablePage {
     property alias contentMotion: missionContent
     readonly property string activeSection: {
         const scroll = flickable.contentY + 24
+        const maximumScroll = Math.max(0, flickable.contentHeight - flickable.height)
+        const atEnd = maximumScroll > 0 && flickable.contentY >= maximumScroll - 1
         const sections = [
             { name: "overview", target: missionOverview },
             { name: "log", target: missionReport.logTarget },
@@ -23,8 +25,10 @@ Kirigami.ScrollablePage {
         ]
         let active = "overview"
         for (const entry of sections) {
-            if (entry.name === "recovery" && !flight.landings.length) continue
-            if (entry.target.mapToItem(flickable.contentItem, 0, 0).y <= scroll) active = entry.name
+            if (!entry.target.visible) continue
+            // A short final section cannot always scroll to the top. At the
+            // bottom of the report, keep its shortcut selected nevertheless.
+            if (entry.target.mapToItem(flickable.contentItem, 0, 0).y <= scroll || atEnd) active = entry.name
         }
         return active
     }

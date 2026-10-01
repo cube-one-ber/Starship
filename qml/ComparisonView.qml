@@ -16,17 +16,21 @@ ColumnLayout {
     property alias leftControl: leftChoice
     property alias rightControl: rightChoice
     spacing: 16
-    onFlightsChanged: {
+    function resetSelections() {
         leftChoice.currentIndex = flights.length ? 0 : -1
         rightChoice.currentIndex = flights.length > 1 ? 1 : flights.length ? 0 : -1
     }
+    // ComboBox resets its index while applying a new model. Select the defaults
+    // after both models have updated, including rapid filter changes.
+    onFlightsChanged: Qt.callLater(resetSelections)
+    Component.onCompleted: Qt.callLater(resetSelections)
     Kirigami.Heading { Layout.fillWidth: true; text: "Across two flights."; font.family: SpaceStyle.serif; font.pointSize: 24; wrapMode: Text.WordWrap }
     Controls.Label { Layout.fillWidth: true; text: "Choose flights from the current search and year filter."; color: SpaceStyle.muted; wrapMode: Text.WordWrap }
     RowLayout {
         Layout.fillWidth: true
         spacing: 12
         Controls.ComboBox { id: leftChoice; Layout.fillWidth: true; Layout.minimumWidth: 0; model: comparison.choices; Accessible.name: "First flight to compare" }
-        Controls.ComboBox { id: rightChoice; Layout.fillWidth: true; Layout.minimumWidth: 0; model: comparison.choices; currentIndex: comparison.flights.length > 1 ? 1 : 0; Accessible.name: "Second flight to compare" }
+        Controls.ComboBox { id: rightChoice; Layout.fillWidth: true; Layout.minimumWidth: 0; model: comparison.choices; Accessible.name: "Second flight to compare" }
     }
     Repeater {
         model: [
