@@ -37,7 +37,7 @@ Windows 10/11 x64: extract **Starship-Journal-windows-x64.zip** and run **starsh
 
 Linux x86_64: choose the **AppImage**, portable **tar.gz**, **DEB**, or **RPM**. The bundled runtime requires glibc 2.41 or newer (Debian 13+, Ubuntu 25.04+, Fedora 42+). For the AppImage, make it executable and launch it; use **--appimage-extract-and-run** if FUSE is unavailable. For the tarball, extract and run **AppRun**.
 
-macOS $macos_minimum+ Apple Silicon: open the **DMG** and drag **Starship Journal.app** to Applications, or extract the **ZIP**. The development app is ad-hoc signed, not Apple-notarized; macOS may require allowing it in Privacy & Security. The compatibility JSON records the requirements of this build.
+macOS $macos_minimum+ Apple Silicon: open the **DMG** and drag **Starship.app** to Applications, or extract the **ZIP**. The development app is ad-hoc signed, not Apple-notarized; macOS may require allowing it in Privacy & Security. The compatibility JSON records the requirements of this build.
 
 All three platform builds, backend tests, and desktop/narrow packaged-app checks passed before publication. Screenshots and diagnostics are available in the [build run](https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID).
 

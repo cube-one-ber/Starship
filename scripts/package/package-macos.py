@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SDK = Path(os.environ['STARSHIP_KDE_PREFIX'])
 DIST = ROOT / 'dist'
 STAGE = ROOT / 'target/macos-package'
-APP = STAGE / 'Starship Journal.app'
+APP = STAGE / 'Starship.app'
 
 
 def run(*command, **kwargs):
@@ -153,21 +153,21 @@ def main():
     with tempfile.TemporaryDirectory(prefix='Starship extracted 🛰 ') as work:
         run('ditto', '-x', '-k', archive, work)
         run('python3', ROOT / 'scripts/check/check-portable.py',
-            Path(work) / 'Starship Journal.app/Contents/MacOS/starship-journal',
+            Path(work) / 'Starship.app/Contents/MacOS/starship-journal',
             '--output', ROOT / 'target/macos-smoke-tests/zip')
     image = STAGE / 'dmg'
     image.mkdir()
     shutil.copytree(APP, image / APP.name, symlinks=True)
     (image / 'Applications').symlink_to('/Applications')
     dmg = DIST / 'Starship-Journal-macos-arm64.dmg'
-    run('hdiutil', 'create', '-volname', 'Starship Journal', '-srcfolder', image,
+    run('hdiutil', 'create', '-volname', 'Starship', '-srcfolder', image,
         '-ov', '-format', 'UDZO', dmg)
     run('hdiutil', 'verify', dmg)
     mount = STAGE / 'mounted'
     run('hdiutil', 'attach', '-readonly', '-nobrowse', '-mountpoint', mount, dmg)
     try:
         run('python3', ROOT / 'scripts/check/check-portable.py',
-            mount / 'Starship Journal.app/Contents/MacOS/starship-journal',
+            mount / 'Starship.app/Contents/MacOS/starship-journal',
             '--output', ROOT / 'target/macos-smoke-tests/dmg')
     finally:
         run('hdiutil', 'detach', mount)
